@@ -2,6 +2,7 @@ package day01
 
 import (
 	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -47,7 +48,23 @@ func (*Puzzle) Part1(input string) string {
 }
 
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	parsedInput := parseInput(input)
+
+	var elfCalSums []int
+	for _, elfList := range parsedInput {
+		elfCalSum := 0
+		for _, item := range elfList {
+			elfCalSum += item
+		}
+
+		elfCalSums = append(elfCalSums, elfCalSum)
+	}
+
+	sort.Ints(elfCalSums)
+
+	L := len(elfCalSums)
+	top3Sum := elfCalSums[L-1] + elfCalSums[L-2] + elfCalSums[L-3]
+	return fmt.Sprint(top3Sum)
 }
 
 func (*Puzzle) Notes() string {
