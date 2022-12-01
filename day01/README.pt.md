@@ -46,5 +46,15 @@ Esta lista representa as Calorias da comida transportada pelos Elfos:
 
 No caso dos Elfos ficarem com fome e precisarem de um snack extra, eles precisam saber a qual Elfo perguntar: eles gostariam de saber quantas Calorias leva o Elfo que carrega *mais* Calorias. No exemplo acima, isto é *`24000`* (carregado pelo quarto Elfo).
 
-Encontra o Elfo que leva mais Calorias. *Quantas calorias esse elfo leva no total?*
+Encontra o Elfo que leva mais Calorias. *Quantas calorias esse Elfo leva no total?*
+
+## --- Parte Dois ---
+
+Quando terminas de calcular a resposta à pergunta dos Elfos, eles já tinham percebido que o Elfo que levava mais Calorias de comida podia eventualmente *ficar sem mais snack*.
+
+Para evitar esta situação inaceitável, os Elfos preferiam saber o total de Calorias carregado pelo *top três* de Elfos que levam mais Calorias. Dessa forma, mesmo que um desses Elfos fique sem snacks, eles ainda têm dois suplentes.
+
+No exemplo acima, o top três Elfos são o quarto Elfo (com `24000` Calorias), depois o terceiro Elfo (com `11000` Calorias), depois o quinto Elfo (com `10000` Calorias). A soma das Calorias levado por esses três elfos é `45000`.
+
+Encontra o top três Elfos que leva mais Calorias. *Quantas Calorias esses três Elfos levam no total?*
 
