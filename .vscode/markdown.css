@@ -1,0 +1,19 @@
+body {
+  background-color: #0f0f23;
+}
+
+pre {
+  background: #0f0f23;
+  color: #ffffff;
+}
+
+code{
+  color: #ffffff;
+}
+
+em {
+  color: #ffffff;
+  font-style: normal;
+  text-shadow: 0 0 5px #ffffff;
+}
+
