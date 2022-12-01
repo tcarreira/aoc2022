@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"time"
+
+	// ci:importDay
 )
 
 const nTries int = 10
@@ -23,7 +25,10 @@ func main() {
 	fmt.Println(" Day | Part1      ( time ms ) | Part2      ( time ms ) |")
 	fmt.Println("-----+------------------------+------------------------+")
 
-	for day0, aocDay := range []DayAOC{} {
+	aocDays := []DayAOC{
+		// existing days:
+	} // ci:addNewDay
+	for day0, aocDay := range aocDays {
 		day := day0 + 1
 		inputBytes, err := ioutil.ReadFile(fmt.Sprintf("day%02d/input.txt", day))
 		if err != nil {

@@ -1,0 +1,158 @@
+name: update Puzzle day
+on:
+  schedule:
+    - cron:  '30 5,6,12,23 * 12 *'
+  workflow_dispatch:
+    inputs:
+      year:
+        description: What AoC year
+        required: true
+        default: '2022'
+      day:
+        description: What AoC day
+        required: true
+        default: 'today'
+
+jobs:
+  updateDay:
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup day of AoC
+        run: |
+          aoc_year="${{ github.event.inputs.year }}"
+          [ $aoc_year == "" ] && aoc_year=$(date +%Y)
+
+          aoc_day="${{ github.event.inputs.day }}"
+          [ $aoc_day == "today" ] && aoc_day=$(date +%d)
+          [ $aoc_day == "" ] && aoc_day=$(date +%d)
+
+          echo "AOC_YEAR=${aoc_year}" >> $GITHUB_ENV
+          echo "AOC_DAY=$(printf %02d $aoc_day)" >> $GITHUB_ENV
+          tail -n2 $GITHUB_ENV
+      - uses: actions/checkout@v3
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: setup aoc-to-markdown
+        run: |
+          git clone https://github.com/antonio-ramadas/aoc-to-markdown/
+          pip install -r aoc-to-markdown/requirements.txt
+      - name: update aoc-day
+        run: |
+          python aoc-to-markdown/aoc_to_markdown.py -y "${{ env.AOC_YEAR }}" -d "$(( ${{ env.AOC_DAY }} ))" --input --save
+
+          [ -d "day${{ env.AOC_DAY }}" ] || mkdir "day${{ env.AOC_DAY }}"
+          cp "day-${{ env.AOC_DAY }}/README.md" "day${{ env.AOC_DAY }}/README.md"
+          cp "day-${{ env.AOC_DAY }}/input.txt" "day${{ env.AOC_DAY }}/input.txt"
+
+          # replace (some) relative links by absolute links
+          sed -i 's@](/201@](https://adventofcode.com/201@g' "day${{ env.AOC_DAY }}/README.md"
+        env:
+          SESSION_ID: ${{ secrets.AOC_SESSION_ID }}
+      - name: add Go template
+        run: |
+          [ -f "day${{ env.AOC_DAY }}/solutions.go" ] && exit 0
+
+          ##############################################
+          cat >"day${{ env.AOC_DAY }}/solutions.go" <<EOF
+          package day${{ env.AOC_DAY }}
+
+          type Puzzle struct{}
+
+          func (*Puzzle) Part1(input string) string {
+          	return "-"
+          }
+
+          func (*Puzzle) Part2(input string) string {
+          	return "-"
+          }
+
+          func (*Puzzle) Notes() string {
+          	return ""
+          }
+          EOF
+
+          ##############################################
+          cat >"day${{ env.AOC_DAY }}/solutions_test.go" <<EOF
+          package day${{ env.AOC_DAY }}
+
+          import (
+          	"io/ioutil"
+          	"testing"
+          )
+
+          var p *Puzzle = &Puzzle{}
+
+          func TestPart1(t *testing.T) {
+          	tests := []struct {
+          		Input    string
+          		Expected string
+          	}{
+          		{"", "-"},
+          	}
+
+          	for i, tt := range tests {
+          		solution := p.Part1(tt.Input)
+          		if solution != tt.Expected {
+          			t.Errorf("[%02d] Expected %q, got %q", i, tt.Expected, solution)
+          		}
+          	}
+
+          	data, _ := ioutil.ReadFile("input.txt")
+          	solution := p.Part1(string(data))
+          	if solution != "-" {
+          		t.Errorf("Solution for Part1: %s", solution)
+          	}
+          }
+
+          func TestPart2(t *testing.T) {
+          	tests := []struct {
+          		Input    string
+          		Expected string
+          	}{
+          		{"", "-"},
+          	}
+
+          	for i, tt := range tests {
+          		solution := p.Part2(tt.Input)
+          		if solution != tt.Expected {
+          			t.Errorf("[%02d] Expected %q, got %q", i, tt.Expected, solution)
+          		}
+          	}
+
+          	data, _ := ioutil.ReadFile("input.txt")
+          	solution := p.Part2(string(data))
+          	if solution != "-" {
+          		t.Errorf("Solution for Part2: %s", solution)
+          	}
+          }
+          EOF
+      - name: add new day to main.go
+        run: |
+          grep "day${{ env.AOC_DAY }}" main.go &>/dev/null && exit 0
+          sed -i "s@	// ci:importDay@	\"github.com/tcarreira/aoc2022/day${{ env.AOC_DAY }}\"\n	// ci:importDay@g" main.go
+          sed -i "s@	} // ci:addNewDay@		&day${{ env.AOC_DAY }}.Puzzle{},\n	} // ci:addNewDay@g" main.go
+      - name: git add
+        run: |
+          git add "day${{ env.AOC_DAY }}"
+          git add main.go
+      - name: setup git
+        run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "Github Bot"
+      - name: git commit
+        run: |
+          files_changed=$(git diff --name-only --cached | wc -l)
+          if [ $files_changed -eq 0 ] ; then
+            exit 0
+          elif [ $files_changed -gt 3 ] ; then
+            git commit -m "Create day${{ env.AOC_DAY }}"
+          else
+            git commit -m "Update day${{ env.AOC_DAY }}"
+          fi
+      - name: git push
+        run: git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
