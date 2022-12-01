@@ -20,11 +20,11 @@ jobs:
       - name: setup day of AoC
         run: |
           aoc_year="${{ github.event.inputs.year }}"
-          [ $aoc_year == "" ] && aoc_year=$(date +%Y)
+          [ "_${aoc_year}" == "_" ] && aoc_year=$(date +%Y)
 
           aoc_day="${{ github.event.inputs.day }}"
-          [ $aoc_day == "today" ] && aoc_day=$(date +%d)
-          [ $aoc_day == "" ] && aoc_day=$(date +%d)
+          [ "_${aoc_day}" == "_today" ] && aoc_day=$(date +%d)
+          [ "_${aoc_day}" == "_" ] && aoc_day=$(date +%d)
 
           echo "AOC_YEAR=${aoc_year}" >> $GITHUB_ENV
           echo "AOC_DAY=$(printf %02d $aoc_day)" >> $GITHUB_ENV
