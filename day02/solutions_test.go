@@ -6,7 +6,8 @@ import (
 )
 
 var p *Puzzle = &Puzzle{}
-var exampleInput string = `A Y
+var exampleInput string = `
+A Y
 B X
 C Z`
 
@@ -37,7 +38,7 @@ func TestPart2(t *testing.T) {
 		Input    string
 		Expected string
 	}{
-		{"", "-"},
+		{exampleInput, "12"},
 	}
 
 	for i, tt := range tests {
