@@ -2,6 +2,8 @@
 
 Advent of Code 2022 - soluções
 
+![Advent Of Code](./aoc.jpeg)
+
 ## Descrição
 
 Soluções do https://adventofcode.com/2022 feitas em Go.
