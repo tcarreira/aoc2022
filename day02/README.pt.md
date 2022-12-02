@@ -34,3 +34,22 @@ Essa estratégia prevê e recomenda o seguinte:
 No final, se você seguisse a estratégia, você teria uma pontuação total de  `15` (8 + 1 + 6).
 
 *Qual é a pontuação total que você teria se seguisse a estratégia do Elfo?*
+
+## --- Parte Dois ---
+
+O Elfo acabou de ajudar com a tenda e volta para perto de você. "De qualquer forma, a segunda coluna diz como a rodada deve terminar: `X` se você deve perder, `Y` se você deve empatar, e `Z` se você deve ganhar. Bom sorte!"
+
+A pontuação total ainda é calculada da mesma forma, mas agora você precisa escolher a forma que você vai jogar para que a rodada termine como indicado. O exemplo acima decorrrria da seguinte forma:
+
+
+ - Na primeira rodada, seu oponente vai escolher Pedra (`A`), e você precisa que a rorada termine em empate (`Y`), então você também escolhe Pedra. Isso dá uma pontuação de 1 + 3 = *4*.
+
+ - Na segunda rodada, seu oponente vai escolher Papel (`B`), e você escolhe Pedra para perder (`X`) com uma pontuação de 1 + 0 = *1*.
+
+ - Na terceira rodada, você ganha à Tesoura do seu oponente com Pedra, para uma pontuação de 1 + 6 = *7*.
+
+
+Agora que você decifrou corretamente a estratégia ultra secreta, você teria uma pontuação total de `12`.
+
+Seguindo as instruções do Elfo para a segunda coluna, *qual é a pontuação total que você teria se seguisse a estratégia?*
+
