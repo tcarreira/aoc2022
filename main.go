@@ -30,7 +30,7 @@ func main() {
 	aocDays := []DayAOC{
 		// existing days:
 		&day01.Puzzle{},
-			} // ci:addNewDayday02.Puzzle{},
+		&day02.Puzzle{},
 	} // ci:addNewDay
 	for day0, aocDay := range aocDays {
 		day := day0 + 1
