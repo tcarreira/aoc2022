@@ -135,7 +135,7 @@ jobs:
         run: |
           grep "day${{ env.AOC_DAY }}" main.go &>/dev/null && exit 0
           sed -i "s@	// ci:importDay@	\"github.com/tcarreira/aoc2022/day${{ env.AOC_DAY }}\"\n	// ci:importDay@g" main.go
-          sed -i "s@	} // ci:addNewDay@		&day${{ env.AOC_DAY }}.Puzzle{},\n	} // ci:addNewDay@g" main.go
+          sed -i "s@	} // ci:addNewDay@		\&day${{ env.AOC_DAY }}.Puzzle{},\n	} // ci:addNewDay@g" main.go
       - name: git add
         run: |
           git add "day${{ env.AOC_DAY }}"
