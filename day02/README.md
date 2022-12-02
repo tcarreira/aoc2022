@@ -1,18 +1,18 @@
-# --- Day 2: Rock Paper Scissors ---
+# --- Dia 2: Pedra Papel Tesoura ---
 
-The Elves begin to set up camp on the beach. To decide whose tent gets to be closest to the snack storage, a giant [Rock Paper Scissors](https://en.wikipedia.org/wiki/Rock_paper_scissors) tournament is already in progress.
+Os Elfos começam a montar acampamento na praia. Para decidir qual tenda fica mais próxima do armazém de petiscos, um gigantesco [Pedra Papel Tesoura](https://pt.wikipedia.org/wiki/Pedra-papel-tesoura) já está em andamento.
 
-Rock Paper Scissors is a game between two players. Each game contains many rounds; in each round, the players each simultaneously choose one of Rock, Paper, or Scissors using a hand shape. Then, a winner for that round is selected: Rock defeats Scissors, Scissors defeats Paper, and Paper defeats Rock. If both players choose the same shape, the round instead ends in a draw.
+Pedra Papel Tesoura é um jogo entre dois jogadores. Cada jogo contém muitas rodadas; em cada rodada, os jogadores escolhem simultaneamente uma das formas de Pedra, Papel ou Tesoura. Então, um vencedor para aquela rodada é selecionado: Pedra vence Tesoura, Tesoura vence Papel, e Papel vence Pedra. Se ambos os jogadores escolherem a mesma forma, a rodada termina em um empate.
 
-Appreciative of your help yesterday, one Elf gives you an *encrypted strategy guide* (your puzzle input) that they say will be sure to help you win. "The first column is what your opponent is going to play: `A` for Rock, `B` for Paper, and `C` for Scissors. The second column--" Suddenly, the Elf is called away to help with someone's tent.
+Agradecido pela sua ajuda ontem, um Elfo te dá uma *estratégia criptografada* (seu *input* do puzzle) que diz que vai te ajudar a ganhar. "A primeira coluna é o que seu oponente vai jogar: `A` para Pedra, `B` para Papel, e `C` para Tesoura. A segunda coluna--" De repente, o Elfo é chamado para ajudar com a tenda de alguém.
 
-The second column, *you reason*, must be what you should play in response: `X` for Rock, `Y` for Paper, and `Z` for Scissors. Winning every time would be suspicious, so the responses must have been carefully chosen.
+A segunda coluna, *você deduz*, deve ser o que você deve jogar em resposta: `X` para Pedra, `Y` para Papel, e `Z` para Tesoura. Ganhar todas as vezes seria suspeito, então as respostas devem ter sido escolhidas com cuidado.
 
-The winner of the whole tournament is the player with the highest score. Your *total score* is the sum of your scores for each round. The score for a single round is the score for the *shape you selected* (1 for Rock, 2 for Paper, and 3 for Scissors) plus the score for the *outcome of the round* (0 if you lost, 3 if the round was a draw, and 6 if you won).
+O vencedor do torneio inteiro é o jogador com a maior pontuação. Sua *pontuação total* é a soma de suas pontuações para cada rodada. A pontuação para uma única rodada é a pontuação para a *forma que você escolheu* (1 para Pedra, 2 para Papel, e 3 para Tesoura) mais a pontuação para o *resultado da rodada* (0 se você perdeu, 3 se a rodada foi um empate, e 6 se você ganhou).
 
-Since you can't be sure if the Elf is trying to help you or trick you, you should calculate the score you would get if you were to follow the strategy guide.
+Como você não pode ter certeza se o Elfo está tentando te ajudar ou te enganar, você deve calcular a pontuação que você teria se seguisse a estratégia.
 
-For example, suppose you were given the following strategy guide:
+Por exemplo, suponha que você tenha recebido a seguinte estratégia:
 
 ```
 A Y
@@ -21,35 +21,35 @@ C Z
 
 ```
 
-This strategy guide predicts and recommends the following:
+Essa estratégia prevê e recomenda o seguinte:
 
 
- - In the first round, your opponent will choose Rock (`A`), and you should choose Paper (`Y`). This ends in a win for you with a score of *8* (2 because you chose Paper + 6 because you won).
+ - Na primeira rodada, seu oponente vai escolher Pedra (`A`), e você deve escolher Papel (`Y`). Isso termina em uma vitória para você com uma pontuação de *8* (2 porque você escolheu Papel + 6 porque você ganhou).
 
- - In the second round, your opponent will choose Paper (`B`), and you should choose Rock (`X`). This ends in a loss for you with a score of *1* (1 + 0).
+ - Na segunda rodada, seu oponente vai escolher Papel (`B`), e você deve escolher Pedra (`X`). Isso termina em uma derrota para você com uma pontuação de *1* (1 + 0).
 
- - The third round is a draw with both players choosing Scissors, giving you a score of 3 + 3 = *6*.
-
-
-In this example, if you were to follow the strategy guide, you would get a total score of `15` (8 + 1 + 6).
-
-*What would your total score be if everything goes exactly according to your strategy guide?*
-
-## --- Part Two ---
-
-The Elf finishes helping with the tent and sneaks back over to you. "Anyway, the second column says how the round needs to end: `X` means you need to lose, `Y` means you need to end the round in a draw, and `Z` means you need to win. Good luck!"
-
-The total score is still calculated in the same way, but now you need to figure out what shape to choose so the round ends as indicated. The example above now goes like this:
+ - A terceira rodada é um empate com ambos os jogadores escolhendo Tesoura, dando a você uma pontuação de 3 + 3 = *6*.
 
 
- - In the first round, your opponent will choose Rock (`A`), and you need the round to end in a draw (`Y`), so you also choose Rock. This gives you a score of 1 + 3 = *4*.
+No final, se você seguisse a estratégia, você teria uma pontuação total de  `15` (8 + 1 + 6).
 
- - In the second round, your opponent will choose Paper (`B`), and you choose Rock so you lose (`X`) with a score of 1 + 0 = *1*.
+*Qual é a pontuação total que você teria se seguisse a estratégia do Elfo?*
 
- - In the third round, you will defeat your opponent's Scissors with Rock for a score of 1 + 6 = *7*.
+## --- Parte Dois ---
+
+O Elfo acabou de ajudar com a tenda e volta para perto de você. "De qualquer forma, a segunda coluna diz como a rodada deve terminar: `X` se você deve perder, `Y` se você deve empatar, e `Z` se você deve ganhar. Bom sorte!"
+
+A pontuação total ainda é calculada da mesma forma, mas agora você precisa escolher a forma que você vai jogar para que a rodada termine como indicado. O exemplo acima decorrrria da seguinte forma:
 
 
-Now that you're correctly decrypting the ultra top secret strategy guide, you would get a total score of `12`.
+ - Na primeira rodada, seu oponente vai escolher Pedra (`A`), e você precisa que a rorada termine em empate (`Y`), então você também escolhe Pedra. Isso dá uma pontuação de 1 + 3 = *4*.
 
-Following the Elf's instructions for the second column, *what would your total score be if everything goes exactly according to your strategy guide?*
+ - Na segunda rodada, seu oponente vai escolher Papel (`B`), e você escolhe Pedra para perder (`X`) com uma pontuação de 1 + 0 = *1*.
+
+ - Na terceira rodada, você ganha à Tesoura do seu oponente com Pedra, para uma pontuação de 1 + 6 = *7*.
+
+
+Agora que você decifrou corretamente a estratégia ultra secreta, você teria uma pontuação total de `12`.
+
+Seguindo as instruções do Elfo para a segunda coluna, *qual é a pontuação total que você teria se seguisse a estratégia?*
 

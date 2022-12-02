@@ -46,11 +46,11 @@ jobs:
           python aoc-to-markdown/aoc_to_markdown.py -y "${{ env.AOC_YEAR }}" -d "$(( ${{ env.AOC_DAY }} ))" --input --save
 
           [ -d "day${{ env.AOC_DAY }}" ] || mkdir "day${{ env.AOC_DAY }}"
-          cp "day-${{ env.AOC_DAY }}/README.md" "day${{ env.AOC_DAY }}/README.md"
+          cp "day-${{ env.AOC_DAY }}/README.md" "day${{ env.AOC_DAY }}/README.en.md"
           cp "day-${{ env.AOC_DAY }}/input.txt" "day${{ env.AOC_DAY }}/input.txt"
 
           # replace (some) relative links by absolute links
-          sed -i 's@](/201@](https://adventofcode.com/201@g' "day${{ env.AOC_DAY }}/README.md"
+          sed -i 's@](/201@](https://adventofcode.com/201@g' "day${{ env.AOC_DAY }}/README.en.md"
         env:
           SESSION_ID: ${{ secrets.AOC_SESSION_ID }}
       - name: add Go template

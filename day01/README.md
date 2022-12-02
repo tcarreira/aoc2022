@@ -1,16 +1,16 @@
-# --- Day 1: Calorie Counting ---
+# --- Dia 1: Contar Calorias ---
 
-Santa's reindeer typically eat regular reindeer food, but they need a lot of [magical energy](https://adventofcode.com/2018/day/25) to deliver presents on Christmas. For that, their favorite snack is a special type of *star* fruit that only grows deep in the jungle. The Elves have brought you on their annual expedition to the grove where the fruit grows.
+As renas do Pai Natal costumam comer comida normal para rena, mas elas precisam de muita [energia mágica](https://adventofcode.com/2018/day/25) para entregar os presentes no Natal. Para isso, o seu snack favorito é uma espécie de fruto *estrela* que cresce apenas na selva mais profunda. Os Elfos trouxeram-te na sua expedição anual ao arvoredo onde o fruto cresce.
 
-To supply enough magical energy, the expedition needs to retrieve a minimum of *fifty stars* by December 25th. Although the Elves assure you that the grove has plenty of fruit, you decide to grab any fruit you see along the way, just in case.
+Para conseguir energia mágica suficiente, a expedição precisa de conseguir um mínimo de *cinquenta estrelas* até ao dia 25 de Dezembro. Apesar dos Elfos assegurarem que o arvoredo tem frutos suficientes, decides apanhar qualquer fruto que consigas ver pelo caminho, por precaução.
 
-Collect stars by solving puzzles.  Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first.  Each puzzle grants *one star*. Good luck!
+Apanha estrelas resolvendo quebra-cabeças. Serão disponibilizados dois quebra-cabeças a cada dia do calendário do Advento; o segundo quebra-cabeças é desbloqueado quando o primeiro for resolvido. Cada quebra-cabeças premeia com *uma estrela*. Boa sorte!
 
-The jungle must be too overgrown and difficult to navigate in vehicles or access from the air; the Elves' expedition traditionally goes on foot. As your boats approach land, the Elves begin taking inventory of their supplies. One important consideration is food - in particular, the number of *Calories* each Elf is carrying (your puzzle input).
+A selva deve estar demasiado crescida e de difícil navegação por veículos ou acesso pelo ar; a expedição dos Elfos é tradicionalmente feita a pé. Enquanto os vossos barcos se aproximam da terra, os Elfos começam a fazer um inventário dos seus mantimentos - mais precisamente, o número de *Calorias* que cada Elfo carrega consigo (a entrada do teu quebra-cabeças).
 
-The Elves take turns writing down the number of Calories contained by the various meals, snacks, rations, *etc.* that they've brought with them, one item per line. Each Elf separates their own inventory from the previous Elf's inventory (if any) by a blank line.
+À vez, os Elfos anotam o número de Calorias contido em várias refeições, snacks, rações, *etc.* que eles trouxeram com eles, um item por linha. Cada Elfo separa o seu próprio inventário do Elfo anterior (se existir) por uma linha em branco.
 
-For example, suppose the Elves finish writing their items' Calories and end up with the following list:
+Por exemplo, supomos que os Elfos terminaram de escrever as Calorias dos seus items e acabamos com a seguinte lista:
 
 ```
 1000
@@ -30,31 +30,31 @@ For example, suppose the Elves finish writing their items' Calories and end up w
 
 ```
 
-This list represents the Calories of the food carried by five Elves:
+Esta lista representa as Calorias da comida transportada pelos Elfos:
 
 
- - The first Elf is carrying food with `1000`, `2000`, and `3000` Calories, a total of `6000` Calories.
+ - O primeiro Elfo leva comida com  `1000`, `2000`, e `3000` Calorias, um total de `6000` Calorias.
 
- - The second Elf is carrying one food item with `4000` Calories.
+ - O segundo Elfo leva um item de comida com `4000` Calorias.
 
- - The third Elf is carrying food with `5000` and `6000` Calories, a total of `11000` Calories.
+ - O terceiro Elfo leva comida com `5000` e `6000` Calorias, um total de `11000` Calorias.
 
- - The fourth Elf is carrying food with `7000`, `8000`, and `9000` Calories, a total of `24000` Calories.
+ - O quarto Elfo leva comida com `7000`, `8000`, e `9000` Calorias, um total de `24000` Calorias.
 
- - The fifth Elf is carrying one food item with `10000` Calories.
+ - O quinto Elfo leva um item de comida com `10000` Calorias.
 
 
-In case the Elves get hungry and need extra snacks, they need to know which Elf to ask: they'd like to know how many Calories are being carried by the Elf carrying the *most* Calories. In the example above, this is *`24000`* (carried by the fourth Elf).
+No caso dos Elfos ficarem com fome e precisarem de um snack extra, eles precisam saber a qual Elfo perguntar: eles gostariam de saber quantas Calorias leva o Elfo que carrega *mais* Calorias. No exemplo acima, isto é *`24000`* (carregado pelo quarto Elfo).
 
-Find the Elf carrying the most Calories. *How many total Calories is that Elf carrying?*
+Encontra o Elfo que leva mais Calorias. *Quantas calorias esse Elfo leva no total?*
 
-## --- Part Two ---
+## --- Parte Dois ---
 
-By the time you calculate the answer to the Elves' question, they've already realized that the Elf carrying the most Calories of food might eventually *run out of snacks*.
+Quando terminas de calcular a resposta à pergunta dos Elfos, eles já tinham percebido que o Elfo que levava mais Calorias de comida podia eventualmente *ficar sem mais snack*.
 
-To avoid this unacceptable situation, the Elves would instead like to know the total Calories carried by the *top three* Elves carrying the most Calories. That way, even if one of those Elves runs out of snacks, they still have two backups.
+Para evitar esta situação inaceitável, os Elfos preferiam saber o total de Calorias carregado pelo *top três* de Elfos que levam mais Calorias. Dessa forma, mesmo que um desses Elfos fique sem snacks, eles ainda têm dois suplentes.
 
-In the example above, the top three Elves are the fourth Elf (with `24000` Calories), then the third Elf (with `11000` Calories), then the fifth Elf (with `10000` Calories). The sum of the Calories carried by these three elves is `45000`.
+No exemplo acima, o top três Elfos são o quarto Elfo (com `24000` Calorias), depois o terceiro Elfo (com `11000` Calorias), depois o quinto Elfo (com `10000` Calorias). A soma das Calorias levado por esses três elfos é `45000`.
 
-Find the top three Elves carrying the most Calories. *How many Calories are those Elves carrying in total?*
+Encontra o top três Elfos que leva mais Calorias. *Quantas Calorias esses três Elfos levam no total?*
 
