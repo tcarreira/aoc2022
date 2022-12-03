@@ -46,3 +46,37 @@ No exemplo acima, a prioridade dos items que aparece em ambos os compartimentos 
 
 Encontra o tipo de items que aparece em ambos os compartimentos de cada mochilão. *Qual a soma das prioridades desses tipos de items?*
 
+# --- Parte Dois ---
+
+Assim que terminas de identificar os items fora do lugar, os Elfos se aproximam com um outro problema.
+
+Por segurança, os Elfos estão divididos em grupos de três. Cada Elfo leva um crachá que identifica o seu grupo. Para ser eficiente, dentro de cada grupo de três Elfos, o crachá é o *único item carregado por todos os três Elfos*. Ou seja, se um crachá de um grupo é o item do tipo `B`, então todos os Elfos do grupo devem carregar um item do tipo `B` dentro do seu mochilão, e no máximo dois dos Elfos irão lear qualquer outro tipo.
+
+O problema é que alguém se esqueceu de atualizar o selo de autenticidade dos crachás deste ano. Todos os crachás precisam ser tirados para fora dos mochilões para que os novos selos sejam colados.
+
+Adicionalmente, ninguém anotou quais tipos de item correspondem ao crachá de cada grupo. A única forma de dizer que o tipo de item é o certo é encontrando o único tipo de item que é *comum entre todos os três Elfos* de cada grupo.
+
+Cada conjunto de três linhas na lista corresponde a um único grupo, mas cada grupo pode ter um tipo de item de crachá diferente. Então no exemplo acima, o primeiro grupo de mochilões são as primeiras três linhas:
+
+```
+vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg
+
+```
+
+E o segundo grupo de mochilões são as três linhas seguintes:
+
+```
+wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ttgJtRGJQctTZtZT
+CrZsJsPPZsGzwwsLwLmpwMDw
+
+```
+
+No primeiro grupo, o único tipo de item que aparece em todos os três mochilões é o `r` minúsculo; este deve ser os seus crachás. No segundo grupo, o tipo do crachá tem que ser o `Z`.
+
+As prioridades para esses items ainda precisam ser encontradas para organizar os esforços de colagem: aqui, eles são 18 (`r`) para o primeiro grupo e 52 (`Z`) para o segundo grupo. A soma das prioridades é *70*.
+
+Encontra o tipo de item que corresponde aos crachás de cada grupo de três Elfos. *Qual a soma das prioridades desses tipos de items?*
+
