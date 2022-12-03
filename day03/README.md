@@ -76,7 +76,7 @@ CrZsJsPPZsGzwwsLwLmpwMDw
 
 No primeiro grupo, o único tipo de item que aparece em todos os três mochilões é o `r` minúsculo; este deve ser os seus crachás. No segundo grupo, o tipo do crachá tem que ser o `Z`.
 
-As prioridades para esses items ainda precisam ser encontradas para organizar os esforços de colagem: aqui, eles são 18 (`r`) para o primeiro grupo e 52 (`Z`) para o segundo grupo. A soma das prioridades é *70*.
+As prioridades para esses items ainda precisam ser encontradas para organizar os esforços de colagem: aqui, eles são 18 (`r`) para o primeiro grupo e 52 (`Z`) para o segundo grupo. A soma das prioridades é `70`.
 
 Encontra o tipo de item que corresponde aos crachás de cada grupo de três Elfos. *Qual a soma das prioridades desses tipos de items?*
 

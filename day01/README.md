@@ -1,10 +1,10 @@
 # --- Dia 1: Contar Calorias ---
 
-As renas do Pai Natal costumam comer comida normal para rena, mas elas precisam de muita [energia mágica](https://adventofcode.com/2018/day/25) para entregar os presentes no Natal. Para isso, o seu snack favorito é uma espécie de fruto *estrela* que cresce apenas na selva mais profunda. Os Elfos trouxeram-te na sua expedição anual ao arvoredo onde o fruto cresce.
+As renas do Pai Natal costumam comer comida normal para rena, mas elas precisam de muita [energia mágica](https://adventofcode.com/2018/day/25) para entregar os presentes no Natal. Para isso, o seu snack favorito é uma espécie de fruto **estrela** que cresce apenas na selva mais profunda. Os Elfos trouxeram-te na sua expedição anual ao arvoredo onde o fruto cresce.
 
-Para conseguir energia mágica suficiente, a expedição precisa de conseguir um mínimo de *cinquenta estrelas* até ao dia 25 de Dezembro. Apesar dos Elfos assegurarem que o arvoredo tem frutos suficientes, decides apanhar qualquer fruto que consigas ver pelo caminho, por precaução.
+Para conseguir energia mágica suficiente, a expedição precisa de conseguir um mínimo de **cinquenta estrelas** até ao dia 25 de Dezembro. Apesar dos Elfos assegurarem que o arvoredo tem frutos suficientes, decides apanhar qualquer fruto que consigas ver pelo caminho, por precaução.
 
-Apanha estrelas resolvendo quebra-cabeças. Serão disponibilizados dois quebra-cabeças a cada dia do calendário do Advento; o segundo quebra-cabeças é desbloqueado quando o primeiro for resolvido. Cada quebra-cabeças premeia com *uma estrela*. Boa sorte!
+Apanha estrelas resolvendo quebra-cabeças. Serão disponibilizados dois quebra-cabeças a cada dia do calendário do Advento; o segundo quebra-cabeças é desbloqueado quando o primeiro for resolvido. Cada quebra-cabeças premeia com **uma estrela**. Boa sorte!
 
 A selva deve estar demasiado crescida e de difícil navegação por veículos ou acesso pelo ar; a expedição dos Elfos é tradicionalmente feita a pé. Enquanto os vossos barcos se aproximam da terra, os Elfos começam a fazer um inventário dos seus mantimentos - mais precisamente, o número de *Calorias* que cada Elfo carrega consigo (a entrada do teu quebra-cabeças).
 

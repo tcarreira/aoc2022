@@ -17,3 +17,8 @@ em {
   text-shadow: 0 0 5px #ffffff;
 }
 
+strong {
+  color: #ffff66;
+  font-style: normal;
+  text-shadow: 0 0 5px #ffff66;
+}
