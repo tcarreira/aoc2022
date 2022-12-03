@@ -7,6 +7,7 @@ import (
 
 	"github.com/tcarreira/aoc2022/day01"
 	"github.com/tcarreira/aoc2022/day02"
+	"github.com/tcarreira/aoc2022/day03"
 	// ci:importDay
 )
 
@@ -31,6 +32,7 @@ func main() {
 		// existing days:
 		&day01.Puzzle{},
 		&day02.Puzzle{},
+		&day03.Puzzle{},
 	} // ci:addNewDay
 	for day0, aocDay := range aocDays {
 		day := day0 + 1
