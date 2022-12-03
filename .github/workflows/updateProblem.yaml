@@ -39,7 +39,7 @@ jobs:
           python-version: "3.10"
       - name: setup aoc-to-markdown
         run: |
-          git clone https://github.com/antonio-ramadas/aoc-to-markdown/
+          git clone https://github.com/tcarreira/aoc-to-markdown/
           pip install -r aoc-to-markdown/requirements.txt
       - name: update aoc-day
         run: |
