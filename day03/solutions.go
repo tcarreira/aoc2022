@@ -10,6 +10,7 @@ type Puzzle struct{}
 type Ruckpack struct {
 	half1 string
 	half2 string
+	all   string
 }
 
 func parseInput(raw string) []Ruckpack {
@@ -20,6 +21,7 @@ func parseInput(raw string) []Ruckpack {
 		ruckpack := Ruckpack{
 			half1: ruckpack[:len(ruckpack)/2],
 			half2: ruckpack[len(ruckpack)/2:],
+			all:   ruckpack,
 		}
 		result = append(result, ruckpack)
 	}
@@ -33,6 +35,42 @@ func findRepeatedItem(s1, s2 string) string {
 			if c1 == c2 {
 				return string(c1)
 			}
+		}
+	}
+	panic("unreachable")
+}
+
+func findBadge(r1, r2, r3 Ruckpack) string {
+	countingR1 := make(map[string]int)
+	countingR2 := make(map[string]int)
+	countingR3 := make(map[string]int)
+
+	for _, item := range r1.all {
+		countingR1[string(item)] = 1
+	}
+	for _, item := range r2.all {
+		countingR2[string(item)] = 1
+	}
+	for _, item := range r3.all {
+		countingR3[string(item)] = 1
+	}
+
+	countingGroupItems := make(map[string]int)
+	for _, counting := range []map[string]int{
+		countingR1, countingR2, countingR3,
+	} {
+		for item := range counting {
+			if _, ok := countingGroupItems[item]; !ok {
+				countingGroupItems[item] = 1
+			} else {
+				countingGroupItems[item] += 1
+			}
+		}
+	}
+
+	for item, counter := range countingGroupItems {
+		if counter == 3 {
+			return item
 		}
 	}
 	panic("unreachable")
@@ -78,9 +116,17 @@ func (*Puzzle) Part1(input string) string {
 }
 
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	ruckpacks := parseInput(input)
+
+	sum := 0
+	for i := 0; i < len(ruckpacks); i += 3 {
+		badge := findBadge(ruckpacks[i+0], ruckpacks[i+1], ruckpacks[i+2])
+		itemPriority := convertItemToPriority(badge)
+		sum += itemPriority
+	}
+	return fmt.Sprint(sum)
 }
 
 func (*Puzzle) Notes() string {
-	return ""
+	return "interseção de mapas"
 }
