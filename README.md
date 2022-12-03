@@ -1,22 +1,23 @@
-# aoc2022
+# Advent of Code 2022
 
-Advent of Code 2022 - soluções
+Traduções para Português e implementação das soluções do AoC2022
 
 ![Advent Of Code](./aoc.jpeg)
 
 ## Descrição
 
 Soluções do https://adventofcode.com/2022 feitas em Go.
+As traduções dos enunciados estão disponíveis dentro de cada dia.
 
 As soluções são desenvolvidas ao vivo e transmitidas no
 [youtube](https://youtube.com/@tcarreira) e no
 [twitch](https://twitch.tv/tcarreira).
 
-O registo das lives pode ser consultado na playlist do youtube:
-https://youtube.com/playlist?list=PLJgtTDTisWI4Vtuc8pjCLcPUqaUgvzXVn
+Existem playlists para seguir no Youtube:
+- Gravações do streaming das resoluções ao vivo: https://youtube.com/playlist?list=PLJgtTDTisWI4Vtuc8pjCLcPUqaUgvzXVn
+- Resumos curtos das soluções: https://youtube.com/playlist?list=PLJgtTDTisWI5K05p0SMu9XaIUYC6JzEPQ
 
 Qualquer um pode entrar no [LeaderBoard privado](https://adventofcode.com/2022/leaderboard/private) usando o código: `827447-e95d42f1` (até um limite de 200)
-
 
 
 ## Soluções e tempos
@@ -25,7 +26,7 @@ Qualquer um pode entrar no [LeaderBoard privado](https://adventofcode.com/2022/l
 
 ```
 ######################################################
-Solving problems for the https://adventofcode.com/2022
+Resolvendo os puzzles do https://adventofcode.com/2022
 ######################################################
 
  Day | Part1      ( time ms ) | Part2      ( time ms ) |
