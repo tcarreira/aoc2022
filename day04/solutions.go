@@ -45,6 +45,16 @@ func isFullyContained(range1, range2 []int) int {
 	return 0
 }
 
+func isAnyContained(range1, range2 []int) int {
+	if range1[1] < range2[0] {
+		return 0
+	}
+	if range1[0] > range2[1] {
+		return 0
+	}
+	return 1
+}
+
 func (*Puzzle) Part1(input string) string {
 	// lista de pares
 	// sub-par: intervalo inclusivo
@@ -60,7 +70,14 @@ func (*Puzzle) Part1(input string) string {
 }
 
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	parsedInput := parseInput(input)
+
+	count := 0
+	for _, pair := range parsedInput {
+		count += isAnyContained(pair.range1, pair.range2)
+	}
+
+	return fmt.Sprint(count)
 }
 
 func (*Puzzle) Notes() string {

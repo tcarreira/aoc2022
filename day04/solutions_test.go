@@ -40,7 +40,7 @@ func TestPart2(t *testing.T) {
 		Input    string
 		Expected string
 	}{
-		{"", "-"},
+		{exampleInput, "4"},
 	}
 
 	for i, tt := range tests {
