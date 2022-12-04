@@ -53,3 +53,23 @@ Alguns dos pares notaram que uma das suas atribuições *contém completamente* 
 
 *Em quantos pares de atribuições um dos intervalos contém completamente o outro?*
 
+## --- Parte Dois ---
+
+Parece que mesmo assim ainda existe alguma duplicação de trabalho planeado. Os Elfos *gostariam* antes de saber o número de pares em que existe *alguma sobreposição*.
+
+No exemplo acima, os primeiros dois pares (`2-4,6-8` e `2-3,4-5`) não se sobrepõem, enquanto os outros quatro pares (`5-7,7-9`, `2-8,3-7`, `6-6,4-6`, e `2-6,4-8`) sim:
+
+
+ - `5-7,7-9` se sobrepõem em apenas uma secção, `7`.
+
+ - `2-8,3-7` se sobrepõem todas as secções da `3` até à `7`.
+
+ - `6-6,4-6` se sobrepõem em apenas uma secção, `6`.
+
+ - `2-6,4-8` se sobrepõem nas secções `4`, `5`, e `6`.
+
+
+Então, neste exemplo, o número de pares atribuídos que se sobrepõem é `4`.
+
+*Em quantos pares de atribuições há alguma sobreposição de intervalos?*
+
