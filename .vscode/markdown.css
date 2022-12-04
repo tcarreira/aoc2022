@@ -7,7 +7,7 @@ pre {
   color: #ffffff;
 }
 
-code{
+code {
   color: #ffffff;
 }
 
@@ -20,5 +20,11 @@ em {
 strong {
   color: #ffff66;
   font-style: normal;
+  font-weight: normal;
   text-shadow: 0 0 5px #ffff66;
+}
+
+a {
+  text-decoration: none;
+  color: #009900;
 }
