@@ -34,4 +34,6 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   01 | 70116      (      0.2) | 206582     (      0.2) |
   02 | 9759       (      0.2) | 12429      (      0.2) |
   03 | 7727       (      0.1) | 2609       (      1.6) | interseção de mapas
+  04 | 485        (      0.2) | 857        (      0.2) | sobreposição de intervalos
+
 ```
