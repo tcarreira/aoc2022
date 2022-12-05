@@ -6,13 +6,33 @@ import (
 )
 
 var p *Puzzle = &Puzzle{}
+var exampleInput string = `    [D]    
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2`
+
+func TestPop(t *testing.T) {
+	s := Stack{"A", "B", "C"}
+	o := s.Pop()
+	if o != "C" {
+		t.Error("Not the right element")
+	}
+	if len(s) != 2 {
+		t.Error("not right len")
+	}
+}
 
 func TestPart1(t *testing.T) {
 	tests := []struct {
 		Input    string
 		Expected string
 	}{
-		{"", "-"},
+		{exampleInput, "CMZ"},
 	}
 
 	for i, tt := range tests {
