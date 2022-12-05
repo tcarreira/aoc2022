@@ -29,11 +29,12 @@ Qualquer um pode entrar no [LeaderBoard privado](https://adventofcode.com/2022/l
 Resolvendo os puzzles do https://adventofcode.com/2022
 ######################################################
 
- Day | Part1      ( time ms ) | Part2      ( time ms ) |
+ Dia | Parte 1    ( time ms ) | Parte 2    ( time ms ) |
 -----+------------------------+------------------------+
   01 | 70116      (      0.2) | 206582     (      0.2) |
   02 | 9759       (      0.2) | 12429      (      0.2) |
-  03 | 7727       (      0.1) | 2609       (      1.6) | interseção de mapas
+  03 | 7727       (      0.1) | 2609       (      1.6) | interseção de mapas (maps/dicts)
   04 | 485        (      0.2) | 857        (      0.2) | sobreposição de intervalos
+  05 | WSFTMRHPP  (      0.1) | GSLCMFBRP  (      0.1) | pilhas (stacks)
 
 ```
