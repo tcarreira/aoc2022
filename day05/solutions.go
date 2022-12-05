@@ -83,6 +83,12 @@ func (s *Stacks) applyMoves(move Move) {
 	}
 }
 
+func (s *Stacks) applyMoves2(move Move) {
+	movingCrates := (*s)[move.fromStack-1][len((*s)[move.fromStack-1])-move.craneCount:]
+	(*s)[move.fromStack-1] = (*s)[move.fromStack-1][:len((*s)[move.fromStack-1])-move.craneCount]
+	(*s)[move.toStack-1] = append((*s)[move.toStack-1], movingCrates...)
+}
+
 func (*Puzzle) Part1(input string) string {
 	parsedInput := parseInput(input)
 
@@ -98,7 +104,17 @@ func (*Puzzle) Part1(input string) string {
 }
 
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	parsedInput := parseInput(input)
+
+	for _, move := range parsedInput.moves {
+		parsedInput.stacks.applyMoves2(move)
+	}
+
+	result := ""
+	for _, stack := range *parsedInput.stacks {
+		result += stack.Pop()
+	}
+	return result
 }
 
 func (*Puzzle) Notes() string {
