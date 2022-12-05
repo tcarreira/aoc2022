@@ -66,7 +66,72 @@ Finalmente, um caixote é movido da pilha 1 para a pilha 2:
 
 ```
 
-Os Elfos só precisam saber *qual caixote irá acabar no topo de cada pilha*; neste exemplo, os caixotes no topo são `C`na pilha 1, `M` na pilha 2, e `Z` na pilha 3, então é preciso juntar estes três e dar aos Elfos a mensagem `CMZ`.
+Os Elfos só precisam saber *qual caixote irá acabar no topo de cada pilha*; neste exemplo, os caixotes no topo são `C` na pilha 1, `M` na pilha 2, e `Z` na pilha 3, então é preciso juntar estes três e dar aos Elfos a mensagem `CMZ`.
 
 *Depois do procedimento de reorganização terminar, qual caixote acaba no topo de cada pilha?*
+
+## --- Parte Dois ---
+
+Enquanto observa a operadora do guindaste reorganizar habilmente os caixotes, você nota que o processo não segue as previsões.
+
+Alguma lama estava cobrindo a escrita no lado do guindaste, e você rapidamente limpa-a. O guindaste não é um MoveCaixotes 9000 - é um **MoveCaixotes 9001**.
+
+O MoveCaixotes 9001 é notável por várias novas funcionalidades: ar condicionado, assentos em pele, um porta-copos extra, e *a capacidade de apanhar e mover vários caixotes de uma só vez*./
+
+Considerando novamente o exemplo acima, os caixotes começam na mesma configuração:
+
+```
+    [D]    
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+
+```
+
+Mover apenas um caixote da pilha 2 para a pilha 1 tem o mesmo comportamento de antes:
+
+```
+[D]        
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+
+```
+
+Contudo, a ação de mover três caixotes da pilha 1 para a pilha 3 significa que esses três caixotes *ficam na mesma ordem*, resultando nesta nova configuração:
+
+```
+        [D]
+        [N]
+    [C] [Z]
+    [M] [P]
+ 1   2   3
+
+```
+
+Depois, quando ambos os caixotes são movidos da pilha 2 para a pilha 1, eles também *mantêm a ordem*:
+
+```
+        [D]
+        [N]
+[C]     [Z]
+[M]     [P]
+ 1   2   3
+
+```
+
+FInalmente, um único caixote ainda é movido da pilha 1 para a pilha 2, mas é o caixote `C` que é movido:
+
+```
+        [D]
+        [N]
+        [Z]
+[M] [C] [P]
+ 1   2   3
+
+```
+
+Neste exemplo, o MoveCaixotes 9001 deixou os caixotes em uma ordem totalmente diferente: `MCD`.
+
+Antes que o processo de reorganização termine, atualize o seu simulador para que os ELfos saibam onde devem esperar para descarregar os últimos suprimentos. *Depois do processo de reorganização estar completo, qual caixote termina em qual pilha?*
 
