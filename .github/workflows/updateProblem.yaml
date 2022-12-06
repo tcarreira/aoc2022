@@ -51,6 +51,8 @@ jobs:
 
           # replace (some) relative links by absolute links
           sed -i 's@](/201@](https://adventofcode.com/201@g' "day${{ env.AOC_DAY }}/README.en.md"
+          sed -i 's@](/2020@](https://adventofcode.com/2020@g' "day${{ env.AOC_DAY }}/README.en.md"
+          sed -i 's@](/2021@](https://adventofcode.com/2021@g' "day${{ env.AOC_DAY }}/README.en.md"
         env:
           SESSION_ID: ${{ secrets.AOC_SESSION_ID }}
       - name: add Go template
