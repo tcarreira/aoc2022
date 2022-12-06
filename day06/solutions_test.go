@@ -12,7 +12,11 @@ func TestPart1(t *testing.T) {
 		Input    string
 		Expected string
 	}{
-		{"", "-"},
+		{"mjqjpqmgbljsphdztnvjfqwrcgsmlb", "7"},
+		{"bvwbjplbgvbhsrlpgdmjqwftvncz", "5"},
+		{"nppdvjthqldpwncqszvftbrmjlhg", "6"},
+		{"nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", "10"},
+		{"zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", "11"},
 	}
 
 	for i, tt := range tests {
@@ -24,7 +28,7 @@ func TestPart1(t *testing.T) {
 
 	data, _ := ioutil.ReadFile("input.txt")
 	solution := p.Part1(string(data))
-	if solution != "-" {
+	if solution != "1855" {
 		t.Errorf("Solution for Part1: %s", solution)
 	}
 }
