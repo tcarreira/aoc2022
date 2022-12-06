@@ -10,7 +10,7 @@ Como que inspirado pelo timing cômico, o dispositivo emite algumas *faíscas co
 
 Para poder se comunicar com os Elfos, o dispositivo precisa *travar no sinal* deles. O sinal é uma série de caracteres aparentemente aleatórios que o dispositivo recebe um de cada vez.
 
-Para corrigir o sistema de comunicação, você precisa adicionar uma sub-rotina ao dispositivo que deteta um *marcador de início de pacote* no fluxo de dados. No protocolo usado pelos Elfos, o início de um pacote é indicado por uma sequência de *quatro caracteres todos diferentes*.
+Para corrigir o sistema de comunicações, você precisa adicionar uma sub-rotina ao dispositivo que deteta um *marcador de início de pacote* no fluxo de dados. No protocolo usado pelos Elfos, o início de um pacote é indicado por uma sequência de *quatro caracteres todos diferentes*.
 
 O dispositivo enviará à sua sub-rotina um buffer de fluxo de dados (sua entrada do puzzle); sua sub-rotina precisa identificar a primeira posição onde os quatro caracteres recebidos mais recentemente eram todos diferentes. Especificamente, ele precisa relatar o número de caracteres desde o início do buffer até o final do primeiro marcador de quatro caracteres.
 
@@ -35,4 +35,26 @@ Aqui estão mais alguns exemplos:
 
 
 *Quantos caracteres precisam ser processados antes que o primeiro marcador de início de pacote seja detetado?*
+
+## --- Parte dois ---
+
+O sistema de comunicações do seu dispositivo está detectando corretamente os pacotes, mas ainda não está funcionando. Parece que também precisa procurar por *mensagens*.
+
+Um *marcador de início de mensagem* é como um marcador de início de pacote, exceto que consiste em *14 caracteres distintos* em vez de 4.
+
+Aqui estão as primeiras posições dos marcadores de início de mensagem para todos os exemplos acima:
+
+
+  - `mjqjpqmgbljsphdztnvjfqwrcgsmlb`: primeiro marcador após o caractere `19`
+
+  - `bvwbjplbgvbhsrlpgdmjqwftvncz`: primeiro marcador após o caractere `23`
+
+  - `nppdvjthqldpwncqszvftbrmjlhg`: primeiro marcador após o caractere `23`
+
+  - `nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg`: primeiro marcador após o caractere `29`
+
+  - `zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw`: primeiro marcador após o caractere `26`
+
+
+*Quantos caracteres precisam ser processados antes que o primeiro marcador de início de mensagem seja detectado?*
 
