@@ -24,6 +24,7 @@ Qualquer um pode entrar no [LeaderBoard privado](https://adventofcode.com/2022/l
 
 `go run .`
 
+<!-- ci:result:start -->
 ```
 ######################################################
 Resolvendo os puzzles do https://adventofcode.com/2022
@@ -38,3 +39,4 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   05 | WSFTMRHPP  (      0.1) | GSLCMFBRP  (      0.1) | pilhas (stacks)
 
 ```
+<!-- ci:result:end -->
