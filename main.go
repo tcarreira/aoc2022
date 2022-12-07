@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
+	"strconv"
 	"time"
 
 	"github.com/tcarreira/aoc2022/day01"
@@ -15,7 +16,31 @@ import (
 	// ci:importDay
 )
 
-const nTries int = 10
+var (
+	Repeats         int  = 10
+	UseCachedResult bool = false
+)
+
+func init() {
+	if repeatsStr := os.Getenv("AOC_REPEATS"); repeatsStr != "" {
+		repeats, err := strconv.Atoi(repeatsStr)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "AOC_REPEATS could not be parsed into int: %v\n", err)
+		} else {
+			Repeats = repeats
+		}
+	}
+
+	if useCachedStr := os.Getenv("AOC_USE_CACHED_RESULT"); useCachedStr != "" {
+		useCached, err := strconv.ParseBool(useCachedStr)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "AOC_USE_CACHED_RESULT could not be parsed into bool: %v\n", err)
+		} else {
+			UseCachedResult = useCached
+		}
+	}
+
+}
 
 type DayAOC interface {
 	Part1(input string) string
@@ -23,13 +48,24 @@ type DayAOC interface {
 	Notes() string
 }
 
+type PuzzleStats struct {
+	Results struct {
+		Part1 string
+		Part2 string
+	}
+	Timing struct {
+		Part1 time.Duration
+		Part2 time.Duration
+	}
+}
+
 func main() {
 	fmt.Println("######################################################")
-	fmt.Println("Solving problems for the https://adventofcode.com/2022")
+	fmt.Println("Resolvendo os puzzles do https://adventofcode.com/2022")
 	fmt.Println("######################################################")
 
 	fmt.Println()
-	fmt.Println(" Day | Part1      ( time ms ) | Part2      ( time ms ) |")
+	fmt.Println(" Dia | Parte 1    ( time ms ) | Parte 2    ( time ms ) |")
 	fmt.Println("-----+------------------------+------------------------+")
 
 	aocDays := []DayAOC{
@@ -44,33 +80,16 @@ func main() {
 	} // ci:addNewDay
 	for day0, aocDay := range aocDays {
 		day := day0 + 1
-		inputBytes, err := ioutil.ReadFile(fmt.Sprintf("day%02d/input.txt", day))
+		puzzleStats, err := buildPuzzleStats(day, aocDay)
 		if err != nil {
-			fmt.Println("Error reading input file", err)
+			fmt.Fprintf(os.Stderr, "error building PuzzleStats for day %d: %v\n", day, err)
 			continue
 		}
-		input := string(inputBytes)
-
-		// Benchmarking part1
-		startTime := time.Now()
-		part1Solution := ""
-		for i := 0; i < nTries; i++ {
-			part1Solution = aocDay.Part1(input)
-		}
-		part1Time := time.Now().Sub(startTime)
-
-		// Benchmarking part2
-		startTime = time.Now()
-		part2Solution := ""
-		for i := 0; i < nTries; i++ {
-			part2Solution = aocDay.Part2(input)
-		}
-		part2Time := time.Now().Sub(startTime)
 
 		// Printing results
 		fmt.Printf("  %02d | %-10s (%9.1f) | %-10s (%9.1f) | %s\n", day,
-			part1Solution, float64(part1Time/time.Microsecond)/float64(nTries)/1000,
-			part2Solution, float64(part2Time/time.Microsecond)/float64(nTries)/1000,
+			puzzleStats.Results.Part1, float64(puzzleStats.Timing.Part1/time.Microsecond)/1000,
+			puzzleStats.Results.Part2, float64(puzzleStats.Timing.Part2/time.Microsecond)/1000,
 			aocDay.Notes(),
 		)
 	}
