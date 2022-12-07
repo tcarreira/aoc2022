@@ -53,6 +53,8 @@ jobs:
             git commit -m "Update Puzzle Stats"
           fi
       - name: git push
-        run: git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        run: |
+          git pull --rebase https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
 
