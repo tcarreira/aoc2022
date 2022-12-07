@@ -1,7 +1,7 @@
 package day04
 
 import (
-	"io/ioutil"
+	"os"
 	"testing"
 )
 
@@ -28,7 +28,7 @@ func TestPart1(t *testing.T) {
 		}
 	}
 
-	data, _ := ioutil.ReadFile("input.txt")
+	data, _ := os.ReadFile("input.txt")
 	solution := p.Part1(string(data))
 	if solution != "485" {
 		t.Errorf("Solution for Part1: %s", solution)
@@ -50,7 +50,7 @@ func TestPart2(t *testing.T) {
 		}
 	}
 
-	data, _ := ioutil.ReadFile("input.txt")
+	data, _ := os.ReadFile("input.txt")
 	solution := p.Part2(string(data))
 	if solution != "857" {
 		t.Errorf("Solution for Part2: %s", solution)
