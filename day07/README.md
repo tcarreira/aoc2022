@@ -100,10 +100,34 @@ Os tamanhos totais dos diretórios acima podem ser encontrados da seguinte forma
 
   - O diretório `d` tem tamanho total *24933642*.
 
-  - Como diretório mais externo, `/` contém todos os arquivos. Seu tamanho total é *48381165*, a soma do tamanho de todos os arquivo.
+  - Como diretório mais externo, `/` contém todos os arquivos. Seu tamanho total é *48381165*, a soma do tamanho de todos os arquivos.
 
 
 Para começar, encontre todos os diretórios com um tamanho total de *no máximo 100000*, e depois calcule a soma de seus tamanhos totais. No exemplo acima, esses diretórios são `a` e `e`; a soma de seus tamanhos totais é `95437` (94853 + 584). (Como neste exemplo, este processo pode contar arquivos mais de uma vez!)
 
 Encontre todos os diretórios com um tamanho total de no máximo 100.000. *Qual é a soma dos tamanhos totais desses diretórios?*
+
+## --- Parte dois ---
+
+Agora, você está pronto para escolher um diretório para excluir.
+
+O espaço total em disco disponível para o sistema de arquivos é `70000000`. Para executar a atualização, você precisa de um espaço não utilizado de pelo menos `30000000`. Você precisa encontrar um diretório que possa excluir e que *libere espaço suficiente* para executar a atualização.
+
+No exemplo acima, o tamanho total do diretório externo (e, portanto, a quantidade total de espaço usado) é `48381165`; isso significa que o tamanho do espaço *não utilizado* deve ser atualmente `21618835`, que não é exatamente o `30000000` exigido pela atualização. Portanto, a atualização ainda requer que um diretório com tamanho total de pelo menos `8381165` seja excluído antes de poder ser executado.
+
+Para conseguir isso, você tem as seguintes opções:
+
+
+  - Exclua o diretório `e`, o que aumentaria o espaço não utilizado em `584`.
+
+  - Exclua o diretório `a`, o que aumentaria o espaço não utilizado em `94853`.
+
+  - Exclua o diretório `d`, o que aumentaria o espaço não utilizado em `24933642`.
+
+  - Exclua o diretório `/`, o que aumentaria o espaço não utilizado em `48381165`.
+
+
+Os diretórios `e` e `a` são muito pequenos; excluí-los não liberaria espaço suficiente. No entanto, os diretórios `d` e `/` são grandes o suficiente! Entre estes, escolha o *menor*: `d`, aumentando o espaço não utilizado em `24933642`.
+
+Encontre o menor diretório que, se excluído, liberaria espaço suficiente no sistema de arquivos para executar a atualização. *Qual é o tamanho total desse diretório?*
 
