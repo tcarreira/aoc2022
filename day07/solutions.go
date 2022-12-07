@@ -52,8 +52,6 @@ func parseInput(raw string) FSNode {
 
 		newNode := fsContext.createNode(resultLine)
 		fsContext.children[newNode.name] = &newNode
-
-		// cd()
 	}
 
 	return filesystem
@@ -120,10 +118,36 @@ func (*Puzzle) Part1(input string) string {
 	return fmt.Sprint(result)
 }
 
+func (node *FSNode) findSmallerDir(neededSpace int) int {
+	minSpace := 70000000
+	for _, child := range node.children {
+		if len(child.children) == 0 {
+			continue
+		} else {
+			if child.size < minSpace && child.size >= neededSpace {
+				minSpace = child.size
+			}
+			subDirSize := child.findSmallerDir(neededSpace)
+			if subDirSize < minSpace && subDirSize >= neededSpace {
+				minSpace = subDirSize
+			}
+		}
+	}
+	return minSpace
+}
+
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	filesystem := parseInput(input)
+	filesystem.computeSize()
+
+	freeSpace := 70000000 - filesystem.size
+	neededSpace := 30000000 - freeSpace
+	result := filesystem.findSmallerDir(neededSpace)
+
+	return fmt.Sprint(result)
+
 }
 
 func (*Puzzle) Notes() string {
-	return ""
+	return "árvores sistema arquivos (fs trees)"
 }
