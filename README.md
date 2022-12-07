@@ -32,11 +32,12 @@ Resolvendo os puzzles do https://adventofcode.com/2022
 
  Dia | Parte 1    ( time ms ) | Parte 2    ( time ms ) |
 -----+------------------------+------------------------+
-  01 | 70116      (      0.2) | 206582     (      0.2) |
-  02 | 9759       (      0.2) | 12429      (      0.2) |
-  03 | 7727       (      0.1) | 2609       (      1.6) | interseção de mapas (maps/dicts)
-  04 | 485        (      0.2) | 857        (      0.2) | sobreposição de intervalos
+  01 | 70116      (      0.2) | 206582     (      0.2) | primeiro problema
+  02 | 9759       (      0.2) | 12429      (      0.2) | 
+  03 | 7727       (      0.1) | 2609       (      1.7) | interseção de mapas (maps/dicts)
+  04 | 485        (      0.4) | 857        (      0.4) | sobreposição de intervalos
   05 | WSFTMRHPP  (      0.1) | GSLCMFBRP  (      0.1) | pilhas (stacks)
-
+  06 | 1855       (      0.0) | 3256       (      0.1) | 
+  07 | -          (      0.0) | -          (      0.0) | 
 ```
 <!-- ci:result:end -->
