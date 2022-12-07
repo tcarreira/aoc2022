@@ -38,6 +38,6 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   04 | 485        (      0.4) | 857        (      0.4) | sobreposição de intervalos
   05 | WSFTMRHPP  (      0.1) | GSLCMFBRP  (      0.1) | pilhas (stacks)
   06 | 1855       (      0.0) | 3256       (      0.1) | 
-  07 | -          (      0.0) | -          (      0.0) | 
+  07 | 1118405    (      0.3) | 12545514   (      0.2) | árvores sistema arquivos (fs trees)
 ```
 <!-- ci:result:end -->
