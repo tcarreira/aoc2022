@@ -27,7 +27,7 @@ jobs:
           [ "_${aoc_day}" == "_" ] && aoc_day=$(date +%d)
 
           echo "AOC_YEAR=${aoc_year}" >> $GITHUB_ENV
-          echo "AOC_DAY=$(printf %02d $aoc_day)" >> $GITHUB_ENV
+          echo "AOC_DAY=${aoc_day}" >> $GITHUB_ENV
           tail -n2 $GITHUB_ENV
       - uses: actions/checkout@v3
         with:
@@ -43,7 +43,8 @@ jobs:
           pip install -r aoc-to-markdown/requirements.txt
       - name: update aoc-day
         run: |
-          python aoc-to-markdown/aoc_to_markdown.py -y "${{ env.AOC_YEAR }}" -d "$(( ${{ env.AOC_DAY }} ))" --input --save
+          day_num="${{ env.AOC_DAY }}" && day_num="${day_num#0}"
+          python aoc-to-markdown/aoc_to_markdown.py -y "${{ env.AOC_YEAR }}" -d "${day_num}" --input --save
 
           [ -d "day${{ env.AOC_DAY }}" ] || mkdir "day${{ env.AOC_DAY }}"
           cp "day-${{ env.AOC_DAY }}/README.md" "day${{ env.AOC_DAY }}/README.en.md"
