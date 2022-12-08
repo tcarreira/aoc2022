@@ -39,5 +39,6 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   05 | WSFTMRHPP  (      0.1) | GSLCMFBRP  (      0.1) | pilhas (stacks)
   06 | 1855       (      0.0) | 3256       (      0.1) | 
   07 | 1118405    (      0.3) | 12545514   (      0.2) | árvores sistema arquivos (fs trees)
+  08 | 1779       (      0.4) | 172224     (      0.7) | programação dinâmica
 ```
 <!-- ci:result:end -->
