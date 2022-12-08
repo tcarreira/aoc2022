@@ -58,7 +58,7 @@ func TestPart2(t *testing.T) {
 	}
 }
 
-func TestPart3(t *testing.T) {
+func TestCheckVisible(t *testing.T) {
 
 	var exampleGrid = [][]int{
 		{3, 0, 3, 7, 3},
@@ -67,7 +67,7 @@ func TestPart3(t *testing.T) {
 		{3, 3, 5, 4, 9},
 		{3, 5, 3, 9, 0},
 	}
-	var resultGrid = [][]bool{
+	var expectedGrid = [][]bool{
 		{true, true, true, true, true},
 		{true, true, true, false, true},
 		{true, true, false, true, true},
@@ -77,7 +77,7 @@ func TestPart3(t *testing.T) {
 
 	solution := checkVisible(exampleGrid)
 
-	expected, _ := json.Marshal(resultGrid)
+	expected, _ := json.Marshal(expectedGrid)
 	got, _ := json.Marshal(solution)
 
 	if string(got) != string(expected) {

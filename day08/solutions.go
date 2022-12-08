@@ -8,16 +8,6 @@ import (
 
 type Puzzle struct{}
 
-// 30373
-// 25512
-// 65332
-// 33549
-// 35390
-
-// Input: 30373
-// PD   : OxxOx
-// top  : 7
-
 func parseInput(raw string) [][]int {
 	grid := [][]int{}
 
@@ -35,6 +25,65 @@ func parseInput(raw string) [][]int {
 	return grid
 }
 
+func checkVisible(grid [][]int) [][]bool {
+	visibleTrees := [][]bool{}
+
+	// left - right (build)
+	for i, line := range grid {
+		visibleTrees = append(visibleTrees, []bool{})
+		top := -1
+		for _, c := range line {
+			if c > top {
+				top = c
+				visibleTrees[i] = append(visibleTrees[i], true)
+			} else {
+				visibleTrees[i] = append(visibleTrees[i], false)
+			}
+		}
+	}
+
+	// right - left
+	for i, line := range grid {
+		top := -1
+		for j := len(line) - 1; j >= 0; j-- {
+			c := line[j]
+			if c > top {
+				top = c
+				visibleTrees[i][j] = true
+			}
+		}
+	}
+
+	// down - up
+	for i := 0; i <= len(grid)-1; i++ {
+		line := grid[i]
+		top := -1
+		for j := 0; j <= len(line)-1; j++ {
+			c := grid[j][i]
+			// fmt.Println(i, j, c, top)
+			if c > top {
+				top = c
+				visibleTrees[j][i] = true
+			}
+		}
+	}
+
+	// up - down
+	for i := len(grid) - 1; i >= 0; i-- {
+		line := grid[i]
+		top := -1
+		for j := len(line) - 1; j >= 0; j-- {
+			c := grid[j][i]
+			if c > top {
+				top = c
+				visibleTrees[j][i] = true
+			}
+		}
+	}
+
+	return visibleTrees
+}
+
 func countVisible(grid [][]bool) int {
 	sum := 0
 	for i := 0; i < len(grid); i++ {
@@ -47,70 +96,8 @@ func countVisible(grid [][]bool) int {
 	return sum
 }
 
-func (*Puzzle) Part1(input string) string {
-	grid := parseInput(input)
-	visibleGrid := checkVisible(grid)
-	sum := countVisible(visibleGrid)
-	return fmt.Sprint(sum)
-}
-
-func checkVisible(exampleGrid [][]int) [][]bool {
-	PD := [][]bool{}
-
-	for i, line := range exampleGrid {
-		PD = append(PD, []bool{})
-		top := -1
-		for _, c := range line {
-			if c > top {
-				top = c
-				PD[i] = append(PD[i], true)
-			} else {
-				PD[i] = append(PD[i], false)
-			}
-		}
-	}
-
-	for i, line := range exampleGrid {
-		top := -1
-		for j := len(line) - 1; j >= 0; j-- {
-			c := line[j]
-			if c > top {
-				top = c
-				PD[i][j] = true
-			}
-		}
-	}
-
-	for i := 0; i <= len(exampleGrid)-1; i++ {
-		line := exampleGrid[i]
-		top := -1
-		for j := 0; j <= len(line)-1; j++ {
-			c := exampleGrid[j][i]
-			// fmt.Println(i, j, c, top)
-			if c > top {
-				top = c
-				PD[j][i] = true
-			}
-		}
-	}
-
-	for i := len(exampleGrid) - 1; i >= 0; i-- {
-		line := exampleGrid[i]
-		top := -1
-		for j := len(line) - 1; j >= 0; j-- {
-			c := exampleGrid[j][i]
-			if c > top {
-				top = c
-				PD[j][i] = true
-			}
-		}
-	}
-
-	return PD
-}
-
 func bestScenicView(grid [][]int) int {
-	sum := 0
+	maxScenic := 0
 	for i := 0; i < len(grid); i++ {
 		for j := 0; j < len(grid[0]); j++ {
 			tree := grid[i][j]
@@ -156,12 +143,19 @@ func bestScenicView(grid [][]int) int {
 			}
 			scenic *= count
 
-			if scenic > sum {
-				sum = scenic
+			if scenic > maxScenic {
+				maxScenic = scenic
 			}
 		}
 	}
-	return sum
+	return maxScenic
+}
+
+func (*Puzzle) Part1(input string) string {
+	grid := parseInput(input)
+	visibleGrid := checkVisible(grid)
+	sum := countVisible(visibleGrid)
+	return fmt.Sprint(sum)
 }
 
 func (*Puzzle) Part2(input string) string {
@@ -171,10 +165,6 @@ func (*Puzzle) Part2(input string) string {
 
 }
 
-// {3, 0, 3, 7, 3},
-// {2, 1, 1, 1, 0}
-// {0  1  2  3  1}
-
 func (*Puzzle) Notes() string {
-	return ""
+	return "programação dinâmica"
 }
