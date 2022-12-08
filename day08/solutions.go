@@ -109,9 +109,71 @@ func checkVisible(exampleGrid [][]int) [][]bool {
 	return PD
 }
 
-func (*Puzzle) Part2(input string) string {
-	return "-"
+func bestScenicView(grid [][]int) int {
+	sum := 0
+	for i := 0; i < len(grid); i++ {
+		for j := 0; j < len(grid[0]); j++ {
+			tree := grid[i][j]
+			scenic := 1
+
+			// ->
+			count := 0
+			for y := j + 1; y < len(grid); y++ {
+				count++
+				if grid[i][y] >= tree {
+					break
+				}
+			}
+			scenic *= count
+
+			// <-
+			count = 0
+			for y := j - 1; y >= 0; y-- {
+				count++
+				if grid[i][y] >= tree {
+					break
+				}
+			}
+			scenic *= count
+
+			// ^
+			count = 0
+			for x := i - 1; x >= 0; x-- {
+				count++
+				if grid[x][j] >= tree {
+					break
+				}
+			}
+			scenic *= count
+
+			// v
+			count = 0
+			for x := i + 1; x < len(grid); x++ {
+				count++
+				if grid[x][j] >= tree {
+					break
+				}
+			}
+			scenic *= count
+
+			if scenic > sum {
+				sum = scenic
+			}
+		}
+	}
+	return sum
 }
+
+func (*Puzzle) Part2(input string) string {
+	grid := parseInput(input)
+	sum := bestScenicView(grid)
+	return fmt.Sprint(sum)
+
+}
+
+// {3, 0, 3, 7, 3},
+// {2, 1, 1, 1, 0}
+// {0  1  2  3  1}
 
 func (*Puzzle) Notes() string {
 	return ""
