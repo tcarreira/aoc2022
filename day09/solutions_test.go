@@ -39,11 +39,21 @@ func TestPart1(t *testing.T) {
 }
 
 func TestPart2(t *testing.T) {
+	example2 := `R 5
+U 8
+L 8
+D 3
+R 17
+D 10
+L 25
+U 20
+`
 	tests := []struct {
 		Input    string
 		Expected string
 	}{
-		{"", "-"},
+		{exampleInput, "1"},
+		{example2, "36"},
 	}
 
 	for i, tt := range tests {
@@ -55,7 +65,7 @@ func TestPart2(t *testing.T) {
 
 	data, _ := os.ReadFile("input.txt")
 	solution := p.Part2(string(data))
-	if solution != "-" {
+	if solution != "2593" {
 		t.Errorf("Solution for Part2: %s", solution)
 	}
 }

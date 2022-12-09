@@ -130,6 +130,26 @@ func simulator(moves []Move) int {
 	return len(tailTrail)
 }
 
+func simulatorPart2(moves []Move) int {
+	knots := []Pos{}
+	for i := 0; i < 10; i++ {
+		knots = append(knots, Pos{0, 0})
+	}
+
+	tailTrail := TailTrail{Pos{0, 0}: struct{}{}}
+
+	for _, mov := range moves {
+		for step := 0; step < mov.steps; step++ {
+			knots[0].moveHead(mov)
+			for i := range knots[1:] {
+				knots[i+1].moveTail(knots[i]) // move next, based on previous
+			}
+			tailTrail.updateTailTrail(knots[9])
+		}
+	}
+	return len(tailTrail)
+}
+
 func (*Puzzle) Part1(input string) string {
 	// simularMovimentos()
 	//   headPos.move(mov)
@@ -143,9 +163,11 @@ func (*Puzzle) Part1(input string) string {
 }
 
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	moves := parseInput(input)
+	solution := simulatorPart2(moves)
+	return fmt.Sprint(solution)
 }
 
 func (*Puzzle) Notes() string {
-	return ""
+	return "map/dict/set coord visitadas"
 }
