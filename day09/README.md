@@ -264,7 +264,7 @@ Portanto, existem `13` posições que a cauda visitou pelo menos uma vez.
 
 Simule sua série hipotética completa de movimentos. *Quantas posições a ponta da corda visita pelo menos uma vez?*
 
-## --- Parte dois ---
+## --- Parte Dois ---
 
 Uma corda rebenta! De repente, o rio está ficando muito mais perto do que você se lembra. A ponte ainda está lá, mas algumas das cordas que quebraram agora estão chicoteando em sua direção enquanto você cai pelo ar!
 
