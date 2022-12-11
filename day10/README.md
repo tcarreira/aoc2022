@@ -215,3 +215,139 @@ A soma dessas intensidades de sinal é `13140`.
 
 Encontre a força do sinal durante o 20º, 60º, 100º, 140º, 180º e 220º ciclos. *Qual é a soma dessas seis intensidades de sinal?*
 
+## --- Parte Dois ---
+
+Parece que o registo `X` controla a posição horizontal de um [sprite](https://pt.wikipedia.org/wiki/Sprite_(computa%C3%A7%C3%A3o_gr%C3%A1fica)). Especificamente, o sprite tem 3 pixels de largura e o registro `X` define a posição horizontal do *meio* desse sprite. (Neste sistema, não existe "posição vertical": se a posição horizontal do sprite colocar seus pixels onde o CRT está desenhando no momento, esses pixels serão desenhados.)
+
+Você conta os pixels no CRT: 40 de largura e 6 de altura. Essa tela CRT desenha a linha superior de pixels da esquerda para a direita, depois a linha abaixo dela e assim por diante. O pixel mais à esquerda em cada linha está na posição `0`, e o pixel mais à direita em cada linha está na posição `39`.
+
+Tal como a CPU, o CRT está intimamente ligado ao circuito do relógio: o CRT desenha *um único pixel durante cada ciclo*. Representando cada pixel da tela como um `#`, aqui estão os ciclos durante os quais o primeiro e o último pixel de cada linha são desenhados:
+
+```
+Ciclo   1 -> ######################################## <- Ciclo  40
+Ciclo  41 -> ######################################## <- Ciclo  80
+Ciclo  81 -> ######################################## <- Ciclo 120
+Ciclo 121 -> ######################################## <- Ciclo 160
+Ciclo 161 -> ######################################## <- Ciclo 200
+Ciclo 201 -> ######################################## <- Ciclo 240
+
+```
+
+Então, [*cronometrando*](https://www.youtube.com/watch?v=sJFnWZH5FXc) [cuidadosamente](https://en.wikipedia.org/wiki/Racing_the_Beam) as instruções da CPU e as operações de desenho do CRT, você deve ser capaz de determinar se o sprite é visível no instante em que cada pixel é desenhado. Se o sprite estiver posicionado de forma que um de seus três pixels seja o pixel que está sendo desenhado no momento, a tela produzirá um pixel *aceso* (`#`); caso contrário, a tela deixa o pixel *escuro* (`.`).
+Os primeiros píxeis do exemplo maior acima são desenhados da seguinte forma:
+
+```
+Posição do Sprite: ###.....................................
+
+Início ciclo    1: começa por executar addx 15
+Durante ciclo   1: o CRT desenha o pixel na posição 0
+Linha atual CRT  : #
+
+Durante ciclo   2: o CRT desenha o pixel na posição 1
+Linha atual CRT  : ##
+Final do ciclo  2: termina executando addx 15 (Registo X passa a 16)
+Posição do Sprite: ...............###......................
+
+Início ciclo    3: começa por executar addx -11
+Durante ciclo   3: o CRT desenha o pixel na posição 2
+Linha atual CRT  : ##.
+
+Durante ciclo   4: o CRT desenha o pixel na posição 3
+Linha atual CRT  : ##..
+Final do ciclo  4: termina executando addx -11 (Registo X passa a 5)
+Posição do Sprite: ....###.................................
+
+Início ciclo    5: começa por executar addx 6
+Durante ciclo   5: o CRT desenha o pixel na posição 4
+Linha atual CRT  : ##..#
+
+Durante ciclo   6: o CRT desenha o pixel na posição 5
+Linha atual CRT  : ##..##
+Final do ciclo  6: termina executando addx 6 (Registo X passa a 11)
+Posição do Sprite: ..........###...........................
+
+Início ciclo    7: começa por executar addx -3
+Durante ciclo   7: o CRT desenha o pixel na posição 6
+Linha atual CRT  : ##..##.
+
+Durante ciclo   8: o CRT desenha o pixel na posição 7
+Linha atual CRT  : ##..##..
+Final do ciclo  8: termina executando addx -3 (Registo X passa a 8)
+Posição do Sprite: .......###..............................
+
+Início ciclo    9: começa por executar addx 5
+Durante ciclo   9: o CRT desenha o pixel na posição 8
+Linha atual CRT  : ##..##..#
+
+Durante ciclo  10: o CRT desenha o pixel na posição 9
+Linha atual CRT  : ##..##..##
+Final do ciclo 10: termina executando addx 5 (Registo X passa a 13)
+Posição do Sprite: ............###.........................
+
+Início ciclo   11: começa por executar addx -1
+Durante ciclo  11: o CRT desenha o pixel na posição 10
+Linha atual CRT  : ##..##..##.
+
+Durante ciclo  12: o CRT desenha o pixel na posição 11
+Linha atual CRT  : ##..##..##..
+Final do ciclo 12: termina executando addx -1 (Registo X passa a 12)
+Posição do Sprite: ...........###..........................
+
+Início ciclo   13: começa por executar addx -8
+Durante ciclo  13: o CRT desenha o pixel na posição 12
+Linha atual CRT  : ##..##..##..#
+
+Durante ciclo  14: o CRT desenha o pixel na posição 13
+Linha atual CRT  : ##..##..##..##
+Final do ciclo 14: termina executando addx -8 (Registo X passa a 4)
+Posição do Sprite: ...###..................................
+
+Início ciclo   15: começa por executar addx 13
+Durante ciclo  15: o CRT desenha o pixel na posição 14
+Linha atual CRT  : ##..##..##..##.
+
+Durante ciclo  16: o CRT desenha o pixel na posição 15
+Linha atual CRT  : ##..##..##..##..
+Final do ciclo 16: termina executando addx 13 (Registo X passa a 17)
+Posição do Sprite: ................###.....................
+
+Início ciclo   17: começa por executar addx 4
+Durante ciclo  17: o CRT desenha o pixel na posição 16
+Linha atual CRT  : ##..##..##..##..#
+
+Durante ciclo  18: o CRT desenha o pixel na posição 17
+Linha atual CRT  : ##..##..##..##..##
+Final do ciclo 18: termina executando addx 4 (Registo X passa a 21)
+Posição do Sprite: ....................###.................
+
+Início ciclo   19: começa por executar noop
+Durante ciclo  19: o CRT desenha o pixel na posição 18
+Linha atual CRT  : ##..##..##..##..##.
+Final do ciclo 19: termina executando noop
+
+Início ciclo   20: começa por executar addx -1
+Durante ciclo  20: o CRT desenha o pixel na posição 19
+Linha atual CRT  : ##..##..##..##..##..
+
+Durante ciclo  21: o CRT desenha o pixel na posição 20
+Linha atual CRT  : ##..##..##..##..##..#
+Final do ciclo 21: termina executando addx -1 (Registo X passa a 20)
+Posição do Sprite: ...................###..................
+
+```
+
+Permitir que o programa seja executado até ao final faz com que o CRT produza a seguinte imagem:
+
+```
+##..##..##..##..##..##..##..##..##..##..
+###...###...###...###...###...###...###.
+####....####....####....####....####....
+#####.....#####.....#####.....#####.....
+######......######......######......####
+#######.......#######.......#######.....
+
+```
+
+Renderize a imagem fornecida pelo seu programa. *Quais são as oito letras maiúsculas que aparecem no seu CRT?*
+
+
