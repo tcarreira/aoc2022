@@ -245,5 +245,5 @@ func TestPrintPart2(t *testing.T) {
 	state.processInstructions(240)
 	fmt.Println("---------------")
 	state.PrintScreen()
-	t.Error("") // uncomment for printing
+	// t.Error("") // uncomment for printing
 }
