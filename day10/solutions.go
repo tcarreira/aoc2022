@@ -2,6 +2,7 @@ package day10
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -105,11 +106,16 @@ func (*Puzzle) Part2(input string) string {
 		Screen:       []string{"", "", "", "", "", ""},
 	}
 	state.processInstructions(240)
-	// fmt.Println("---------------")
-	// state.PrintScreen()
+
+	if _, ok := os.LookupEnv("AOC_DAY10"); ok {
+		fmt.Println("Visual Day 10:")
+		state.PrintScreen()
+		os.Unsetenv("AOC_DAY10")
+	}
+
 	return "PLEFULPB"
 }
 
 func (*Puzzle) Notes() string {
-	return "desenhando caracteres"
+	return "desenhando caracteres (env: AOC_DAY10)"
 }
