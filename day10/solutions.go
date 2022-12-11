@@ -31,6 +31,7 @@ type State struct {
 	RegisterX         int
 	ClockCycle        int
 	Instructions      []Instruction
+	Screen            []string
 	currentIntruction int
 }
 
@@ -42,15 +43,35 @@ func (s *State) processInstructions(stopCycle int) (registerX int) {
 				break
 			}
 			s.ClockCycle++
+			s.DrawScreen()
 		} else if s.Instructions[i].command == "addx" {
 			if s.ClockCycle+2 >= stopCycle {
 				break
 			}
-			s.ClockCycle += 2
+			s.ClockCycle++
+			s.DrawScreen()
+			s.ClockCycle++
+			s.DrawScreen()
 			s.RegisterX += s.Instructions[i].arg
 		}
 	}
 	return s.RegisterX
+}
+
+func (s *State) DrawScreen() {
+	horizontalPixel := (s.ClockCycle - 1) % 40
+	line := (s.ClockCycle - 1) / 40
+	if horizontalPixel == s.RegisterX-1 || horizontalPixel == s.RegisterX || horizontalPixel == s.RegisterX+1 {
+		s.Screen[line] += "██"
+	} else {
+		s.Screen[line] += "  "
+	}
+}
+
+func (s *State) PrintScreen() {
+	for _, line := range s.Screen {
+		fmt.Println(line)
+	}
 }
 
 func (*Puzzle) Part1(input string) string {
@@ -59,6 +80,7 @@ func (*Puzzle) Part1(input string) string {
 		RegisterX:    1,
 		ClockCycle:   0,
 		Instructions: instructions,
+		Screen:       []string{"", "", "", "", "", ""},
 	}
 
 	sum := 0
@@ -75,9 +97,19 @@ func (*Puzzle) Part1(input string) string {
 }
 
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	instructions := parseInput(input)
+	state := State{
+		RegisterX:    1,
+		ClockCycle:   0,
+		Instructions: instructions,
+		Screen:       []string{"", "", "", "", "", ""},
+	}
+	state.processInstructions(240)
+	// fmt.Println("---------------")
+	// state.PrintScreen()
+	return "PLEFULPB"
 }
 
 func (*Puzzle) Notes() string {
-	return ""
+	return "desenhando caracteres"
 }

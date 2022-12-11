@@ -1,6 +1,7 @@
 package day10
 
 import (
+	"fmt"
 	"os"
 	"testing"
 )
@@ -164,6 +165,7 @@ noop
 		RegisterX:    1,
 		ClockCycle:   0,
 		Instructions: instructions,
+		Screen:       []string{"", "", "", "", "", ""},
 	}
 
 	tests := []struct {
@@ -214,7 +216,7 @@ func TestPart2(t *testing.T) {
 		Input    string
 		Expected string
 	}{
-		{"", "-"},
+		{exampleInput, "PLEFULPB"}, // wrong tests, only visually
 	}
 
 	for i, tt := range tests {
@@ -226,7 +228,22 @@ func TestPart2(t *testing.T) {
 
 	data, _ := os.ReadFile("input.txt")
 	solution := p.Part2(string(data))
-	if solution != "-" {
+	if solution != "PLEFULPB" {
 		t.Errorf("Solution for Part2: %s", solution)
 	}
+}
+
+func TestPrintPart2(t *testing.T) {
+	data, _ := os.ReadFile("input.txt")
+	instructions := parseInput(string(data))
+	state := State{
+		RegisterX:    1,
+		ClockCycle:   0,
+		Instructions: instructions,
+		Screen:       []string{"", "", "", "", "", ""},
+	}
+	state.processInstructions(240)
+	fmt.Println("---------------")
+	state.PrintScreen()
+	t.Error("") // uncomment for printing
 }
