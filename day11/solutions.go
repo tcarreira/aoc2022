@@ -24,7 +24,8 @@ type Operation struct {
 }
 
 type MonkeyState struct {
-	monkeys []Monkey
+	monkeys       []Monkey
+	commonDivisor int
 }
 
 func parseInput(raw string) MonkeyState {
@@ -65,10 +66,15 @@ func parseInput(raw string) MonkeyState {
 		monkeyState.monkeys[mID].throwMonkeyIfFalse = monkeyID
 	}
 
+	monkeyState.commonDivisor = 1
+	for _, monkey := range monkeyState.monkeys {
+		monkeyState.commonDivisor *= monkey.testDivisible
+	}
+
 	return monkeyState
 }
 
-func (ms *MonkeyState) processRound() {
+func (ms *MonkeyState) processRoundOptionalDiv(isDiv3 bool) {
 	for monkeyID, monkey := range ms.monkeys {
 		ms.monkeys[monkeyID].itemsCount += len(monkey.items)
 		for _, worryLevel := range monkey.items {
@@ -90,7 +96,12 @@ func (ms *MonkeyState) processRound() {
 			}
 
 			// part2 : dividir 3
-			worryLevel = worryLevel / 3
+			if isDiv3 {
+				worryLevel = worryLevel / 3
+			} else {
+				mod := worryLevel % ms.commonDivisor
+				worryLevel = mod + ms.commonDivisor
+			}
 
 			// part3: Test
 			if worryLevel%monkey.testDivisible == 0 {
@@ -101,6 +112,10 @@ func (ms *MonkeyState) processRound() {
 		}
 		ms.monkeys[monkeyID].items = []int{}
 	}
+}
+
+func (ms *MonkeyState) processRound() {
+	ms.processRoundOptionalDiv(true)
 }
 
 func (ms *MonkeyState) monkeyBusiness() int {
@@ -128,7 +143,18 @@ func (*Puzzle) Part1(input string) string {
 }
 
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	monkeyState := parseInput(input)
+	for round := 1; round <= 10000; round++ {
+		monkeyState.processRoundOptionalDiv(false)
+		// if round == 20 || round%1000 == 0 {
+		// 	fmt.Printf("After round %d:\n", round)
+		// 	for mID, monkey := range monkeyState.monkeys {
+		// 		fmt.Printf("Monkey %d: %v\n", mID, monkey.itemsCount)
+		// 	}
+		// }
+	}
+	monkeyBusiness := monkeyState.monkeyBusiness()
+	return fmt.Sprint(monkeyBusiness)
 }
 
 func (*Puzzle) Notes() string {
