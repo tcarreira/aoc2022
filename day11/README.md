@@ -241,3 +241,92 @@ Neste exemplo, os dois macacos mais ativos inspecionaram os itens 101 e 105 veze
 
 Descubra quais macacos perseguir contando quantos itens eles inspecionam em 20 rodadas. *Qual é o nível de macacadas depois de 20 rodadas de travessuras de símios?*
 
+## --- Parte Dois ---
+
+Você está preocupado com a possibilidade de nunca mais receber seus itens de volta. Tão preocupado, na verdade, que seu alívio por a inspeção de um macaco não ter danificado um item *não faz mais com que seu nível de preocupação seja dividido por três*.
+
+Infelizmente, esse alívio era tudo o que impedia que seus níveis de preocupação atingissem *níveis ridículos*. Você precisará *encontrar outra maneira de manter seus níveis de preocupação administráveis*.
+
+Nesse ritmo, você pode ter que aguentar esses macacos por *muito tempo* - possivelmente *`10000` rodadas*!
+
+Com essas novas regras, você ainda pode descobrir o *nível de macacadas* após 10000 rodadas. Usando o mesmo exemplo acima:
+
+```
+== Depois da rodada 1 ==
+Macaco 0 inspecionou itens 2 vezes.
+Macaco 1 inspecionou itens 4 vezes.
+Macaco 2 inspecionou itens 3 vezes.
+Macaco 3 inspecionou itens 6 vezes.
+
+== Depois da rodada 20 ==
+Macaco 0 inspecionou itens 99 vezes.
+Macaco 1 inspecionou itens 97 vezes.
+Macaco 2 inspecionou itens 8 vezes.
+Macaco 3 inspecionou itens 103 vezes.
+
+== Depois da rodada 1000 ==
+Macaco 0 inspecionou itens 5204 vezes.
+Macaco 1 inspecionou itens 4792 vezes.
+Macaco 2 inspecionou itens 199 vezes.
+Macaco 3 inspecionou itens 5192 vezes.
+
+== Depois da rodada 2000 ==
+Macaco 0 inspecionou itens 10419 vezes.
+Macaco 1 inspecionou itens 9577 vezes.
+Macaco 2 inspecionou itens 392 vezes.
+Macaco 3 inspecionou itens 10391 vezes.
+
+== Depois da rodada 3000 ==
+Macaco 0 inspecionou itens 15638 vezes.
+Macaco 1 inspecionou itens 14358 vezes.
+Macaco 2 inspecionou itens 587 vezes.
+Macaco 3 inspecionou itens 15593 vezes.
+
+== Depois da rodada 4000 ==
+Macaco 0 inspecionou itens 20858 vezes.
+Macaco 1 inspecionou itens 19138 vezes.
+Macaco 2 inspecionou itens 780 vezes.
+Macaco 3 inspecionou itens 20797 vezes.
+
+== Depois da rodada 5000 ==
+Macaco 0 inspecionou itens 26075 vezes.
+Macaco 1 inspecionou itens 23921 vezes.
+Macaco 2 inspecionou itens 974 vezes.
+Macaco 3 inspecionou itens 26000 vezes.
+
+== Depois da rodada 6000 ==
+Macaco 0 inspecionou itens 31294 vezes.
+Macaco 1 inspecionou itens 28702 vezes.
+Macaco 2 inspecionou itens 1165 vezes.
+Macaco 3 inspecionou itens 31204 vezes.
+
+== Depois da rodada 7000 ==
+Macaco 0 inspecionou itens 36508 vezes.
+Macaco 1 inspecionou itens 33488 vezes.
+Macaco 2 inspecionou itens 1360 vezes.
+Macaco 3 inspecionou itens 36400 vezes.
+
+== Depois da rodada 8000 ==
+Macaco 0 inspecionou itens 41728 vezes.
+Macaco 1 inspecionou itens 38268 vezes.
+Macaco 2 inspecionou itens 1553 vezes.
+Macaco 3 inspecionou itens 41606 vezes.
+
+== Depois da rodada 9000 ==
+Macaco 0 inspecionou itens 46945 vezes.
+Macaco 1 inspecionou itens 43051 vezes.
+Macaco 2 inspecionou itens 1746 vezes.
+Macaco 3 inspecionou itens 46807 vezes.
+
+== Depois da rodada 10000 ==
+Macaco 0 inspecionou itens 52166 vezes.
+Macaco 1 inspecionou itens 47830 vezes.
+Macaco 2 inspecionou itens 1938 vezes.
+Macaco 3 inspecionou itens 52013 vezes.
+
+```
+
+Após 10000 rodadas, os dois macacos mais ativos inspecionaram os itens 52166 e 52013 vezes. Multiplicando-os, o nível de *macacadas* nesta situação é agora `2713310158`.
+
+Os níveis de preocupação não são mais divididos por três depois que cada item é inspecionado; você precisará encontrar outra maneira de manter seus níveis de preocupação administráveis. Começando novamente a partir do estado inicial da sua entrada do puzzle, *qual é o nível de macacadas após 10000 rodadas?*
+
