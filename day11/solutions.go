@@ -66,6 +66,7 @@ func parseInput(raw string) MonkeyState {
 		monkeyState.monkeys[mID].throwMonkeyIfFalse = monkeyID
 	}
 
+	// For part2 only
 	monkeyState.commonDivisor = 1
 	for _, monkey := range monkeyState.monkeys {
 		monkeyState.commonDivisor *= monkey.testDivisible
@@ -80,7 +81,7 @@ func (ms *MonkeyState) processRoundOptionalDiv(isDiv3 bool) {
 		for _, worryLevel := range monkey.items {
 			var err error
 
-			// part 1: operation
+			// fase1: operation
 			arg := worryLevel
 			if monkey.operation.arg != "old" {
 				arg, err = strconv.Atoi(monkey.operation.arg)
@@ -95,15 +96,16 @@ func (ms *MonkeyState) processRoundOptionalDiv(isDiv3 bool) {
 				worryLevel += arg
 			}
 
-			// part2 : dividir 3
+			// fase2 : dividir 3
 			if isDiv3 {
 				worryLevel = worryLevel / 3
 			} else {
+				// Part2 only
 				mod := worryLevel % ms.commonDivisor
 				worryLevel = mod + ms.commonDivisor
 			}
 
-			// part3: Test
+			// fase3: Test
 			if worryLevel%monkey.testDivisible == 0 {
 				ms.monkeys[monkey.throwMonkeyIfTrue].items = append(ms.monkeys[monkey.throwMonkeyIfTrue].items, worryLevel)
 			} else {
@@ -133,10 +135,6 @@ func (*Puzzle) Part1(input string) string {
 	monkeyState := parseInput(input)
 	for round := 1; round <= 20; round++ {
 		monkeyState.processRound()
-		// fmt.Printf("After round %d:\n", round)
-		// for mID, monkey := range monkeyState.monkeys {
-		// 	fmt.Printf("Monkey %d: %v\n", mID, monkey.items)
-		// }
 	}
 	monkeyBusiness := monkeyState.monkeyBusiness()
 	return fmt.Sprint(monkeyBusiness)
@@ -146,12 +144,6 @@ func (*Puzzle) Part2(input string) string {
 	monkeyState := parseInput(input)
 	for round := 1; round <= 10000; round++ {
 		monkeyState.processRoundOptionalDiv(false)
-		// if round == 20 || round%1000 == 0 {
-		// 	fmt.Printf("After round %d:\n", round)
-		// 	for mID, monkey := range monkeyState.monkeys {
-		// 		fmt.Printf("Monkey %d: %v\n", mID, monkey.itemsCount)
-		// 	}
-		// }
 	}
 	monkeyBusiness := monkeyState.monkeyBusiness()
 	return fmt.Sprint(monkeyBusiness)
