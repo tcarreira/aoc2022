@@ -54,7 +54,7 @@ Cada macaco tem vários atributos:
 
 
 
-Após cada macaco inspecionar um item, mas antes de testar seu nível de preocupação, seu alívio pelo fato de a inspeção do macaco não ter danificado o item faz com que seu nível de preocupação seja *dividido por três* e arredondado para o número inteiro mais próximo.
+Após cada macaco inspecionar um item, mas antes de testar seu nível de preocupação, seu alívio pelo fato de a inspeção do macaco não ter danificado o item faz com que seu nível de preocupação seja *dividido por três* e arredondado para baixo.
 
 Os macacos se revezam inspecionando e jogando itens. No *turno* de um único macaco, ele inspeciona e joga todos os itens que está segurando, um de cada vez e na ordem listada. O macaco `0` vai primeiro, depois o macaco `1`, e assim por diante até que cada macaco tenha tido uma vez. O processo de todos os macacos terem tido a sua vez é chamado de *rodada*.
 
