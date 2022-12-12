@@ -43,6 +43,6 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   09 | 6391       (      1.5) | 2593        (      1.8) | map/dict/set coord visitadas
   10 | 16480      (      0.0) | PLEFULPB    (      0.1) | desenhando caracteres (env: AOC_DAY10)
   11 | 51075      (      0.1) | 11741456163 (     28.7) | big integers / overflow
-  12 | 520        (      0.2) | 508         (      0.1) | 
+  12 | 520        (      0.2) | 508         (      0.1) | Caminho mais curto
 ```
 <!-- ci:result:end -->
