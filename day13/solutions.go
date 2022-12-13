@@ -3,6 +3,7 @@ package day13
 import (
 	"encoding/json"
 	"fmt"
+	"sort"
 	"strings"
 )
 
@@ -36,9 +37,7 @@ func toInterfaceList(v interface{}) []interface{} {
 			result = append(result, f)
 		}
 	} else if xlist, ok := v.([]interface{}); ok {
-		for _, x := range xlist {
-			result = append(result, x)
-		}
+		result = append(result, xlist...)
 	}
 	return result
 }
@@ -93,7 +92,29 @@ func (*Puzzle) Part1(input string) string {
 }
 
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	pairs := parseInput(input)
+	packages := [][]interface{}{}
+	for _, pair := range pairs {
+		packages = append(packages, pair[0], pair[1])
+	}
+	div1 := []interface{}{[]float64{2}}
+	div2 := []interface{}{[]float64{6}}
+	packages = append(packages, div1, div2)
+
+	sort.Slice(packages, func(i, j int) bool {
+		less, _ := isCorrectOrder(packages[i], packages[j])
+		return less
+	})
+
+	result := 1
+	for i, pack := range packages {
+		if _, isDifferent := isCorrectOrder(pack, div1); !isDifferent {
+			result *= (1 + i)
+		} else if _, isDifferent := isCorrectOrder(pack, div2); !isDifferent {
+			result *= (1 + i)
+		}
+	}
+	return fmt.Sprint(result)
 }
 
 func (*Puzzle) Notes() string {
