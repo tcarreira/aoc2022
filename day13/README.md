@@ -121,3 +121,45 @@ Quais são os índices dos pares que já estão *na ordem correta*? (O primeiro 
 
 Determine quais pares de pacotes já estão na ordem correta. *Qual é a soma dos índices desses pares?*
 
+## --- Parte dois ---
+
+Agora, você só precisa colocar *todos* os pacotes na ordem certa. Desconsidere as linhas em branco em sua lista de pacotes recebidos.
+
+O protocolo de sinal de socorro também requer que você inclua dois *pacotes divisores* adicionais:
+
+```
+[[2]]
+[[6]]
+
+```
+
+Usando as mesmas regras de antes, organize todos os pacotes - os da sua lista de pacotes recebidos, bem como os dois pacotes divisores - na ordem correta.
+
+Para o exemplo acima, o resultado de colocar os pacotes na ordem correta é:
+
+```
+[]
+[[]]
+[[[]]]
+[1,1,3,1,1]
+[1,1,5,1,1]
+[[1],[2,3,4]]
+[1,[2,[3,[4,[5,6,0]]]],8,9]
+[1,[2,[3,[4,[5,6,7]]]],8,9]
+[[1],4]
+[[2]]
+[3]
+[[4,4],4,4]
+[[4,4],4,4,4]
+[[6]]
+[7,7,7]
+[7,7,7,7]
+[[8,7,6]]
+[9]
+
+```
+
+No final, localize os pacotes divisores. Para encontrar a *chave decodificadora* para este sinal de socorro, você precisa determinar os índices dos dois pacotes divisores e multiplicá-los. (O primeiro pacote está no índice 1, o segundo pacote está no índice 2 e assim por diante.) Neste exemplo, os pacotes divisores são *10º* e *14º* e, portanto, a chave do decodificador é `140`.
+
+Organize todos os pacotes na ordem correta. *Qual é a chave decodificadora para o sinal de socorro?*
+
