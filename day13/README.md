@@ -42,9 +42,9 @@ Ao comparar dois valores, o primeiro valor é chamado de *esquerda* e o segundo 
 
   - Se *ambos os valores forem inteiros*, o *inteiro inferior* deve vir primeiro. Se o inteiro esquerdo for menor que o inteiro direito, as entradas estarão na ordem correta. Se o inteiro esquerdo for maior que o inteiro direito, as entradas não estão na ordem correta. Caso contrário, as entradas são o mesmo número inteiro; continue verificando a próxima parte da entrada.
 
-  - Se *ambos os valores forem listas*, compare o primeiro valor de cada lista, depois o segundo valor e assim por diante. Se a lista da esquerda ficar sem itens primeiro, as entradas estarão na ordem correta. Se a lista correta ficar sem itens primeiro, as entradas não estarão na ordem correta. Se as listas tiverem o mesmo tamanho e nenhuma comparação tomar uma decisão sobre a ordem, continue verificando a próxima parte da entrada.
+  - Se *ambos os valores forem listas*, compare o primeiro valor de cada lista, depois o segundo valor e assim por diante. Se a lista da esquerda ficar sem itens primeiro, as entradas estarão na ordem correta. Se a lista direita ficar sem itens primeiro, as entradas não estarão na ordem correta. Se as listas tiverem o mesmo tamanho e nenhuma comparação tomar uma decisão sobre a ordem, continue verificando a próxima parte da entrada.
 
-  - Se *exatamente um valor for um número inteiro*, converta o número inteiro em uma lista que contenha esse número inteiro como seu único valor e repita a comparação. Por exemplo, se comparar `[0,0,0]` e `2`, converta o valor correto para `[2]` (uma lista contendo `2`); o resultado é então encontrado comparando `[0,0,0]` e `[2]`.
+  - Se *exatamente um valor for um número inteiro*, converta o número inteiro em uma lista que contenha esse número inteiro como seu único valor e repita a comparação. Por exemplo, se comparar `[0,0,0]` e `2`, converta o valor direito para `[2]` (uma lista contendo `2`); o resultado é então encontrado comparando `[0,0,0]` e `[2]`.
 
 
 Usando essas regras, você pode determinar quais pares no exemplo estão na ordem correta:
