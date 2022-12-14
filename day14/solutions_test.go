@@ -31,6 +31,8 @@ func TestPart1(t *testing.T) {
 	if solution != "1133" {
 		t.Errorf("Solution for Part1: %s", solution)
 	}
+
+	CaveMap{}.print(0, 0, 0, 0, Point{0, 0}) // ignore unused func
 }
 
 func TestPart2(t *testing.T) {
