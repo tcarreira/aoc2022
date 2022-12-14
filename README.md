@@ -44,6 +44,7 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   10 | 16480      (      0.0) | PLEFULPB    (      0.1) | desenhando caracteres (env: AOC_DAY10)
   11 | 51075      (      0.1) | 11741456163 (     28.7) | big integers / overflow
   12 | 520        (      0.2) | 508         (      0.1) | Caminho mais curto
-  13 | 5013       (      2.9) | 25038       (      5.5) | 
+  13 | 5013       (      2.9) | 25038       (      5.5) | ler e ordenar campos não-estruturados
+  14 | 1133       (      2.0) | 27566       (      8.9) | 
 ```
 <!-- ci:result:end -->
