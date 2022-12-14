@@ -125,6 +125,50 @@ func (m CaveMap) simulateFallingSand() int {
 	return counter
 }
 
+func (m CaveMap) simulateBlockSource() int {
+	counter := 0
+
+	maxY := len(m)
+	for l := maxY - 1; l > 0; l-- {
+		for x := 0; x < len(m[l]); x++ {
+			if m[l][x] {
+				maxY = l
+				break
+			}
+		}
+		if maxY == l {
+			break
+		}
+	}
+
+	floorY := maxY + 2
+
+	sand := Point{500, 0}
+	for {
+		// fmt.Println(counter)
+		// m.print(488, 512, 0, 11, sand)
+		// fmt.Println()
+
+		if !m[sand.y+1][sand.x] && sand.y+1 < floorY {
+			sand.y++
+		} else if !m[sand.y+1][sand.x-1] && sand.y+1 < floorY {
+			sand.y++
+			sand.x--
+		} else if !m[sand.y+1][sand.x+1] && sand.y+1 < floorY {
+			sand.y++
+			sand.x++
+		} else {
+			counter++
+			m[sand.y][sand.x] = true
+			if sand.x == 500 && sand.y == 0 {
+				break
+			}
+			sand = Point{500, 0}
+		}
+	}
+	return counter
+}
+
 func (*Puzzle) Part1(input string) string {
 	// 1. tratar o input
 	// 1.1 transformar coords -> mapa
@@ -137,7 +181,9 @@ func (*Puzzle) Part1(input string) string {
 }
 
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	myMap := parseInput(input)
+	solution := myMap.simulateBlockSource()
+	return fmt.Sprint(solution)
 }
 
 func (*Puzzle) Notes() string {
