@@ -6,13 +6,17 @@ import (
 )
 
 var p *Puzzle = &Puzzle{}
+var exampleInput = `
+498,4 -> 498,6 -> 496,6
+503,4 -> 502,4 -> 502,9 -> 494,9
+`
 
 func TestPart1(t *testing.T) {
 	tests := []struct {
 		Input    string
 		Expected string
 	}{
-		{"", "-"},
+		{exampleInput, "24"},
 	}
 
 	for i, tt := range tests {
@@ -24,7 +28,7 @@ func TestPart1(t *testing.T) {
 
 	data, _ := os.ReadFile("input.txt")
 	solution := p.Part1(string(data))
-	if solution != "-" {
+	if solution != "1133" {
 		t.Errorf("Solution for Part1: %s", solution)
 	}
 }
