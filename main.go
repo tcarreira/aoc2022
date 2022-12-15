@@ -25,7 +25,7 @@ import (
 )
 
 var (
-	Repeats         int  = 10
+	Repeats         int  = 3
 	UseCachedResult bool = false
 )
 
@@ -73,8 +73,8 @@ func main() {
 	fmt.Println("######################################################")
 
 	fmt.Println()
-	fmt.Println(" Dia | Parte 1    ( time ms ) | Parte 2     ( time ms ) |")
-	fmt.Println("-----+------------------------+-------------------------+")
+	fmt.Println(" Dia | Parte 1    ( time ms ) | Parte 2        ( time ms ) |")
+	fmt.Println("-----+------------------------+----------------------------+")
 
 	aocDays := []DayAOC{
 		// existing days:
@@ -103,7 +103,7 @@ func main() {
 		}
 
 		// Printing results
-		fmt.Printf("  %02d | %-10s (%9.1f) | %-11s (%9.1f) | %s\n", day,
+		fmt.Printf("  %02d | %-10s (%9.1f) | %-14s (%9.1f) | %s\n", day,
 			puzzleStats.Results.Part1, float64(puzzleStats.Timing.Part1/time.Microsecond)/1000,
 			puzzleStats.Results.Part2, float64(puzzleStats.Timing.Part2/time.Microsecond)/1000,
 			aocDay.Notes(),
