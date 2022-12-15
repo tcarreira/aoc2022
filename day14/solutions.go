@@ -30,12 +30,12 @@ func (m CaveMap) draw(p1, p2 []string) {
 	yP2, _ := strconv.Atoi(p2[1])
 
 	if xP1 == xP2 {
-		// draw horizontal
+		// draw vertical
 		for i := min(yP1, yP2); i <= max(yP1, yP2); i++ {
 			m[i][xP1] = true
 		}
 	} else if yP1 == yP2 {
-		// draw vertical
+		// draw horizontal
 		for i := min(xP1, xP2); i <= max(xP1, xP2); i++ {
 			m[yP1][i] = true
 		}

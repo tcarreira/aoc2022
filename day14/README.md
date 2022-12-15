@@ -145,7 +145,7 @@ Uma vez que todas as `24` unidades de areia mostradas acima tenham parado, toda 
 
 Usando sua varredura, simule a areia caindo. *Quantas unidades de areia param antes que a areia comece a fluir para o abismo abaixo?*
 
-## --- Parte dois ---
+## --- Parte Dois ---
 
 Você percebe que interpretou mal a varredura. Não há um *vazio sem fim* na parte inferior da digitalização - há chão e você está de pé sobre ele!
 
