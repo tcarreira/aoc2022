@@ -13,7 +13,7 @@ const (
 )
 
 func minDuration(times []time.Duration) time.Duration {
-	var minDur time.Duration
+	var minDur time.Duration = times[0]
 	for _, d := range times {
 		if d < minDur {
 			minDur = d
