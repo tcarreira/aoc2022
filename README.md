@@ -32,20 +32,20 @@ Resolvendo os puzzles do https://adventofcode.com/2022
 
  Dia | Parte 1    ( time ms ) | Parte 2        ( time ms ) |
 -----+------------------------+----------------------------+
-  01 | 70116      (      0.0) | 206582         (      0.0) | primeiro problema
-  02 | 9759       (      0.0) | 12429          (      0.0) | 
-  03 | 7727       (      0.0) | 2609           (      0.0) | interseção de mapas (maps/dicts)
-  04 | 485        (      0.0) | 857            (      0.0) | sobreposição de intervalos
-  05 | WSFTMRHPP  (      0.0) | GSLCMFBRP      (      0.0) | pilhas (stacks)
-  06 | 1855       (      0.0) | 3256           (      0.0) | 
-  07 | 1118405    (      0.0) | 12545514       (      0.0) | árvores sistema arquivos (fs trees)
-  08 | 1779       (      0.0) | 172224         (      0.0) | programação dinâmica
-  09 | 6391       (      0.0) | 2593           (      0.0) | map/dict/set coord visitadas
+  01 | 70116      (      0.1) | 206582         (      0.2) | primeiro problema
+  02 | 9759       (      0.2) | 12429          (      0.2) | 
+  03 | 7727       (      0.1) | 2609           (      1.5) | interseção de mapas (maps/dicts)
+  04 | 485        (      0.4) | 857            (      0.4) | sobreposição de intervalos
+  05 | WSFTMRHPP  (      0.1) | GSLCMFBRP      (      0.1) | pilhas (stacks)
+  06 | 1855       (      0.0) | 3256           (      0.1) | 
+  07 | 1118405    (      0.2) | 12545514       (      0.2) | árvores sistema arquivos (fs trees)
+  08 | 1779       (      0.4) | 172224         (      0.7) | programação dinâmica
+  09 | 6391       (      1.3) | 2593           (      1.6) | map/dict/set coord visitadas
   10 | 16480      (      0.0) | PLEFULPB       (      0.0) | desenhando caracteres (env: AOC_DAY10)
-  11 | 51075      (      0.0) | 11741456163    (      0.0) | big integers / overflow
-  12 | 520        (      0.0) | 508            (      0.0) | Caminho mais curto
-  13 | 5013       (      0.0) | 25038          (      0.0) | ler e ordenar campos não-estruturados
-  14 | 1133       (      0.0) | 27566          (      0.0) | 
-  15 | 6275922    (      0.0) | 11747175442119 (      0.0) | 
+  11 | 51075      (      0.1) | 11741456163    (     35.3) | big integers / overflow
+  12 | 520        (      0.2) | 508            (      0.1) | Caminho mais curto
+  13 | 5013       (      2.1) | 25038          (      3.9) | ler e ordenar campos não-estruturados
+  14 | 1133       (      1.4) | 27566          (      6.8) | 
+  15 | 6275922    (   1671.9) | 11747175442119 (    493.8) | ponto fora de n-áreas (seguir perímetros)
 ```
 <!-- ci:result:end -->
