@@ -12,6 +12,16 @@ const (
 	cacheFileFormat = "day%02d/.cache.json"
 )
 
+func minDuration(times []time.Duration) time.Duration {
+	var minDur time.Duration
+	for _, d := range times {
+		if d < minDur {
+			minDur = d
+		}
+	}
+	return minDur
+}
+
 func calculatePuzzleStats(day int, aocDay DayAOC) (PuzzleStats, error) {
 	pSstats := PuzzleStats{}
 
@@ -22,18 +32,22 @@ func calculatePuzzleStats(day int, aocDay DayAOC) (PuzzleStats, error) {
 	input := string(inputBytes)
 
 	// Benchmarking part1
-	startTime := time.Now()
+	times := []time.Duration{}
 	for i := 0; i < Repeats; i++ {
+		startTime := time.Now()
 		pSstats.Results.Part1 = aocDay.Part1(input)
+		times = append(times, time.Since(startTime))
 	}
-	pSstats.Timing.Part1 = time.Since(startTime) / time.Duration(Repeats)
+	pSstats.Timing.Part1 = minDuration(times)
 
 	// Benchmarking part2
-	startTime = time.Now()
+	times = []time.Duration{}
 	for i := 0; i < Repeats; i++ {
+		startTime := time.Now()
 		pSstats.Results.Part2 = aocDay.Part2(input)
+		times = append(times, time.Since(startTime))
 	}
-	pSstats.Timing.Part2 = time.Since(startTime) / time.Duration(Repeats)
+	pSstats.Timing.Part2 = minDuration(times)
 	return pSstats, nil
 }
 
