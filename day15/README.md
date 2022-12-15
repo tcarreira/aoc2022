@@ -4,7 +4,7 @@ Você sente o chão tremer novamente enquanto o sinal de socorro o leva a uma gr
 
 Os sensores não são muito poderosos, mas tudo bem; seu dispositivo portátil indica que você está perto o suficiente da fonte do sinal de socorro para os usar. Você tira o sistema de sensores de emergência da mochila, aperta o botão grande no topo e os sensores disparam pelos túneis.
 
-Uma vez que um sensor encontra um ponto que acha que lhe dará uma boa leitura, ele se fixa a uma superfície dura e começa a monitorar pelo *sinalizador* emissor de sinais mais próximo. Os sensores e os sinalizadores sempre sempre estão em coordenadas de inteiros. Cada sensor conhece sua própria posição e pode *determinar a posição de um sinalizador com precisão*; no entanto, os sensores só conseguem emparelhar com o único sinalizador *mais próximo do sensor* conforme medido pela [distância de Manhattan](https://pt.wikipedia.org/wiki/Geometria_do_t%C3%A1xi). (Nunca há um empate onde dois sinalizadores estejam à mesma distância de um sensor.)
+Uma vez que um sensor encontra um ponto que acha que lhe dará uma boa leitura, ele se fixa a uma superfície dura e começa a monitorar pelo *sinalizador* emissor de sinais mais próximo. Os sensores e os sinalizadores sempre estão em coordenadas de inteiros. Cada sensor conhece sua própria posição e pode *determinar a posição de um sinalizador com precisão*; no entanto, os sensores só conseguem emparelhar com o único sinalizador *mais próximo do sensor* conforme medido pela [distância de Manhattan](https://pt.wikipedia.org/wiki/Geometria_do_t%C3%A1xi). (Nunca há um empate onde dois sinalizadores estejam à mesma distância de um sensor.)
 
 Não demora muito para os sensores relatarem suas posições e sinalizadores mais próximos (sua entrada de quebra-cabeça). Por exemplo:
 
@@ -111,3 +111,12 @@ Neste exemplo, na linha onde `y=10`, existem `26` posições onde um sinalizador
 
 Consulte o relatório dos sensores que você acabou de lançar. *Na linha onde `y=2000000`, quantas posições não podem conter um sinalizador?*
 
+## --- Parte Dois ---
+
+Seu dispositivo portátil indica que o sinal de socorro está vindo de um sinalizador próximo. O sinalizador de socorro não é detectado por nenhum sensor, mas o sinalizador deve ter as coordenadas `x` e `y`, cada uma não menor que `0` e não maior que `4000000`.
+
+Para isolar o sinal do sinalizador de emergência, você precisa determinar sua *frequência de sintonia*, que pode ser encontrada multiplicando sua coordenada `x` por `4000000` e adicionando sua coordenada `y`.
+
+No exemplo acima, o espaço de busca é menor: em vez disso, as coordenadas `x` e `y` podem ser cada uma no máximo `20`. Com esta área de busca reduzida, há apenas uma única posição que poderia ter um sinalizador: `x=14, y=11`. A frequência de sintonia para este sinalizador de socorro é `56000011`.
+
+Encontre a única posição possível para o sinalizador de socorro. *Qual é a frequência de sintonia?*
