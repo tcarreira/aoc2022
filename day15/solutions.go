@@ -70,13 +70,80 @@ func findCoverage(sensors []Sensor, y int) int {
 	return len(coverage)
 }
 
+func isInsideAny(sensors []Sensor, x, y int) bool {
+	for _, sensor := range sensors {
+		if manhattan(P{x, y}, sensor.position) <= manhattan(sensor.position, sensor.beacon) {
+			return true
+		}
+	}
+	return false
+}
+
+func findCoverage2D(sensors []Sensor, side int) int {
+	for _, sensor := range sensors {
+		dist := manhattan(sensor.position, sensor.beacon) + 1
+
+		// starts on top
+		p := P{sensor.position.x, sensor.position.y - dist}
+
+		// down - right
+		for i := 0; i < dist; i++ {
+			if p.x < 0 || p.x > side || p.y < 0 || p.y > side {
+				continue
+			}
+			if !isInsideAny(sensors, p.x, p.y) {
+				return p.x*4000000 + p.y
+			}
+			p.x++
+			p.y++
+		}
+		// down - left
+		for i := 0; i < dist; i++ {
+			if p.x < 0 || p.x > side || p.y < 0 || p.y > side {
+				continue
+			}
+			if !isInsideAny(sensors, p.x, p.y) {
+				return p.x*4000000 + p.y
+			}
+			p.x--
+			p.y++
+		}
+		// up - left
+		for i := 0; i < dist; i++ {
+			if p.x < 0 || p.x > side || p.y < 0 || p.y > side {
+				continue
+			}
+			if !isInsideAny(sensors, p.x, p.y) {
+				return p.x*4000000 + p.y
+			}
+			p.x--
+			p.y--
+		}
+		// up - right
+		for i := 0; i < dist; i++ {
+			if p.x < 0 || p.x > side || p.y < 0 || p.y > side {
+				continue
+			}
+			if !isInsideAny(sensors, p.x, p.y) {
+				return p.x*4000000 + p.y
+			}
+			p.x++
+			p.y--
+		}
+	}
+
+	return 0
+}
+
 func part1(input string, y int) string {
-	// parseInput() -> [](Sensor,Beacon)
-	// findCoverage(y=2000000)
-	//   - for pair(S,B) - dist()
-	//     - dist(S,x) <= dist
 	sensors := parseInput(input)
 	solution := findCoverage(sensors, y)
+	return fmt.Sprint(solution)
+}
+
+func part2(input string, side int) string {
+	sensors := parseInput(input)
+	solution := findCoverage2D(sensors, side)
 	return fmt.Sprint(solution)
 }
 
@@ -85,7 +152,7 @@ func (*Puzzle) Part1(input string) string {
 }
 
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	return part2(input, 4000000)
 }
 
 func (*Puzzle) Notes() string {
