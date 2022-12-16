@@ -8,84 +8,77 @@ import (
 
 type Puzzle struct{}
 
-type Valve struct {
-	label    string
-	flowRate int
-	isOpen   bool
-	adjacent []string
+type Valves struct {
+	flowRates   map[string]int
+	connections map[string][]string
 }
 
-type ValveState map[string]Valve
-
-func parseInput(raw string) ValveState {
-	valves := ValveState{}
+func parseInput(raw string) Valves {
+	valves := Valves{
+		flowRates:   make(map[string]int),
+		connections: make(map[string][]string),
+	}
 	for _, line := range strings.Split(strings.TrimSpace(raw), "\n") {
 		var label string
 		var flowRate int
+		var connections []string
 		lineParts := strings.Split(line, "; tunnels lead to valves ")
 		if len(lineParts) == 1 {
 			lineParts = strings.Split(line, "; tunnel leads to valve ")
 		}
 
 		fmt.Sscanf(lineParts[0], "Valve %s has flow rate=%d", &label, &flowRate)
-		valves[label] = Valve{
-			label:    label,
-			flowRate: flowRate,
-			adjacent: strings.Split(lineParts[1], ", "),
-		}
+		connections = strings.Split(lineParts[1], ", ")
+
+		valves.flowRates[label] = flowRate
+		valves.connections[label] = connections
+
 	}
 	return valves
 }
 
-func CloneStringSlice(ss []string) []string {
-	newSlice := []string{}
-	for _, s := range ss {
-		newSlice = append(newSlice, strings.Clone(s))
-	}
-	return newSlice
+type ValvesState struct {
+	current    string
+	openValves []string
 }
 
-func (v Valve) Clone() Valve {
-	return Valve{
-		label:    v.label,
-		flowRate: v.flowRate,
-		isOpen:   v.isOpen,
-		adjacent: CloneStringSlice(v.adjacent),
-	}
+func (s ValvesState) CurrentState(minute int) string {
+	sort.Strings(s.openValves)
+	return fmt.Sprintf("%d:%s:%v", minute, s.current, s.openValves)
 }
-
-func (v ValveState) Clone() ValveState {
-	vs := ValveState{}
-	for label, valve := range v {
-		vs[label] = valve.Clone()
-	}
-	return vs
-}
-
-func (v ValveState) CurrentState(curr string, minute int) string {
+func (s ValvesState) Clone() ValvesState {
 	openValves := []string{}
-	for label, valve := range v {
-		if valve.isOpen {
-			openValves = append(openValves, label)
-		}
+	openValves = append(openValves, s.openValves...)
+
+	return ValvesState{
+		current:    s.current,
+		openValves: openValves,
 	}
-	sort.Slice(openValves, func(i, j int) bool { return openValves[i] < openValves[j] })
-	return fmt.Sprintf("%d:%s:%s", minute, curr, strings.Join(openValves, ","))
 }
 
 type ValveCache struct {
-	cache map[string]int
+	cache  map[string]int
+	valves Valves
 }
 
-func (c ValveCache) findMaxPressureReleased(curr string, valvesState ValveState, minute int, pressureFlow, totalPressure int) int {
-	currentState := valvesState.CurrentState(curr, minute)
+func contains(s string, ss []string) bool {
+	for _, x := range ss {
+		if x == s {
+			return true
+		}
+	}
+	return false
+}
+
+func (c ValveCache) findMaxPressureReleased(state ValvesState, minute, pressureFlow, totalPressure int) int {
+	currentState := state.CurrentState(minute)
 	if x, exists := c.cache[currentState]; exists && x >= totalPressure {
 		return c.cache[currentState]
 	} else {
 		c.cache[currentState] = totalPressure
 	}
 
-	// fmt.Println(curr, minute, totalPressure)
+	// fmt.Println(state.current, minute, totalPressure)
 	if minute >= 30 {
 		return totalPressure + pressureFlow
 	}
@@ -93,18 +86,18 @@ func (c ValveCache) findMaxPressureReleased(curr string, valvesState ValveState,
 	forkedResult := 0
 
 	// fork opening Valve
-	if !valvesState[curr].isOpen && valvesState[curr].flowRate > 0 {
-		newState := valvesState.Clone()
-		newValve := newState[curr]
-		newValve.isOpen = true
-		newState[curr] = newValve
-		forkedResult = c.findMaxPressureReleased(curr, newState, minute+1, pressureFlow+newValve.flowRate, totalPressure+pressureFlow)
+	if !contains(state.current, state.openValves) && c.valves.flowRates[state.current] > 0 {
+		newState := state.Clone()
+		newState.openValves = append(newState.openValves, state.current)
+		newPressureFlow := pressureFlow + c.valves.flowRates[state.current]
+		forkedResult = c.findMaxPressureReleased(newState, minute+1, newPressureFlow, totalPressure+pressureFlow)
 	}
 
 	// fork for eachTunnel
-	for _, nextValve := range valvesState[curr].adjacent {
-		newState := valvesState.Clone()
-		tmpForkedResult := c.findMaxPressureReleased(nextValve, newState, minute+1, pressureFlow, totalPressure+pressureFlow)
+	for _, nextValve := range c.valves.connections[state.current] {
+		newState := state.Clone()
+		newState.current = nextValve
+		tmpForkedResult := c.findMaxPressureReleased(newState, minute+1, pressureFlow, totalPressure+pressureFlow)
 		if forkedResult < tmpForkedResult {
 			forkedResult = tmpForkedResult
 		}
@@ -125,9 +118,12 @@ func (*Puzzle) Part1(input string) string {
 	//
 	valves := parseInput(input)
 	c := ValveCache{
-		cache: make(map[string]int),
+		cache:  make(map[string]int),
+		valves: valves,
 	}
-	solution := c.findMaxPressureReleased("AA", valves, 1, 0, 0)
+
+	state := ValvesState{current: "AA", openValves: []string{}}
+	solution := c.findMaxPressureReleased(state, 1, 0, 0)
 	return fmt.Sprint(solution)
 }
 

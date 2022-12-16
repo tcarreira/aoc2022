@@ -35,7 +35,7 @@ func TestPart1(t *testing.T) {
 
 	data, _ := os.ReadFile("input.txt")
 	solution := p.Part1(string(data))
-	if solution != "-" {
+	if solution != "2330" {
 		t.Errorf("Solution for Part1: %s", solution)
 	}
 }
