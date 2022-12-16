@@ -151,3 +151,86 @@ Essa abordagem permite que você libere o máximo de pressão possível em 30 mi
 
 Descubra os passos para liberar o máximo de pressão em 30 minutos. *Qual é a maior pressão que você consegue liberar?*
 
+## --- Parte dois ---
+
+Você está preocupado que, mesmo com uma abordagem ideal, a pressão liberada não seja suficiente. E se você tivesse um dos elefantes para ajudá-lo?
+
+Você levaria 4 minutos para ensinar um elefante a abrir as válvulas certas na ordem certa, deixando você com apenas *26 minutos* para realmente executar seu plano. Será que ter dois de vocês trabalhando juntos será melhor, mesmo que isso signifique ter menos tempo? (Suponha que você ensine o elefante antes de abrir qualquer válvula, dando a ambos os mesmos 26 minutos completos.)
+
+No exemplo acima, você pode ensinar o elefante a ajudá-lo da seguinte maneira:
+
+```
+== Minuto 1 ==
+Nenhuma válvula está aberta.
+Você se move para a válvula II.
+O elefante move-se para a válvula DD.
+
+== Minuto 2 ==
+Nenhuma válvula está aberta.
+Você se move para a válvula JJ.
+O elefante abre a válvula DD.
+
+== Minuto 3 ==
+A válvula DD está aberta, liberando 20 de pressão.
+Você abre a válvula JJ.
+O elefante move-se para a válvula EE.
+
+== Minuto 4 ==
+As válvulas DD e JJ estão abertas, liberando 41 pressão.
+Você se move para a válvula II.
+O elefante move-se para a válvula FF.
+
+== Minuto 5 ==
+As válvulas DD e JJ estão abertas, liberando 41 pressão.
+Você se move para a válvula AA.
+O elefante move-se para a válvula GG.
+
+== Minuto 6 ==
+As válvulas DD e JJ estão abertas, liberando 41 pressão.
+Você se move para a válvula BB.
+O elefante move-se para a válvula HH.
+
+== Minuto 7 ==
+As válvulas DD e JJ estão abertas, liberando 41 pressão.
+Você abre a válvula BB.
+O elefante abre a válvula HH.
+
+== Minuto 8 ==
+As válvulas BB, DD, HH e JJ estão abertas, liberando 76 de pressão.
+Você se move para a válvula CC.
+O elefante move-se para a válvula GG.
+
+== Minuto 9 ==
+As válvulas BB, DD, HH e JJ estão abertas, liberando 76 de pressão.
+Você abre a válvula CC.
+O elefante move-se para a válvula FF.
+
+== Minuto 10 ==
+As válvulas BB, CC, DD, HH e JJ estão abertas, liberando 78 de pressão.
+O elefante move-se para a válvula EE.
+
+== Minuto 11 ==
+As válvulas BB, CC, DD, HH e JJ estão abertas, liberando 78 de pressão.
+O elefante abre a válvula EE.
+
+(Neste ponto, todas as válvulas estão abertas.)
+
+== Minuto 12 ==
+As válvulas BB, CC, DD, EE, HH e JJ estão abertas, liberando 81 de pressão.
+
+...
+
+== Minuto 20 ==
+As válvulas BB, CC, DD, EE, HH e JJ estão abertas, liberando 81 de pressão.
+
+...
+
+== Minuto 26 ==
+As válvulas BB, CC, DD, EE, HH e JJ estão abertas, liberando 81 de pressão.
+
+```
+
+Com a ajuda do elefante, após 26 minutos, o máximo que você poderia fazer seria liberar um total de `1707` de pressão.
+
+*Com você e um elefante trabalhando juntos por 26 minutos, qual é a maior pressão que você pode liberar?*
+
