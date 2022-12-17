@@ -46,7 +46,7 @@ func TestPart2(t *testing.T) {
 		Input    string
 		Expected string
 	}{
-		{"", "-"},
+		{exampleInput, "1707"},
 	}
 
 	for i, tt := range tests {
@@ -58,7 +58,7 @@ func TestPart2(t *testing.T) {
 
 	data, _ := os.ReadFile("input.txt")
 	solution := p.Part2(string(data))
-	if solution != "-" {
+	if solution != "2675" {
 		t.Errorf("Solution for Part2: %s", solution)
 	}
 }
@@ -120,4 +120,27 @@ func TestPathToState(t *testing.T) {
 	if fmt.Sprint(s) != "[AA BB DD CC]" {
 		t.Error("modified original :(", fmt.Sprint(s))
 	}
+}
+
+func TestOverlap(t *testing.T) {
+	tests := []struct {
+		s1       string
+		s2       string
+		Expected bool
+	}{
+		{"AA", "AA", true},
+		{"AA,BB,CC,DD", "EE,FF", false},
+		{"EE,FF", "AA,BB,CC,DD", false},
+		{"AA,BB,CC", "AA", true},
+		{"AA,BB,CC", "BB", true},
+		{"AA,BB,CC", "CC", true},
+	}
+
+	for i, tt := range tests {
+		got := overlap(tt.s1, tt.s2)
+		if got != tt.Expected {
+			t.Errorf("[%02d] Expected %v, got %v", i, tt.Expected, got)
+		}
+	}
+
 }

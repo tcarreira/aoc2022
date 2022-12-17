@@ -104,6 +104,7 @@ func computeValvesDistances(connections map[string][]string, nonEmpty map[string
 }
 
 type Cache struct {
+	totalMinutes     int
 	stateMaxPressure map[string]int
 	distances        map[string]map[string]int
 	valvesFlow       map[string]int
@@ -123,10 +124,10 @@ func (c *Cache) calculateTotalFlow(path []string) (voidMinutes int, totalFlow in
 	for i, v := range path[1:] {
 		neededMinutes := c.distances[path[i]][v] + 1
 		dist += neededMinutes
-		totalPressure += (30 - dist) * c.valvesFlow[v]
+		totalPressure += (c.totalMinutes - dist) * c.valvesFlow[v]
 	}
 
-	return 30 - dist, totalPressure
+	return c.totalMinutes - dist, totalPressure
 }
 
 func (c *Cache) dfs(path []string, valveState string) int {
@@ -158,6 +159,36 @@ func (c *Cache) dfs(path []string, valveState string) int {
 	return maxPressure
 }
 
+func overlap(s1, s2 string) bool {
+	// s1 and s2 are ordered
+	for i, j := 0, 0; i <= len(s1)-2 && j <= len(s2)-2; {
+		if s1[i:i+2] == s2[j:j+2] {
+			return true
+		}
+		if s1[i:i+2] < s2[j:j+2] {
+			i += 3
+		} else {
+			j += 3
+		}
+	}
+	return false
+}
+
+func (c *Cache) findMaxExclusivePair() int {
+	max := 0
+	for state1, pressure1 := range c.stateMaxPressure {
+		for state2, pressure2 := range c.stateMaxPressure {
+			if overlap(state1, state2) {
+				continue
+			}
+			if pressure1+pressure2 > max {
+				max = pressure1 + pressure2
+			}
+		}
+	}
+	return max
+}
+
 func (*Puzzle) Part1(input string) string {
 	valves := parseInput(input)
 	nonEmptyValves := findNonEmptyValves(valves)
@@ -165,6 +196,7 @@ func (*Puzzle) Part1(input string) string {
 
 	// possiblePaths := map[string]int{} // map[opened-valves]totalPressure
 	cache := Cache{
+		totalMinutes:     30,
 		stateMaxPressure: make(map[string]int),
 		distances:        distances,
 		valvesFlow:       valves.flowRates,
@@ -173,8 +205,23 @@ func (*Puzzle) Part1(input string) string {
 
 	return fmt.Sprint(solution)
 }
+
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	valves := parseInput(input)
+	nonEmptyValves := findNonEmptyValves(valves)
+	distances := computeValvesDistances(valves.connections, nonEmptyValves)
+
+	// possiblePaths := map[string]int{} // map[opened-valves]totalPressure
+	cache := Cache{
+		totalMinutes:     26,
+		stateMaxPressure: make(map[string]int),
+		distances:        distances,
+		valvesFlow:       valves.flowRates,
+	}
+	cache.dfs([]string{"AA"}, "")
+	solution := cache.findMaxExclusivePair()
+
+	return fmt.Sprint(solution)
 }
 
 func (*Puzzle) Notes() string {
