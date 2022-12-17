@@ -2,8 +2,12 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
+	"os/signal"
+	"runtime/pprof"
 	"strconv"
+	"syscall"
 	"time"
 
 	"github.com/tcarreira/aoc2022/day01"
@@ -29,6 +33,7 @@ import (
 var (
 	Repeats         int  = 3
 	UseCachedResult bool = false
+	RuntimeProfile  bool = false
 )
 
 func init() {
@@ -50,6 +55,46 @@ func init() {
 		}
 	}
 
+	if doProfileStr := os.Getenv("AOC_PROFILE"); doProfileStr != "" {
+		doProfile, err := strconv.ParseBool(doProfileStr)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "AOC_PROFILE could not be parsed into bool: %v\n", err)
+		} else {
+			RuntimeProfile = doProfile
+		}
+	}
+}
+
+func handleSignals(retCode int, handle func()) {
+	sigc := make(chan os.Signal, 1)
+	signal.Notify(sigc,
+		syscall.SIGHUP,
+		syscall.SIGINT,
+		syscall.SIGTERM,
+		syscall.SIGQUIT)
+	go func() {
+		<-sigc
+		handle()
+		os.Exit(retCode)
+	}()
+}
+
+func setupProfiling() func() {
+	if !RuntimeProfile {
+		return func() {}
+	}
+
+	handleSignals(1, func() {
+		fmt.Println("Stopping CPU profile")
+		pprof.StopCPUProfile()
+	})
+
+	f, err := os.Create("aoc2022.pprof")
+	if err != nil {
+		log.Fatal(err)
+	}
+	pprof.StartCPUProfile(f)
+	return pprof.StopCPUProfile
 }
 
 type DayAOC interface {
@@ -99,6 +144,9 @@ func calculatePuzzleStats(day int, aocDay DayAOC) (PuzzleStats, error) {
 }
 
 func main() {
+	d := setupProfiling()
+	defer d()
+
 	fmt.Println("######################################################")
 	fmt.Println("Resolvendo os puzzles do https://adventofcode.com/2022")
 	fmt.Println("######################################################")
