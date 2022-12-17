@@ -47,6 +47,7 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   13 | 5013       (      2.1) | 25038          (      3.9) | ler e ordenar campos não-estruturados
   14 | 1133       (      1.4) | 27566          (      6.8) | 
   15 | 6275922    (   1671.9) | 11747175442119 (    493.8) | ponto fora de n-áreas (seguir perímetros)
-  16 | 2330       (  16031.3) | -              (      0.0) | 
+  16 | 2330       (    154.4) | 2675           (  10133.5) | 
+  17 | -          (      0.0) | -              (      0.0) | 
 ```
 <!-- ci:result:end -->
