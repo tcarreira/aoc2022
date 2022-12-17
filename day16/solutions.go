@@ -37,102 +37,142 @@ func parseInput(raw string) Valves {
 	return valves
 }
 
-type ValvesState struct {
-	current    string
-	openValves []string
-}
-
-func (s ValvesState) CurrentState(minute int) string {
-	sort.Strings(s.openValves)
-	return fmt.Sprintf("%d:%s:%v", minute, s.current, s.openValves)
-}
-func (s ValvesState) Clone() ValvesState {
-	openValves := []string{}
-	openValves = append(openValves, s.openValves...)
-
-	return ValvesState{
-		current:    s.current,
-		openValves: openValves,
-	}
-}
-
-type ValveCache struct {
-	cache  map[string]int
-	valves Valves
-}
-
-func contains(s string, ss []string) bool {
+func contains(ss []string, substr string) bool {
 	for _, x := range ss {
-		if x == s {
+		if x == substr {
 			return true
 		}
 	}
 	return false
 }
 
-func (c ValveCache) findMaxPressureReleased(state ValvesState, minute, pressureFlow, totalPressure int) int {
-	currentState := state.CurrentState(minute)
-	if x, exists := c.cache[currentState]; exists && x >= totalPressure {
-		return c.cache[currentState]
-	} else {
-		c.cache[currentState] = totalPressure
-	}
-
-	// fmt.Println(state.current, minute, totalPressure)
-	if minute >= 30 {
-		return totalPressure + pressureFlow
-	}
-
-	forkedResult := 0
-
-	// fork opening Valve
-	if !contains(state.current, state.openValves) && c.valves.flowRates[state.current] > 0 {
-		newState := state.Clone()
-		newState.openValves = append(newState.openValves, state.current)
-		newPressureFlow := pressureFlow + c.valves.flowRates[state.current]
-		forkedResult = c.findMaxPressureReleased(newState, minute+1, newPressureFlow, totalPressure+pressureFlow)
-	}
-
-	// fork for eachTunnel
-	for _, nextValve := range c.valves.connections[state.current] {
-		newState := state.Clone()
-		newState.current = nextValve
-		tmpForkedResult := c.findMaxPressureReleased(newState, minute+1, pressureFlow, totalPressure+pressureFlow)
-		if forkedResult < tmpForkedResult {
-			forkedResult = tmpForkedResult
+func findNonEmptyValves(valves Valves) map[string]int {
+	nonEmpty := map[string]int{}
+	for label, flow := range valves.flowRates {
+		if flow > 0 {
+			nonEmpty[label] = flow
 		}
 	}
-	return forkedResult
+	return nonEmpty
+}
+
+type Queue []string
+
+func (q *Queue) popLeft() string {
+	elem := (*q)[0]
+	*q = (*q)[1:]
+	return elem
+}
+
+func computeDistanceToAll(connections map[string][]string, nonEmpty map[string]int, origin string) map[string]int {
+	distances := map[string]int{}
+	dist := 0
+	q := append(Queue{}, connections[origin]...)
+	for dist <= 26 {
+		dist++
+		tmpQueue := Queue{}
+		for len(q) > 0 {
+			next := q.popLeft()
+			if _, ok := distances[next]; ok || next == origin {
+				continue
+			}
+			if _, ok := nonEmpty[next]; ok {
+				distances[next] = dist
+			}
+			for _, conn := range connections[next] {
+				if !contains(tmpQueue, conn) {
+					tmpQueue = append(tmpQueue, conn)
+				}
+			}
+		}
+		q = append(q, tmpQueue...)
+	}
+	return distances
+}
+
+func computeValvesDistances(connections map[string][]string, nonEmpty map[string]int) map[string]map[string]int {
+	// {A : {B: 1, C: 2, D: 1, I: 1, ....}}
+	distances := map[string]map[string]int{}
+	for origin := range nonEmpty {
+		distances[origin] = computeDistanceToAll(connections, nonEmpty, origin)
+	}
+
+	// must keep distances from first node
+	distances["AA"] = computeDistanceToAll(connections, nonEmpty, "AA")
+
+	return distances
+}
+
+type Cache struct {
+	stateMaxPressure map[string]int
+	distances        map[string]map[string]int
+	valvesFlow       map[string]int
+}
+
+func pathToState(s []string) string {
+	newS := append([]string{}, s[1:]...)
+	sort.Strings(newS)
+	return strings.Join(newS, ",")
+}
+
+func (c *Cache) calculateTotalFlow(path []string) (voidMinutes int, totalFlow int) {
+	totalPressure := 0
+	dist := 0
+
+	// calculate total flow for this path
+	for i, v := range path[1:] {
+		neededMinutes := c.distances[path[i]][v] + 1
+		dist += neededMinutes
+		totalPressure += (30 - dist) * c.valvesFlow[v]
+	}
+
+	return 30 - dist, totalPressure
+}
+
+func (c *Cache) dfs(path []string, valveState string) int {
+	currValve := path[len(path)-1]
+
+	remaining, totalPressure := c.calculateTotalFlow(path)
+	if n, ok := c.stateMaxPressure[valveState]; ok && n > totalPressure {
+		return n
+	}
+	c.stateMaxPressure[valveState] = totalPressure
+
+	maxPressure := totalPressure
+	for nextValve := range c.distances[currValve] {
+		if remaining < 0 { // cannot reach it in time
+			break
+		}
+		if strings.Contains(valveState, nextValve) { // already open
+			continue
+		}
+
+		newPath := append(path, nextValve)
+		newState := pathToState(newPath)
+		pressure := c.dfs(newPath, newState)
+		if pressure > maxPressure {
+			maxPressure = pressure
+		}
+	}
+
+	return maxPressure
 }
 
 func (*Puzzle) Part1(input string) string {
-	// parseInput()
-	//   valve.flowRate
-	//   valve.adjacent: []Valve
-	//   valve.isOpen bool
-	//   []Valve
-	// simul()
-	//   - entrar sala valvula X
-	//   - "escolher" abrir ou não a valvula
-	//   - "escolher" valvulas adjacentes
-	//
 	valves := parseInput(input)
-	c := ValveCache{
-		cache:  make(map[string]int),
-		valves: valves,
-	}
+	nonEmptyValves := findNonEmptyValves(valves)
+	distances := computeValvesDistances(valves.connections, nonEmptyValves)
 
-	state := ValvesState{current: "AA", openValves: []string{}}
-	solution := c.findMaxPressureReleased(state, 1, 0, 0)
+	// possiblePaths := map[string]int{} // map[opened-valves]totalPressure
+	cache := Cache{
+		stateMaxPressure: make(map[string]int),
+		distances:        distances,
+		valvesFlow:       valves.flowRates,
+	}
+	solution := cache.dfs([]string{"AA"}, "")
+
 	return fmt.Sprint(solution)
 }
-
-//   eg: A-B, C-B
-//     AA BB CC
-// AA [   t   ]
-// BB [ t    t]
-// CC [   t   ]
-
 func (*Puzzle) Part2(input string) string {
 	return "-"
 }
