@@ -120,7 +120,6 @@ func (c *Cache) calculateTotalFlow(path []string) (voidMinutes int, totalFlow in
 	totalPressure := 0
 	dist := 0
 
-	// calculate total flow for this path
 	for i, v := range path[1:] {
 		neededMinutes := c.distances[path[i]][v] + 1
 		dist += neededMinutes
@@ -194,7 +193,6 @@ func (*Puzzle) Part1(input string) string {
 	nonEmptyValves := findNonEmptyValves(valves)
 	distances := computeValvesDistances(valves.connections, nonEmptyValves)
 
-	// possiblePaths := map[string]int{} // map[opened-valves]totalPressure
 	cache := Cache{
 		totalMinutes:     30,
 		stateMaxPressure: make(map[string]int),
@@ -211,7 +209,6 @@ func (*Puzzle) Part2(input string) string {
 	nonEmptyValves := findNonEmptyValves(valves)
 	distances := computeValvesDistances(valves.connections, nonEmptyValves)
 
-	// possiblePaths := map[string]int{} // map[opened-valves]totalPressure
 	cache := Cache{
 		totalMinutes:     26,
 		stateMaxPressure: make(map[string]int),
