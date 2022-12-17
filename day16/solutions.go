@@ -116,7 +116,7 @@ func pathToState(s []string) string {
 	return strings.Join(newS, ",")
 }
 
-func (c *Cache) calculateTotalFlow(path []string) (voidMinutes int, totalFlow int) {
+func (c *Cache) calculateTotalPressure(path []string) (voidMinutes int, totalFlow int) {
 	totalPressure := 0
 	dist := 0
 
@@ -132,7 +132,7 @@ func (c *Cache) calculateTotalFlow(path []string) (voidMinutes int, totalFlow in
 func (c *Cache) dfs(path []string, valveState string) int {
 	currValve := path[len(path)-1]
 
-	remaining, totalPressure := c.calculateTotalFlow(path)
+	remaining, totalPressure := c.calculateTotalPressure(path)
 	if n, ok := c.stateMaxPressure[valveState]; ok && n > totalPressure {
 		return n
 	}
