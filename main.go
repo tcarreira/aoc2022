@@ -69,6 +69,35 @@ type PuzzleStats struct {
 	}
 }
 
+func calculatePuzzleStats(day int, aocDay DayAOC) (PuzzleStats, error) {
+	pSstats := PuzzleStats{}
+
+	inputBytes, err := os.ReadFile(fmt.Sprintf(inputFileFormat, day))
+	if err != nil {
+		return pSstats, fmt.Errorf("could not read input file %w", err)
+	}
+	input := string(inputBytes)
+
+	// Benchmarking part1
+	times := []time.Duration{}
+	for i := 0; i < Repeats; i++ {
+		startTime := time.Now()
+		pSstats.Results.Part1 = aocDay.Part1(input)
+		times = append(times, time.Since(startTime))
+	}
+	pSstats.Timing.Part1 = minDuration(times)
+
+	// Benchmarking part2
+	times = []time.Duration{}
+	for i := 0; i < Repeats; i++ {
+		startTime := time.Now()
+		pSstats.Results.Part2 = aocDay.Part2(input)
+		times = append(times, time.Since(startTime))
+	}
+	pSstats.Timing.Part2 = minDuration(times)
+	return pSstats, nil
+}
+
 func main() {
 	fmt.Println("######################################################")
 	fmt.Println("Resolvendo os puzzles do https://adventofcode.com/2022")
@@ -100,9 +129,16 @@ func main() {
 	} // ci:addNewDay
 	for day0, aocDay := range aocDays {
 		day := day0 + 1
-		puzzleStats, err := buildPuzzleStats(day, aocDay)
+
+		var puzzleStats PuzzleStats
+		var err error
+		if UseCachedResult {
+			puzzleStats, err = buildCachedPuzzleStats(day, aocDay)
+		} else {
+			puzzleStats, err = calculatePuzzleStats(day, aocDay)
+		}
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "error building PuzzleStats for day %d: %v\n", day, err)
+			fmt.Fprintf(os.Stderr, "error building PuzzleStats for day %d (cached=%v): %v\n", day, UseCachedResult, err)
 			continue
 		}
 
