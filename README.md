@@ -49,6 +49,6 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   15 | 6275922    (   1671.9) | 11747175442119 (    493.8) | ponto fora de n-áreas (seguir perímetros)
   16 | 2330       (    154.4) | 2675           (  10133.5) | 
   17 | 3133       (      0.7) | 1547953216393  (     11.7) | 
-  18 | -          (      0.0) | -              (      0.0) | 
+  18 | 4390       (      4.7) | 2534           (      4.3) | análogo a encontrar saída de labirinto
 ```
 <!-- ci:result:end -->
