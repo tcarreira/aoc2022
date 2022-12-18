@@ -33,3 +33,12 @@ No exemplo acima, depois de contar todos os lados que não estão conectados a o
 
 *Qual é a área de superfície das gotícula de lava do seu varrimento?*
 
+## --- Parte Dois ---
+
+Algo parece errado sobre o seu cálculo. A taxa de resfriamento depende da área da superfície externa, mas seu cálculo também incluiu a área da superfície de bolsas de ar presas na gotícula de lava.
+
+Em vez disso, considere apenas os lados do cubo que podem ser alcançados pela água e pelo vapor à medida que a gota de lava cai na lagoa. O vapor se expandirá para atingir o máximo possível, deslocando completamente qualquer ar do lado de fora da gota de lava, mas nunca se expandindo na diagonal.
+
+No exemplo maior acima, exatamente um cubo de ar está preso dentro da gota de lava (em `2,2,5`), então a área da superfície externa da gota de lava é `58`.
+
+*Qual é a área de superfície externa das gotícula de lava do seu varrimento?*
