@@ -64,6 +64,11 @@ func buildPieces() []Piece {
 
 // [7]bool
 
+type Cache struct {
+	height     int
+	pieceCount int
+}
+
 type Chamber struct {
 	pieceCounter int
 	moveIdx      int
@@ -71,6 +76,7 @@ type Chamber struct {
 	moves        string
 	pieces       []Piece
 	state        [][7]bool
+	cache        map[string]Cache
 }
 
 func (c *Chamber) isColision(pos [2]int, piece Piece) bool {
@@ -159,6 +165,30 @@ func (c *Chamber) NextPiece() {
 	// checkColision() -> revert, return
 }
 
+func (c *Chamber) updateSeenState() Cache {
+	if len(c.state) < 30 {
+		return Cache{}
+	}
+
+	pieceIdx := c.pieceCounter % len(c.pieces)
+	stateHash := fmt.Sprintf("%03d:%05d:", pieceIdx, c.moveIdx)
+	for l := 0; l < 30; l++ {
+		lineHash := 0
+		for x := 0; x < 7; x++ {
+			if c.state[l][6-x] {
+				lineHash |= 1 << x
+			}
+		}
+		stateHash += fmt.Sprintf("%03d", lineHash)
+	}
+
+	if x, ok := c.cache[stateHash]; ok {
+		return x
+	}
+	c.cache[stateHash] = Cache{height: c.height, pieceCount: c.pieceCounter}
+	return Cache{}
+}
+
 // 8: f f f f f f f
 // 7: f f f f f f f
 // 6: f f f f f f f
@@ -191,7 +221,38 @@ func (*Puzzle) Part1(input string) string {
 }
 
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	chamber := Chamber{
+		moves:  strings.TrimSpace(input),
+		pieces: buildPieces(),
+		state:  [][7]bool{},
+		cache:  make(map[string]Cache),
+	}
+
+	// 0123456789012345678901234567890123456789012345678901234567890123456 T
+	// uuRRRRRRR.......................................................xxx
+	// unique - REPEATED - ...notCalculated... - rest
+	for i := 0; i < 1000000000000; i++ {
+		chamber.NextPiece()
+
+		cacheState := chamber.updateSeenState() // 1
+		// c.current = 8
+		if cacheState.height > 0 {
+			remaining := 1000000000000 - chamber.pieceCounter
+			repeatedHeight := chamber.height - cacheState.height
+			repeatedLen := chamber.pieceCounter - cacheState.pieceCount
+			repeatedTotalHeight := repeatedHeight * (remaining / repeatedLen)
+
+			// chamber.height += repeatedTotalHeight
+			// i = remaining
+			for j := 0; j < remaining%repeatedLen; j++ {
+				chamber.NextPiece()
+			}
+			chamber.height += repeatedTotalHeight
+			break
+		}
+	}
+
+	return fmt.Sprint(chamber.height)
 }
 
 func (*Puzzle) Notes() string {
