@@ -348,3 +348,11 @@ Para provar aos elefantes que sua simulação é precisa, eles querem saber qual
 
 *Quantas unidades de altura terá a torre de rochas depois que 2022 rochas pararem de cair?*
 
+## --- Parte Dois ---
+
+Os elefantes não estão impressionados com sua simulação. Eles exigem saber qual será a altura da torre depois que `1000000000000` rochas pararem! Só então eles se sentirão confiantes o suficiente para prosseguir pela caverna.
+
+No exemplo acima, a torre teria `1514285714288` unidades de altura!
+
+*Qual será a altura da torre depois que `1000000000000` rochas pararem?*
+
