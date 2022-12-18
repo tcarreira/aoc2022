@@ -129,7 +129,6 @@ func (m *CubesMap) area() int {
 func (*Puzzle) Part1(input string) string {
 	cubes := parseInput(input)
 	_, area := buildCubesMap(cubes)
-	// buildCubesMap(cubes) -> map[P]bool, area
 	return fmt.Sprint(area)
 }
 
@@ -144,5 +143,5 @@ func (*Puzzle) Part2(input string) string {
 }
 
 func (*Puzzle) Notes() string {
-	return ""
+	return "análogo a encontrar saída de labirinto"
 }
