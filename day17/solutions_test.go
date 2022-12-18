@@ -6,13 +6,14 @@ import (
 )
 
 var p *Puzzle = &Puzzle{}
+var exampleInput = `>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>`
 
 func TestPart1(t *testing.T) {
 	tests := []struct {
 		Input    string
 		Expected string
 	}{
-		{"", "-"},
+		{exampleInput, "3068"},
 	}
 
 	for i, tt := range tests {
