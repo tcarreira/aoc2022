@@ -174,3 +174,215 @@ Determine o *nível de qualidade* de cada modelo *multiplicando o número de ID 
 
 Determine o nível de qualidade de cada modelo usando o maior número de geodes que ele poderia produzir em 24 minutos. *O que você obtém se somar o nível de qualidade de todos os modelos da sua lista?*
 
+## --- Parte dois ---
+
+Enquanto você estava escolhendo o melhor projeto, os elefantes encontraram comida por conta própria, então você já não está com tanta pressa; você acha que provavelmente tem *32 minutos* antes que o vento mude de direção novamente e você precisará sair do alcance do vulcão em erupção.
+
+Infelizmente, um dos elefantes *comeu a maior parte da sua lista de modelos*! Agora, apenas os três primeiros modelos da sua lista estão intactos.
+
+Em 32 minutos, o maior número de geodes que o modelo 1 (do exemplo acima) pode abrir é `56`. Uma maneira de conseguir isso é:
+
+```
+== Minuto 1 ==
+1 robô coletor de minério coleta 1 minério; agora você tem 1 minério.
+
+== Minuto 2 ==
+1 robô coletor de minério coleta 1 minério; agora você tem 2 minérios.
+
+== Minuto 3 ==
+1 robô coletor de minério coleta 1 minério; agora você tem 3 minérios.
+
+== Minuto 4 ==
+1 robô coletor de minério coleta 1 minério; agora você tem 4 minérios.
+
+== Minuto 5 ==
+Gaste 4 minérios para começar a construir um robô coletor de minérios.
+1 robô coletor de minério coleta 1 minério; agora você tem 1 minério.
+O novo robô coletor de minério está pronto; agora você tem 2 deles.
+
+== Minuto 6 ==
+2 robôs coletores de minério coletam 2 minérios; agora você tem 3 minérios.
+
+== Minuto 7 ==
+Gaste 2 minérios para começar a construir um robô coletor de argila.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 3 minérios.
+O novo robô coletor de argila está pronto; agora você tem 1 deles.
+
+== Minuto 8 ==
+Gaste 2 minérios para começar a construir um robô coletor de argila.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 3 minérios.
+1 robô coletor de argila coleta 1 argila; agora você tem 1 argila.
+O novo robô coletor de argila está pronto; agora você tem 2 deles.
+
+== Minuto 9 ==
+Gaste 2 minérios para começar a construir um robô coletor de argila.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 3 minérios.
+2 robôs coletores de argila coletam 2 argilas; agora você tem 3 argilas.
+O novo robô coletor de argila está pronto; agora você tem 3 deles.
+
+== Minuto 10 ==
+Gaste 2 minérios para começar a construir um robô coletor de argila.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 3 minérios.
+3 robôs coletores de argila coletam 3 argilas; agora você tem 6 argila.
+O novo robô coletor de argila está pronto; agora você tem 4 deles.
+
+== Minuto 11 ==
+Gaste 2 minérios para começar a construir um robô coletor de argila.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 3 minérios.
+4 robôs coletores de argila coletam 4 argilas; agora você tem 10 argila.
+O novo robô coletor de argila está pronto; agora você tem 5 deles.
+
+== Minuto 12 ==
+Gaste 2 minérios para começar a construir um robô coletor de argila.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 3 minérios.
+5 robôs coletores de argila coletam 5 argilas; agora você tem 15 argilas.
+O novo robô coletor de argila está pronto; agora você tem 6 deles.
+
+== Minuto 13 ==
+Gaste 2 minérios para começar a construir um robô coletor de argila.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 3 minérios.
+6 robôs coletores de argila coletam 6 argilas; agora você tem 21 argilas.
+O novo robô coletor de argila está pronto; agora você tem 7 deles.
+
+== Minuto 14 ==
+Gaste 3 minérios e 14 argilas para começar a construir um robô coletor de obsidiana.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 2 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 14 argilas.
+O novo robô coletor de obsidiana está pronto; agora você tem 1 deles.
+
+== Minuto 15 ==
+2 robôs coletores de minério coletam 2 minérios; agora você tem 4 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 21 argilas.
+1 robô coletor de obsidiana coleta 1 obsidiana; agora você tem 1 obsidiana.
+
+== Minuto 16 ==
+Gaste 3 minérios e 14 argilas para começar a construir um robô coletor de obsidiana.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 3 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 14 argilas.
+1 robô coletor de obsidiana coleta 1 obsidiana; agora você tem 2 obsidianas.
+O novo robô coletor de obsidiana está pronto; agora você tem 2 deles.
+
+== Minuto 17 ==
+Gaste 3 minérios e 14 argilas para começar a construir um robô coletor de obsidiana.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 2 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 7 argila.
+2 robôs coletores de obsidiana coletam 2 obsidianas; agora você tem 4 obsidianas.
+O novo robô coletor de obsidiana está pronto; agora você tem 3 deles.
+
+== Minuto 18 ==
+2 robôs coletores de minério coletam 2 minérios; agora você tem 4 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 14 argilas.
+3 robôs coletores de obsidiana coletam 3 obsidianas; agora você tem 7 obsidianas.
+
+== Minuto 19 ==
+Gaste 3 minérios e 14 argilas para começar a construir um robô coletor de obsidiana.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 3 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 7 argila.
+3 robôs coletores de obsidiana coletam 3 obsidianas; agora você tem 10 obsidianas.
+O novo robô coletor de obsidiana está pronto; agora você tem 4 deles.
+
+== Minuto 20 ==
+Gaste 2 minérios e 7 obsidianas para começar a construir um robô quebra-geodes.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 3 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 14 argilas.
+4 robôs coletores de obsidiana coletam 4 obsidianas; agora você tem 7 obsidianas.
+O novo robô quebra-geoges está pronto; agora você tem 1 deles.
+
+== Minuto 21 ==
+Gaste 3 minérios e 14 argila para começar a construir um robô coletor de obsidiana.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 2 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 7 argila.
+4 robôs coletores de obsidiana coletam 4 obsidianas; agora você tem 11 obsidianas.
+1 robô quebra-geodes quebra1 geode; agora você tem 1 geode aberto.
+O novo robô coletor de obsidiana está pronto; agora você tem 5 deles.
+
+== Minuto 22 ==
+Gaste 2 minérios e 7 obsidianas para começar a construir um robô quebra-geodes.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 2 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 14 argilas.
+5 robôs coletores de obsidiana coletam 5 obsidianas; agora você tem 9 obsidianas.
+1 robô quebra-geodes quebra1 geode; agora você tem 2 geodes abertos.
+O novo robô quebra-geoges está pronto; agora você tem 2 deles.
+
+== Minuto 23 ==
+Gaste 2 minérios e 7 obsidianas para começar a construir um robô quebra-geodes.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 2 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 21 argilas.
+5 robôs coletores de obsidiana coletam 5 obsidianas; agora você tem 7 obsidianas.
+2 robôs quebra-geodes quebram 2 geodes; agora você tem 4 geodes abertos.
+O novo robô quebra-geoges está pronto; agora você tem 3 deles.
+
+== Minuto 24 ==
+Gaste 2 minérios e 7 obsidianas para começar a construir um robô quebra-geodes.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 2 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 28 argilas.
+5 robôs coletores de obsidiana coletam 5 obsidianas; agora você tem 5 obsidianas.
+3 robôs quebra-geodes quebram 3 geodes; agora você tem 7 geodes abertos.
+O novo robô quebra-geoges está pronto; agora você tem 4 deles.
+
+== Minuto 25 ==
+2 robôs coletores de minério coletam 2 minérios; agora você tem 4 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 35 argila.
+5 robôs coletores de obsidiana coletam 5 obsidianas; agora você tem 10 obsidianas.
+4 robôs quebra-geodes quebram 4 geodes; agora você tem 11 geodes abertos.
+
+== Minuto 26 ==
+Gaste 2 minérios e 7 obsidianas para começar a construir um robô quebra-geodes.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 4 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 42 argila.
+5 robôs coletores de obsidiana coletam 5 obsidianas; agora você tem 8 obsidianas.
+4 robôs quebra-geodes quebram 4 geodes; agora você tem 15 geodes abertos.
+O novo robô quebra-geoges está pronto; agora você tem 5 deles.
+
+== Minuto 27 ==
+Gaste 2 minérios e 7 obsidianas para começar a construir um robô quebra-geodes.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 4 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 49 argila.
+5 robôs coletores de obsidiana coletam 5 obsidianas; agora você tem 6 obsidianas.
+5 robôs quebra-geodes quebram 5 geodes; agora você tem 20 geodes abertos.
+O novo robô quebra-geoges está pronto; agora você tem 6 deles.
+
+== Minuto 28 ==
+2 robôs coletores de minério coletam 2 minérios; agora você tem 6 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 56 argilas.
+5 robôs coletores de obsidiana coletam 5 obsidianas; agora você tem 11 obsidianas.
+6 robôs quebra-geodes quebram 6 geodes; agora você tem 26 geodes abertos.
+
+== Minuto 29 ==
+Gaste 2 minérios e 7 obsidianas para começar a construir um robô quebra-geodes.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 6 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 63 argilas.
+5 robôs coletores de obsidiana coletam 5 obsidianas; agora você tem 9 obsidianas.
+6 robôs quebra-geodes quebram 6 geodes; agora você tem 32 geodes abertos.
+O novo robô quebra-geoges está pronto; agora você tem 7 deles.
+
+== Minuto 30 ==
+Gaste 2 minérios e 7 obsidianas para começar a construir um robô quebra-geodes.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 6 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 70 argila.
+5 robôs coletores de obsidiana coletam 5 obsidianas; agora você tem 7 obsidianas.
+7 robôs quebra-geodes quebram 7 geodes; agora você tem 39 geodes abertos.
+O novo robô quebra-geoges está pronto; agora você tem 8 deles.
+
+== Minuto 31 ==
+Gaste 2 minérios e 7 obsidianas para começar a construir um robô quebra-geodes.
+2 robôs coletores de minério coletam 2 minérios; agora você tem 6 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 77 argila.
+5 robôs coletores de obsidiana coletam 5 obsidianas; agora você tem 5 obsidianas.
+8 robôs quebra-geodes quebram 8 geodes; agora você tem 47 geodes abertos.
+O novo robô quebra-geoges está pronto; agora você tem 9 deles.
+
+== Minuto 32 ==
+2 robôs coletores de minério coletam 2 minérios; agora você tem 8 minérios.
+7 robôs coletores de argila coletam 7 argila; agora você tem 84 argilas.
+5 robôs coletores de obsidiana coletam 5 obsidianas; agora você tem 10 obsidianas.
+9 robôs quebra-geodes quebram 9 geodes; agora você tem 56 geodes abertos.
+
+```
+
+No entanto, o modelo 2 do exemplo acima ainda é melhor; usando-o, o maior número de geodes que você pode abrir em 32 minutos é `62`.
+
+Você *já não tem modelos suficientes para se preocupar com os níveis de qualidade*. Em vez disso, para cada um dos três primeiros modelos, determine o maior número de geodes que você pode abrir; em seguida, multiplique esses três valores juntos.
+
+Não se preocupe com os níveis de qualidade; em vez disso, apenas determine o maior número de geodes que você poderia abrir usando cada um dos três primeiros modelos. *O que você obtém se multiplicar esses números?*
+
