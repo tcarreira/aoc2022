@@ -222,5 +222,5 @@ func (*Puzzle) Part2(input string) string {
 }
 
 func (*Puzzle) Notes() string {
-	return ""
+	return "teoria de grafos, dfs"
 }

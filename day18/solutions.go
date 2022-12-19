@@ -143,5 +143,5 @@ func (*Puzzle) Part2(input string) string {
 }
 
 func (*Puzzle) Notes() string {
-	return "análogo a encontrar saída de labirinto"
+	return "análogo a encontrar saída de labirinto em 3D"
 }
