@@ -50,5 +50,6 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   16 | 2330       (    154.4) | 2675           (  10133.5) | teoria de grafos, dfs
   17 | 3133       (      0.7) | 1547953216393  (     11.7) | tetris + cache de estado
   18 | 4390       (      4.7) | 2534           (      4.3) | labirinto em mundo minecraft
+  19 | -          (      0.0) | -              (      0.0) | 
 ```
 <!-- ci:result:end -->
