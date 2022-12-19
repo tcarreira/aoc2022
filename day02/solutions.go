@@ -120,5 +120,5 @@ func (*Puzzle) Part2(input string) string {
 }
 
 func (*Puzzle) Notes() string {
-	return ""
+	return "seguir instruções: pedra-papel-tesoura"
 }
