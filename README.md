@@ -51,5 +51,6 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   17 | 3133       (      0.7) | 1547953216393  (     11.7) | * tetris + cache de estado
   18 | 4390       (      4.7) | 2534           (      4.3) | labirinto em mundo minecraft
   19 | 1616       (   1267.1) | 8990           (  22402.0) | ** recursos, prune, optimizs, no-cache
+  20 | 5498       (    382.2) | -              (      0.0) | 
 ```
 <!-- ci:result:end -->
