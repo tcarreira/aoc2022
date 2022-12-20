@@ -41,7 +41,7 @@ Com 16 árvores visíveis na borda e outras 5 visíveis no interior, um total de
 
 Considere seu mapa; *quantas árvores são visíveis de fora da grelha?*
 
-## --- Parte dois ---
+## --- Parte Dois ---
 
 Satisfeitos com a quantidade de cobertura arbórea disponível, os Elfos só precisam saber o melhor local para construir sua casa na árvore: eles gostariam de poder ver muitas *árvores*.
 

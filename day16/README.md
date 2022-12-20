@@ -151,7 +151,7 @@ Essa abordagem permite que você libere o máximo de pressão possível em 30 mi
 
 Descubra os passos para liberar o máximo de pressão em 30 minutos. *Qual é a maior pressão que você consegue liberar?*
 
-## --- Parte dois ---
+## --- Parte Dois ---
 
 Você está preocupado que, mesmo com uma abordagem ideal, a pressão liberada não seja suficiente. E se você tivesse um dos elefantes para ajudá-lo?
 

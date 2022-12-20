@@ -36,7 +36,7 @@ Este caminho atinge a meta em `31` passos, o menor possível.
 
 *Qual é o menor número de passos necessários para mover desde a sua posição atual até o local que deve receber o melhor sinal?*
 
-## --- Parte dois ---
+## --- Parte Dois ---
 
 Ao subir a colina, você suspeita que os elfos vão querer transformar isso em uma trilha para caminhadas. O começo não é muito cênico; talvez você possa encontrar um ponto de partida melhor.
 

@@ -36,7 +36,7 @@ Aqui estão mais alguns exemplos:
 
 *Quantos caracteres precisam ser processados antes que o primeiro marcador de início de pacote seja detetado?*
 
-## --- Parte dois ---
+## --- Parte Dois ---
 
 O sistema de comunicações do seu dispositivo está detectando corretamente os pacotes, mas ainda não está funcionando. Parece que também precisa procurar por *mensagens*.
 

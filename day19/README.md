@@ -174,7 +174,7 @@ Determine o *nível de qualidade* de cada modelo *multiplicando o número de ID 
 
 Determine o nível de qualidade de cada modelo usando o maior número de geodes que ele poderia produzir em 24 minutos. *O que você obtém se somar o nível de qualidade de todos os modelos da sua lista?*
 
-## --- Parte dois ---
+## --- Parte Dois ---
 
 Enquanto você estava escolhendo o melhor projeto, os elefantes encontraram comida por conta própria, então você já não está com tanta pressa; você acha que provavelmente tem *32 minutos* antes que o vento mude de direção novamente e você precisará sair do alcance do vulcão em erupção.
 

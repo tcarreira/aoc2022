@@ -121,7 +121,7 @@ Quais são os índices dos pares que já estão *na ordem correta*? (O primeiro 
 
 Determine quais pares de pacotes já estão na ordem correta. *Qual é a soma dos índices desses pares?*
 
-## --- Parte dois ---
+## --- Parte Dois ---
 
 Agora, você só precisa colocar *todos* os pacotes na ordem certa. Desconsidere as linhas em branco em sua lista de pacotes recebidos.
 

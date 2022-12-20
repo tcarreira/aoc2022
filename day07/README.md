@@ -107,7 +107,7 @@ Para começar, encontre todos os diretórios com um tamanho total de *no máximo
 
 Encontre todos os diretórios com um tamanho total de no máximo 100.000. *Qual é a soma dos tamanhos totais desses diretórios?*
 
-## --- Parte dois ---
+## --- Parte Dois ---
 
 Agora, você está pronto para escolher um diretório para excluir.
 
