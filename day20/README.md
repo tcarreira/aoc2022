@@ -10,7 +10,7 @@ Talvez você possa *descriptografa-lo*?
 
 Quando você ainda estava no acampamento, você ouviu alguns elfos falando sobre criptografia de arquivos de coordenadas. A principal operação envolvida na descriptografia do arquivo é chamada de *mistura*.
 
-O arquivo criptografado é uma lista de números. Para *misturar* o arquivo, mova cada número para frente ou para trás no arquivo um número de posições igual ao valor do número que está sendo movido. A lista é *circular*, portanto, um número movido para lá de uma extremidade da lista aparece noo início da outra extremidade, como se as extremidades estivessem conectadas.
+O arquivo criptografado é uma lista de números. Para *misturar* o arquivo, mova cada número para frente ou para trás no arquivo um número de posições igual ao valor do número que está sendo movido. A lista é *circular*, portanto, um número movido para lá de uma extremidade da lista aparece no início da outra extremidade, como se as extremidades estivessem conectadas.
 
 Por exemplo, para mover o `1` em uma sequência como `4, 5, 6, 1, 7, 8, 9`, o `1` move uma posição para frente: `4, 5, 6, 7, 1, 8 , 9`. Para mover o `-2` em uma sequência como `4, -2, 5, 6, 7, 8, 9`, o `-2` move duas posições para trás, aparecendo do outro lado: `4, 5, 6, 7, 8, -2, 9`.
 
@@ -58,7 +58,56 @@ Arranjo inicial:
 
 ```
 
-Em seguida, as coordenadas do arvoredo podem ser encontradas observando as posições 1000º, 2000º e 3000º após o valor `0`, voltando ao início da lista conforme necessário. No exemplo acima, o 1000º número após `0` é `4`, o 2000º é `-3` e o 3000º é `2`; somá-los juntos produz `3`.
+Em seguida, as coordenadas do arvoredo podem ser encontradas observando as posições 1000º, 2000º e 3000º após o valor `0`, voltando ao início da lista conforme necessário. No exemplo acima, o 1000º número após `0` é `4`, o 2000º é `-3` e o 3000º é `2`; somando-os produz `3`.
 
 Misture seu arquivo criptografado exatamente uma vez. *Qual é a soma dos três números que formam as coordenadas do arvoredo?*
 
+## --- Parte Dois ---
+
+Os valores das coordenadas do arvoredo parecem absurdos. Enquanto você pondera sobre os mistérios da criptografia dos Elfos, de repente você se lembra do resto da rotina de descriptografia que ouviu no acampamento.
+
+Primeiro, você precisa aplicar a *chave de descriptografia*, `811589153`. Multiplique cada número pela chave de descriptografia antes de começar; isso produzirá a lista real de números a serem misturados.
+
+Em segundo lugar, você precisa misturar a lista de números *dez vezes*. A ordem em que os números são misturados não muda durante a mistura; os números ainda são movidos na ordem em que apareceram na lista original pré-misturada. (Portanto, se -3 aparecer em quarto lugar na lista original de números a serem misturados, -3 será o quarto número a ser movido durante cada rodada de mistura.)
+
+Usando o mesmo exemplo acima:
+
+```
+Arranjo inicial:
+811589153, 1623178306, -2434767459, 2434767459, -1623178306, 0, 3246356612
+
+Após 1 rodada de mistura:
+0, -2434767459, 3246356612, -1623178306, 2434767459, 1623178306, 811589153
+
+Após 2 rodadas de mistura:
+0, 2434767459, 1623178306, 3246356612, -2434767459, -1623178306, 811589153
+
+Após 3 rodadas de mistura:
+0, 811589153, 2434767459, 3246356612, 1623178306, -1623178306, -2434767459
+
+Após 4 rodadas de mistura:
+0, 1623178306, -2434767459, 811589153, 2434767459, 3246356612, -1623178306
+
+Após 5 rodadas de mistura:
+0, 811589153, -1623178306, 1623178306, -2434767459, 3246356612, 2434767459
+
+Após 6 rodadas de mistura:
+0, 811589153, -1623178306, 3246356612, -2434767459, 1623178306, 2434767459
+
+Após 7 rodadas de mistura:
+0, -2434767459, 2434767459, 1623178306, -1623178306, 811589153, 3246356612
+
+Após 8 rodadas de mistura:
+0, 1623178306, 3246356612, 811589153, -2434767459, 2434767459, -1623178306
+
+Após 9 rodadas de mistura:
+0, 811589153, 1623178306, -2434767459, 3246356612, 2434767459, -1623178306
+
+Após 10 rodadas de mistura:
+0, -2434767459, 1623178306, 3246356612, -1623178306, 2434767459, 811589153
+
+```
+
+As coordenadas do arvoredo ainda podem ser encontradas da mesma maneira. Aqui, o 1000º número após `0` é `811589153`, o 2000º é `2434767459` e o 3000º é `-1623178306`; somando-os produz `1623178306`.
+
+Aplique a chave de descriptografia e misture seu arquivo criptografado dez vezes. *Qual é a soma dos três números que formam as coordenadas do arvoredo?*
