@@ -1,4 +1,4 @@
-# --- Dia 7: Sem espaço no dispositivo ---
+# --- Dia 7: Sem Espaço no Dispositivo ---
 
 Você pode ouvir o chilrear dos pássaros e as gotas de chuva batendo nas folhas enquanto a expedição avança. Ocasionalmente, você pode até ouvir sons muito mais altos à distância; quão grandes ficam os animais aqui, afinal?
 

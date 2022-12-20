@@ -1,4 +1,4 @@
-# --- Dia 19: Não há minerais suficientes ---
+# --- Dia 19: Não há Minerais Suficientes ---
 
 Suas varreduras mostram que a lava realmente formou obsidiana!
 

@@ -1,4 +1,4 @@
-# --- Dia 6: Problema de ajuste ---
+# --- Dia 6: Problema de Ajuste ---
 
 Os preparativos estão finalmente completos; você e os elfos deixam o acampamento a pé e começam a caminhar em direção ao arvoredo do fruto **estrela**.
 
