@@ -179,9 +179,22 @@ func (*Puzzle) Part1(input string) string {
 }
 
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	bprints := parseInput(input)
+	if len(bprints) > 3 {
+		bprints = bprints[0:3]
+	}
+
+	solution := 1
+	for _, bprint := range bprints {
+		st := setupState(bprint)
+		st.maxMinutes = 32
+		geodes := st.dfs(0, Resources{}, Resources{ores: 1}, Resources{})
+
+		solution *= geodes
+	}
+	return fmt.Sprint(solution)
 }
 
 func (*Puzzle) Notes() string {
-	return ""
+	return "* prune, multi optimiz (s/ cache)"
 }
