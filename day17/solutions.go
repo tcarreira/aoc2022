@@ -256,5 +256,5 @@ func (*Puzzle) Part2(input string) string {
 }
 
 func (*Puzzle) Notes() string {
-	return "tetris + cache de estado"
+	return "* tetris + cache de estado"
 }
