@@ -5,6 +5,8 @@ import (
 	"strings"
 )
 
+const decryptionKey = 811589153
+
 type Puzzle struct{}
 
 type DLLNode struct {
@@ -76,7 +78,7 @@ func (n *DLLNode) shiftBackward(stopIn int) {
 	n.shiftBackward(stopIn - 1)
 }
 
-func (n *DLLNode) mix(nodesMap map[int]*DLLNode) {
+func (n *DLLNode) mix() {
 	value := n.value
 	if value >= 0 {
 		n.shiftForward(value)
@@ -85,12 +87,13 @@ func (n *DLLNode) mix(nodesMap map[int]*DLLNode) {
 	}
 }
 
-func buildNodesMap(nodes []*DLLNode) map[int]*DLLNode {
-	myMap := map[int]*DLLNode{}
-	for _, node := range nodes {
-		myMap[node.value] = node
+func (n *DLLNode) mixPart2(length int) {
+	value := n.value % (length - 1) // when I move, I'm not part of the list
+	if value >= 0 {
+		n.shiftForward(value)
+	} else {
+		n.shiftBackward(-value)
 	}
-	return myMap
 }
 
 func printList(node *DLLNode) {
@@ -105,30 +108,58 @@ func printList(node *DLLNode) {
 	fmt.Println()
 }
 
-func (*Puzzle) Part1(input string) string {
-	numberList := parseInput(input)
-	nodesMap := buildNodesMap(numberList)
-	// fmt.Println(nodesMap)
-	for _, node := range numberList {
-		// fmt.Printf("%p: %+v\n", node, *node)
-		// printList(nodesMap[0])
-		node.mix(nodesMap)
-	}
-
-	idx := []int{1000 % len(numberList), 2000 % len(numberList), 3000 % len(numberList)}
+func getSolution(zeroNode *DLLNode, size int) int {
+	idx := []int{1000 % size, 2000 % size, 3000 % size}
 	solution := 0
-	curr := nodesMap[0]
-	for i := 0; i < len(numberList); i++ {
+	curr := zeroNode
+	for i := 0; i < size; i++ {
 		if i == idx[0] || i == idx[1] || i == idx[2] {
 			solution += curr.value
 		}
 		curr = curr.next
 	}
+	return solution
+}
+
+func (*Puzzle) Part1(input string) string {
+	numberList := parseInput(input)
+	var zeroNode *DLLNode
+	for _, node := range numberList {
+		if node.value == 0 {
+			zeroNode = node
+		}
+	}
+
+	// fmt.Println(nodesMap)
+	for _, node := range numberList {
+		// fmt.Printf("%p: %+v\n", node, *node)
+		// printList(nodesMap[0])
+		node.mix()
+	}
+
+	solution := getSolution(zeroNode, len(numberList))
 	return fmt.Sprint(solution)
 }
 
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	numberList := parseInput(input)
+
+	var zeroNode *DLLNode
+	for _, node := range numberList {
+		if node.value == 0 {
+			zeroNode = node
+		}
+		node.value *= decryptionKey
+	}
+
+	for i := 0; i < 10; i++ {
+		for _, node := range numberList {
+			node.mixPart2(len(numberList))
+		}
+	}
+
+	solution := getSolution(zeroNode, len(numberList))
+	return fmt.Sprint(solution)
 }
 
 func (*Puzzle) Notes() string {
