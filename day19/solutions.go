@@ -89,12 +89,13 @@ func mineResources(resources, robots Resources) Resources {
 	}
 }
 
-func (st *State) dfs(minute int, resources, robots Resources) int {
+func (st *State) dfs(minute int, resources, robots, doNotBuild Resources) int {
 	// fmt.Println(minute, resources, robots)
 	if minute >= st.maxMinutes {
 		return resources.geodes
 	}
 
+	nextDoNotBuild := Resources{}
 	// always make geode robot if possible
 	if resources.ores >= st.blueprint[Geode][Ore] &&
 		resources.obsidian >= st.blueprint[Geode][Obsidian] {
@@ -103,12 +104,41 @@ func (st *State) dfs(minute int, resources, robots Resources) int {
 		newRobots.geodes++
 		newResources.ores -= st.blueprint[Geode][Ore]
 		newResources.obsidian -= st.blueprint[Geode][Obsidian]
-		return st.dfs(minute+1, newResources, newRobots)
+		return st.dfs(minute+1, newResources, newRobots, Resources{})
 	}
 
 	maxGeodes := 0
 
-	if resources.ores >= st.blueprint[Obsidian][Ore] &&
+	if doNotBuild.ores == 0 &&
+		resources.ores >= st.blueprint[Ore][Ore] && robots.ores < st.maxRate[Ore] {
+		// make ore robot
+		newResources := mineResources(resources, robots)
+		newRobots := robots.Clone()
+		newRobots.ores++
+		newResources.ores -= st.blueprint[Ore][Ore]
+		newMaxGeodes := st.dfs(minute+1, newResources, newRobots, Resources{})
+		if newMaxGeodes > maxGeodes {
+			maxGeodes = newMaxGeodes
+		}
+		nextDoNotBuild.ores++
+	}
+
+	if doNotBuild.clay == 0 &&
+		resources.ores >= st.blueprint[Clay][Ore] && robots.clay < st.maxRate[Clay] {
+		// make clay robot
+		newResources := mineResources(resources, robots)
+		newRobots := robots.Clone()
+		newRobots.clay++
+		newResources.ores -= st.blueprint[Clay][Ore]
+		newMaxGeodes := st.dfs(minute+1, newResources, newRobots, Resources{})
+		if newMaxGeodes > maxGeodes {
+			maxGeodes = newMaxGeodes
+		}
+		nextDoNotBuild.clay++
+	}
+
+	if doNotBuild.obsidian == 0 &&
+		resources.ores >= st.blueprint[Obsidian][Ore] &&
 		// make Obsidian robot
 		resources.clay >= st.blueprint[Obsidian][Clay] &&
 		robots.obsidian < st.maxRate[Obsidian] {
@@ -117,38 +147,15 @@ func (st *State) dfs(minute int, resources, robots Resources) int {
 		newRobots.obsidian++
 		newResources.ores -= st.blueprint[Obsidian][Ore]
 		newResources.clay -= st.blueprint[Obsidian][Clay]
-		newMaxGeodes := st.dfs(minute+1, newResources, newRobots)
+		newMaxGeodes := st.dfs(minute+1, newResources, newRobots, Resources{})
 		if newMaxGeodes > maxGeodes {
 			maxGeodes = newMaxGeodes
 		}
-	}
-
-	if resources.ores >= st.blueprint[Ore][Ore] && robots.ores < st.maxRate[Ore] {
-		// make ore robot
-		newResources := mineResources(resources, robots)
-		newRobots := robots.Clone()
-		newRobots.ores++
-		newResources.ores -= st.blueprint[Ore][Ore]
-		newMaxGeodes := st.dfs(minute+1, newResources, newRobots)
-		if newMaxGeodes > maxGeodes {
-			maxGeodes = newMaxGeodes
-		}
-	}
-
-	if resources.ores >= st.blueprint[Clay][Ore] && robots.clay < st.maxRate[Clay] {
-		// make clay robot
-		newResources := mineResources(resources, robots)
-		newRobots := robots.Clone()
-		newRobots.clay++
-		newResources.ores -= st.blueprint[Clay][Ore]
-		newMaxGeodes := st.dfs(minute+1, newResources, newRobots)
-		if newMaxGeodes > maxGeodes {
-			maxGeodes = newMaxGeodes
-		}
+		nextDoNotBuild.obsidian++
 	}
 
 	resources = mineResources(resources, robots)
-	newMaxGeodes := st.dfs(minute+1, resources, robots)
+	newMaxGeodes := st.dfs(minute+1, resources, robots, nextDoNotBuild)
 	if newMaxGeodes > maxGeodes {
 		maxGeodes = newMaxGeodes
 	}
@@ -163,7 +170,7 @@ func (*Puzzle) Part1(input string) string {
 	for id, bprint := range bprints {
 		// fmt.Println("blueprint", id+1)
 		st := setupState(bprint)
-		geodes := st.dfs(0, Resources{}, Resources{ores: 1})
+		geodes := st.dfs(0, Resources{}, Resources{ores: 1}, Resources{})
 
 		qualityLevel := (id + 1) * geodes
 		solution += qualityLevel

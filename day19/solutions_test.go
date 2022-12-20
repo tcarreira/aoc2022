@@ -27,8 +27,18 @@ func TestPart1(t *testing.T) {
 
 	data, _ := os.ReadFile("input.txt")
 	solution := p.Part1(string(data))
-	if solution != "-" {
+	if solution != "1616" {
 		t.Errorf("Solution for Part1: %s", solution)
+	}
+}
+
+func BenchmarkPart1(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		got := p.Part1(exampleInput)
+		expected := "0"
+		if got != expected {
+			b.Errorf("Expected %q, got %q", expected, got)
+		}
 	}
 }
 
