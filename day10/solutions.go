@@ -108,7 +108,7 @@ func (*Puzzle) Part2(input string) string {
 	state.processInstructions(240)
 
 	if _, ok := os.LookupEnv("AOC_DAY10"); ok {
-		fmt.Println("Visual Day 10:")
+		fmt.Println("Visual Solution for Day 10:")
 		state.PrintScreen()
 		os.Unsetenv("AOC_DAY10")
 	}

@@ -203,4 +203,11 @@ func main() {
 			aocDay.Notes(),
 		)
 	}
+
+	// Special prints
+	// still print aoc day 10 drawing when using cached result
+	if _, ok := os.LookupEnv("AOC_DAY10"); ok && UseCachedResult {
+		fmt.Println()
+		calculatePuzzleStats(10, &day10.Puzzle{})
+	}
 }
