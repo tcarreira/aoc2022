@@ -52,6 +52,6 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   18 | 4390       (      4.7) | 2534           (      4.3) | labirinto em mundo minecraft
   19 | 1616       (    644.3) | 8990           (  11114.5) | ** recursos, prune, optimizs, no-cache
   20 | 5498       (    193.1) | 3390007892081  (   1002.3) | Listas (duplamente) ligadas
-  21 | -          (      0.0) | -              (      0.0) | 
+  21 | 21120928600114 (      1.1) | 3453748220116  (      1.1) | 
 ```
 <!-- ci:result:end -->
