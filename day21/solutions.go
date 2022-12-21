@@ -103,7 +103,7 @@ func (m *Monkey) traverseToDestination(destination string, wantedValue int) (int
 	if m.right != nil {
 		switch m.operator {
 		case "+":
-			newWanted = wantedValue - *m.left.value // R = a+b | b=a-R
+			newWanted = wantedValue - *m.left.value // R = a+b | b=R-a
 		case "-":
 			newWanted = *m.left.value - wantedValue // R = a-b | b=a-R
 		case "*":
@@ -137,9 +137,10 @@ func (*Puzzle) Part2(input string) string {
 	if v, ok := monkeys["root"].right.traverseToDestination("humn", *monkeys["root"].left.value); ok {
 		return fmt.Sprint(v)
 	}
+
 	panic("should not reach this state :(")
 }
 
 func (*Puzzle) Notes() string {
-	return ""
+	return "árvore binária & backtrack"
 }
