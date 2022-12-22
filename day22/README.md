@@ -35,7 +35,7 @@ A segunda metade é uma descrição do *caminho que você deve seguir*. Consiste
 
   - Um *número* indica o *número de quadrados a serem movidos* na direção que você está. Se você bater em uma parede, você para de avançar e continua com a próxima instrução.
 
-  - Uma *letra* indica se deve rodar 90 graus *no sentido horário* (`R`) ou **no sentido anti-horário** (`L`). A rotação acontece no local; isso não altera o quadrado em que você está no momento.
+  - Uma *letra* indica se deve rodar 90 graus *no sentido horário* (`R`) ou *no sentido anti-horário* (`L`). A rotação acontece no local; isso não altera o quadrado em que você está no momento.
 
 
 Portanto, um caminho como `10R5` significa "vá em frente 10 quadrados, gire 90 graus no sentido horário e depois avance 5 quadrados".
