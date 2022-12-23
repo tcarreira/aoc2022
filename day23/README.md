@@ -106,7 +106,7 @@ Neste ponto, nenhum Elfo precisa se mover, e assim o processo termina.
 O exemplo maior acima procede da seguinte forma:
 
 ```
-== Initial State ==
+== Estado inicial ==
 ..............
 ..............
 .......#......
@@ -231,4 +231,28 @@ Para ter certeza de que estão no caminho certo, os Elfos gostam de verificar ap
 Nesta região, o número de quadrados vazios é `110`.
 
 Simule o processo dos Elfos e encontre o menor retângulo que contenha os Elfos após 10 rodadas. *Quantos quadrados de chão vazios esse retângulo contém?*
+
+## --- Parte Dois ---
+
+Parece que você está no caminho certo. Termine de simular o processo e descubra onde os Elfos precisam ir. Quantas rodadas você lhes poupou?
+
+No exemplo acima, a *primeira rodada em que nenhum elfo se moveu* foi a rodada `20`:
+
+```
+.......#......
+....#......#..
+..#.....#.....
+......#.......
+...#....#.#..#
+#.............
+....#.....#...
+..#.....#.....
+....#.#....#..
+.........#....
+....#......#..
+.......#......
+
+```
+
+Descubra onde os elfos precisam ir. *Qual é o número da primeira rodada em que nenhum elfo se move?*
 
