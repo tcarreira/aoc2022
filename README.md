@@ -53,6 +53,7 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   19 | 1616           (  644.3) | 8990           (11114.5) | ** recursos, prune, optimizs, no-cache
   20 | 5498           (  193.1) | 3390007892081  ( 1002.3) | Listas (duplamente) ligadas
   21 | 21120928600114 (    1.1) | 3453748220116  (    1.1) | árvore binária & backtrack
-  22 | -              (    0.0) | -              (    0.0) | 
+  22 | 27436          (    3.3) | 15426          (    3.8) | caminhar na face do cubo (planif hardc)
+  23 | -              (    0.0) | -              (    0.0) | 
 ```
 <!-- ci:result:end -->
