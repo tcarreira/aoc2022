@@ -7,6 +7,11 @@ import (
 	"unicode"
 )
 
+var (
+	maxCol  int
+	maxLine int
+)
+
 type Puzzle struct{}
 
 type P struct {
@@ -20,18 +25,25 @@ type Tile struct {
 	isWall bool
 }
 
+type MonkeyMap map[P]Tile
+
 func parseInput(raw string) (MonkeyMap, []string) {
-	var monkeyMap MonkeyMap
+	monkeyMap := MonkeyMap{}
 
 	parts := strings.Split(raw, "\n\n")
-	for l, line := range strings.Split(parts[0], "\n") {
-		monkeyMap = append(monkeyMap, make([]Tile, len(line)))
-		for col, c := range line {
+	mapStrLines := strings.Split(parts[0], "\n")
+	maxLine = len(mapStrLines)
+	for line, lineStr := range mapStrLines {
+		for col, c := range lineStr {
+			if len(lineStr) > maxCol {
+				maxCol = col
+			}
+
 			switch c {
 			case '#':
-				monkeyMap[l][col].isWall = true
+				monkeyMap[P{line: line, col: col}] = Tile{isWall: true}
 			case '.':
-				monkeyMap[l][col].isOpen = true
+				monkeyMap[P{line: line, col: col}] = Tile{isOpen: true}
 			}
 		}
 	}
@@ -59,11 +71,9 @@ func parseInput(raw string) (MonkeyMap, []string) {
 	return monkeyMap, instructions
 }
 
-type MonkeyMap [][]Tile
-
 func findInitialPosition(monkeyMap MonkeyMap) P {
-	for i, t := range monkeyMap[0] {
-		if t.isOpen {
+	for i := 0; ; i++ {
+		if _, ok := monkeyMap[P{line: 0, col: i}]; ok {
 			return P{line: 0, col: i, dir: 0}
 		}
 	}
@@ -73,69 +83,84 @@ func findInitialPosition(monkeyMap MonkeyMap) P {
 func (mm *MonkeyMap) step(p *P) bool {
 	switch p.dir {
 	case 0: // face right
-		if p.col+1 >= len((*mm)[p.line]) || (!(*mm)[p.line][j].isWall) { // wrap around
-			for j := 0; ; j++ {
-				if (*mm)[p.line][j].isOpen {
-					p.col = j
-					return true
-				}
-				if (*mm)[p.line][j].isWall {
-					return false
+		newCol := p.col + 1
+		tile, ok := (*mm)[P{line: p.line, col: newCol}]
+		if !ok { //wrap around
+			for i := 0; ; i++ {
+				if tile, ok = (*mm)[P{line: p.line, col: i}]; ok {
+					newCol = i
+					break
 				}
 			}
 		}
-		if (*mm)[p.line][p.col+1].isWall { // wall
+		if tile.isWall {
 			return false
 		}
-		p.col++
+		p.col = newCol
+		return true
+
 	case 1: // face down
-		if p.line+1 >= len((*mm)) { // wrap around
-			for j := 0; ; j++ {
-				if len((*mm)[j]) <= p.col {
-					continue
-				}
-				if (*mm)[j][p.col].isOpen {
-					p.line = j
-					return true
-				}
-				if (*mm)[j][p.col].isWall {
-					return false
+		newLine := p.line + 1
+		tile, ok := (*mm)[P{line: newLine, col: p.col}]
+		if !ok { //wrap around
+			for i := 0; ; i++ {
+				if tile, ok = (*mm)[P{line: i, col: p.col}]; ok {
+					newLine = i
+					break
 				}
 			}
 		}
-		if (*mm)[p.line][p.col+1].isWall { // wall
+		if tile.isWall {
 			return false
 		}
-		p.col++
+		p.line = newLine
+		return true
 
 	case 2: // face left
-		if p.col-1 <= 0 { // wrap around
-			for j := 0; ; j++ {
-				if (*mm)[p.line][j].isOpen {
-					p.col = j
-					return true
-				}
-				if (*mm)[p.line][j].isWall {
-					return false
+		newCol := p.col - 1
+		tile, ok := (*mm)[P{line: p.line, col: newCol}]
+		if !ok { //wrap around
+			for i := maxCol; ; i-- {
+				if tile, ok = (*mm)[P{line: p.line, col: i}]; ok {
+					newCol = i
+					break
 				}
 			}
 		}
-		if (*mm)[p.line][p.col+1].isWall { // wall
+		if tile.isWall {
 			return false
 		}
-		p.col++
+		p.col = newCol
+		return true
+
+	case 3: // face up
+		newLine := p.line - 1
+		tile, ok := (*mm)[P{line: newLine, col: p.col}]
+		if !ok { //wrap around
+			for i := maxLine; ; i-- {
+				if tile, ok = (*mm)[P{line: i, col: p.col}]; ok {
+					newLine = i
+					break
+				}
+			}
+		}
+		if tile.isWall {
+			return false
+		}
+		p.line = newLine
+		return true
 	}
-	panic("not reachable")
+	panic(fmt.Errorf("not reachable, %T , %#v", p, p))
 }
 
 func (mm *MonkeyMap) move(pos *P, instr string) {
+	// fmt.Println(pos, instr)
 	if steps, err := strconv.Atoi(instr); err == nil {
 		for i := 0; i < steps; i++ {
-			if !pos.step(pos) {
+			if !mm.step(pos) {
 				return
 			}
 		}
-
 		return
 	}
 
@@ -145,7 +170,7 @@ func (mm *MonkeyMap) move(pos *P, instr string) {
 		pos.dir = (pos.dir + 1) % 4
 	case "L":
 		if pos.dir == 0 {
-			pos.dir = 4
+			pos.dir = 3
 		} else {
 			pos.dir--
 		}
@@ -161,12 +186,7 @@ func (*Puzzle) Part1(input string) string {
 		monkeyMap.move(&position, instruction)
 
 	}
-	fmt.Println(position, instructions)
-	// buildMap
-	// simulateWalk
-	//   colisionWall
-	//   endMap -> wrapAround
-	return "-"
+	return fmt.Sprint((position.line+1)*1000 + (position.col+1)*4 + position.dir)
 }
 
 func (*Puzzle) Part2(input string) string {

@@ -7,17 +7,17 @@ import (
 
 var p *Puzzle = &Puzzle{}
 var exampleInput = `        ...#
-.#..
-#...
-....
+        .#..
+        #...
+        ....
 ...#.......#
 ........#...
 ..#....#....
 ..........#.
-...#....
-.....#..
-.#......
-......#.
+        ...#....
+        .....#..
+        .#......
+        ......#.
 
 10R5L5R10L4R5L5
 `
@@ -37,11 +37,11 @@ func TestPart1(t *testing.T) {
 		}
 	}
 
-	// data, _ := os.ReadFile("input.txt")
-	// solution := p.Part1(string(data))
-	// if solution != "-" {
-	// 	t.Errorf("Solution for Part1: %s", solution)
-	// }
+	data, _ := os.ReadFile("input.txt")
+	solution := p.Part1(string(data))
+	if solution != "27436" {
+		t.Errorf("Solution for Part1: %s", solution)
+	}
 }
 
 func TestPart2(t *testing.T) {
