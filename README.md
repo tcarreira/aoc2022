@@ -55,5 +55,6 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   21 | 21120928600114 (    1.1) | 3453748220116  (    1.1) | árvore binária & backtrack
   22 | 27436          (    3.3) | 15426          (    3.8) | caminhar na face do cubo (planif hardc)
   23 | 4162           (   27.3) | 986            ( 2007.0) | jogo da vida
+  24 | -              (    0.0) | -              (    0.0) | 
 ```
 <!-- ci:result:end -->
