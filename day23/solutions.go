@@ -147,20 +147,6 @@ func (me *Elfs) CountEmtpyTiles() int {
 	return fullRect - elfCount
 }
 
-func (me *Elfs) ExecutePlan2(planCounter map[P]int) (Elfs, int) {
-	newElfsMap := make(Elfs)
-	movedElfs := 0
-	for elf, plan := range *me {
-		if plan != nil && planCounter[*plan] == 1 {
-			movedElfs++
-			newElfsMap[*plan] = nil
-		} else {
-			newElfsMap[elf] = nil
-		}
-	}
-	return newElfsMap, movedElfs
-}
-
 func (*Puzzle) Part1(input string) string {
 
 	elfs := parseInput(input)
@@ -183,21 +169,17 @@ func (*Puzzle) Part1(input string) string {
 }
 
 func (*Puzzle) Part2(input string) string {
-
 	elfs := parseInput(input)
-	var moved, solution int
 
 	// elfs.Print()
 	for i := 0; ; i++ {
 		planCounter := elfs.Plan(i)
-		elfs, moved = elfs.ExecutePlan2(planCounter)
-		if moved == 0 {
-			solution = i + 1
-			break
+		if len(planCounter) == 0 {
+			return fmt.Sprint(i + 1)
 		}
+		elfs = elfs.ExecutePlan(planCounter)
 		// elfs.Print()
 	}
-	return fmt.Sprint(solution)
 }
 
 func (*Puzzle) Notes() string {
