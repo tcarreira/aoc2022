@@ -90,7 +90,7 @@ func TestPart2(t *testing.T) {
 		Input    string
 		Expected string
 	}{
-		{"", "-"},
+		{exampleInput, "54"},
 	}
 
 	for i, tt := range tests {
@@ -102,7 +102,7 @@ func TestPart2(t *testing.T) {
 
 	data, _ := os.ReadFile("input.txt")
 	solution := p.Part2(string(data))
-	if solution != "-" {
+	if solution != "807" {
 		t.Errorf("Solution for Part2: %s", solution)
 	}
 }

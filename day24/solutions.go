@@ -130,7 +130,50 @@ func (*Puzzle) Part1(input string) string {
 }
 
 func (*Puzzle) Part2(input string) string {
-	return "-"
+	blizs := parseInput(input)
+
+	// setup State
+	startPoint, finishPoint := P3{dx + 1, dy, 0}, P{dX - 1, dY}
+	destination := finishPoint
+	phase := 1
+
+	// main cycle
+	queue := map[P3]bool{startPoint: true}
+	for t := 1; ; t++ {
+		bmap := blizs.Step(t)
+		nextQueue := map[P3]bool{}
+
+	queueLabel:
+		for p := range queue {
+			if p.X == destination.X && p.Y == destination.Y {
+				switch phase {
+				case 1:
+					destination = P{startPoint.X, startPoint.Y}
+					queue = map[P3]bool{{finishPoint.X, finishPoint.Y, t + 1}: true}
+					phase = 2
+					break queueLabel
+				case 2:
+					destination = finishPoint
+					queue = map[P3]bool{{startPoint.X, startPoint.Y, t + 1}: true}
+					phase = 3
+					break queueLabel
+				case 3:
+					return fmt.Sprint(t - 1)
+				}
+			}
+
+			for _, nextP := range p.nextStepPoints(t) {
+				if _, ok := nextQueue[nextP]; ok {
+					continue
+				}
+				if !bmap.isClear(nextP) {
+					continue
+				}
+				nextQueue[nextP] = true
+			}
+			queue = nextQueue
+		}
+	}
 }
 
 func (*Puzzle) Notes() string {
