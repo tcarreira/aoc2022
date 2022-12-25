@@ -263,3 +263,15 @@ Minuto 18, mover para baixo:
 
 *Qual é o menor número de minutos necessários para evitar as nevascas e atingir a meta?*
 
+## --- Parte dois ---
+
+Quando a expedição chega ao outro lado do vale, um dos elfos parece especialmente consternado:
+
+Ele *esqueceu o lanche* na entrada do vale!
+
+Já que você é tão bom em desviar de nevascas, os Elfos pedem humildemente que você volte para os lanches dele. Nas mesmas condições iniciais, com que rapidez você pode ir do início ao objetivo, voltar ao início e voltar ao objetivo?
+
+No exemplo acima, a primeira viagem até ao destino leva `18` minutos, a viagem de volta ao início leva `23` minutos e a viagem de volta ao destino novamente leva `13` minutos, para um tempo total de `54` minutos.
+
+*Qual é o menor número de minutos necessários para atingir a meta, voltar ao início e atingir a meta novamente?*
+
