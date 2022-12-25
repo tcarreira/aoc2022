@@ -56,6 +56,6 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   22 | 27436          (    3.3) | 15426          (    3.8) | caminhar na face do cubo (planif hardc)
   23 | 4162           (   27.3) | 986            ( 2007.0) | jogo da vida
   24 | 281            (   48.7) | 807            (  151.6) | 
-  25 | -              (    0.0) | -              (    0.0) | 
+  25 | 2011-=2=-1020-1===-1 (    0.0) | -              (    0.0) | 
 ```
 <!-- ci:result:end -->
