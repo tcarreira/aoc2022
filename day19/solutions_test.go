@@ -1,6 +1,7 @@
 package day19
 
 import (
+	"fmt"
 	"os"
 	"testing"
 )
@@ -47,7 +48,7 @@ func TestPart2(t *testing.T) {
 		Input    string
 		Expected string
 	}{
-		{exampleInput, "62"},
+		{exampleInput, fmt.Sprint(56 * 62)},
 	}
 
 	for i, tt := range tests {
