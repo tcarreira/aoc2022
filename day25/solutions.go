@@ -22,15 +22,15 @@ func snafuToDecimal(snafu string) int {
 		var digit int
 		switch string(snafu[len(snafu)-1-i]) {
 		case "2":
-			digit += 2
+			digit = 2
 		case "1":
-			digit += 1
+			digit = 1
 		case "0":
-			digit += 0
+			digit = 0
 		case "-":
-			digit -= 1
+			digit = -1
 		case "=":
-			digit -= 2
+			digit = -2
 		}
 		number += exp(5, i) * digit
 	}

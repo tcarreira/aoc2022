@@ -73,7 +73,7 @@ func TestPart1(t *testing.T) {
 
 	data, _ := os.ReadFile("input.txt")
 	solution := p.Part1(string(data))
-	if solution != "-" {
+	if solution != "2011-=2=-1020-1===-1" {
 		t.Errorf("Solution for Part1: %s", solution)
 	}
 }
