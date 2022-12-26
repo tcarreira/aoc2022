@@ -207,11 +207,18 @@ func main() {
 		}
 
 		// Printing results
-		fmt.Printf("  %02d | %-14s (%7.1f) | %-14s (%7.1f) | %s\n", day,
-			puzzleStats.Results.Part1, float64(puzzleStats.Timing.Part1/time.Microsecond)/1000,
-			puzzleStats.Results.Part2, float64(puzzleStats.Timing.Part2/time.Microsecond)/1000,
-			aocDay.Notes(),
-		)
+		if day == 25 { // day 25 has only one part
+			fmt.Printf("  %02d | %-41s (%7.1f) | %s\n", day,
+				puzzleStats.Results.Part1, float64(puzzleStats.Timing.Part1/time.Microsecond)/1000,
+				aocDay.Notes(),
+			)
+		} else {
+			fmt.Printf("  %02d | %-14s (%7.1f) | %-14s (%7.1f) | %s\n", day,
+				puzzleStats.Results.Part1, float64(puzzleStats.Timing.Part1/time.Microsecond)/1000,
+				puzzleStats.Results.Part2, float64(puzzleStats.Timing.Part2/time.Microsecond)/1000,
+				aocDay.Notes(),
+			)
+		}
 	}
 
 	// Special prints
