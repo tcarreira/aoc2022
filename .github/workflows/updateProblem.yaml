@@ -1,7 +1,7 @@
 name: update Puzzle day
 on:
-  schedule:
-    - cron:  '30 5,6,12,23 * 12 *'
+  # schedule:
+  #   - cron:  '30 5,6,12,23 * 12 *'
   workflow_dispatch:
     inputs:
       year:

@@ -1,8 +1,9 @@
 name: update Readme Puzzle Stats
 on:
-  schedule:
-    - cron:  '30 0 * 12 *'
+  # schedule:
+  #   - cron:  '30 0 * 12 *'
   workflow_dispatch:
+  push:
 
 jobs:
   updateReadmeStats:
