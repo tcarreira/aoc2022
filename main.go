@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"runtime"
 	"runtime/pprof"
 	"strconv"
 	"syscall"
@@ -120,9 +121,15 @@ type PuzzleStats struct {
 		Part1 time.Duration
 		Part2 time.Duration
 	}
+	Memory struct {
+		Part1 uint64
+		Part2 uint64
+	}
 }
 
 func calculatePuzzleStats(day int, aocDay DayAOC) (PuzzleStats, error) {
+	var m runtime.MemStats
+	var startTotalAlloc uint64
 	pSstats := PuzzleStats{}
 
 	inputBytes, err := os.ReadFile(fmt.Sprintf(inputFileFormat, day))
@@ -133,21 +140,33 @@ func calculatePuzzleStats(day int, aocDay DayAOC) (PuzzleStats, error) {
 
 	// Benchmarking part1
 	times := []time.Duration{}
+	runtime.GC()
+	runtime.ReadMemStats(&m)
+	startTotalAlloc = m.TotalAlloc
 	for i := 0; i < Repeats; i++ {
 		startTime := time.Now()
 		pSstats.Results.Part1 = aocDay.Part1(input)
 		times = append(times, time.Since(startTime))
 	}
+	runtime.GC()
+	runtime.ReadMemStats(&m)
 	pSstats.Timing.Part1 = minDuration(times)
+	pSstats.Memory.Part1 = m.TotalAlloc - startTotalAlloc
 
 	// Benchmarking part2
 	times = []time.Duration{}
+	runtime.GC()
+	runtime.ReadMemStats(&m)
+	startTotalAlloc = m.TotalAlloc
 	for i := 0; i < Repeats; i++ {
 		startTime := time.Now()
 		pSstats.Results.Part2 = aocDay.Part2(input)
 		times = append(times, time.Since(startTime))
 	}
+	runtime.GC()
+	runtime.ReadMemStats(&m)
 	pSstats.Timing.Part2 = minDuration(times)
+	pSstats.Memory.Part2 = m.TotalAlloc - startTotalAlloc
 	return pSstats, nil
 }
 
@@ -160,8 +179,8 @@ func main() {
 	fmt.Println("######################################################")
 
 	fmt.Println()
-	fmt.Println(" Dia | Parte 1        (time ms) | Parte 2        (time ms) |")
-	fmt.Println("-----+--------------------------+----------------------------+")
+	fmt.Println(" Dia | Parte 1        (t ms | Mb)| Parte 2        (t ms | Mb)|")
+	fmt.Println("-----+---------------------------+---------------------------+")
 
 	aocDays := []DayAOC{
 		// existing days:
@@ -208,14 +227,14 @@ func main() {
 
 		// Printing results
 		if day == 25 { // day 25 has only one part
-			fmt.Printf("  %02d | %-41s (%7.1f) | %s\n", day,
-				puzzleStats.Results.Part1, float64(puzzleStats.Timing.Part1/time.Microsecond)/1000,
+			fmt.Printf("  %02d | %-42s (%5d|%3d)| %s\n", day,
+				puzzleStats.Results.Part1, puzzleStats.Timing.Part1/time.Millisecond, puzzleStats.Memory.Part1/1024/1024,
 				aocDay.Notes(),
 			)
 		} else {
-			fmt.Printf("  %02d | %-14s (%7.1f) | %-14s (%7.1f) | %s\n", day,
-				puzzleStats.Results.Part1, float64(puzzleStats.Timing.Part1/time.Microsecond)/1000,
-				puzzleStats.Results.Part2, float64(puzzleStats.Timing.Part2/time.Microsecond)/1000,
+			fmt.Printf("  %02d | %-14s (%5d|%3d)| %-14s (%5d|%3d)| %s\n", day,
+				puzzleStats.Results.Part1, puzzleStats.Timing.Part1/time.Millisecond, puzzleStats.Memory.Part1/1024/1024,
+				puzzleStats.Results.Part2, puzzleStats.Timing.Part2/time.Millisecond, puzzleStats.Memory.Part2/1024/1024,
 				aocDay.Notes(),
 			)
 		}
