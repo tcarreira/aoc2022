@@ -118,7 +118,6 @@ Resolvendo os puzzles do https://adventofcode.com/2022
   22 |              2408 KB |              2523 KB | caminhar na face do cubo (planif hardc)
   23 |              4796 KB |            381151 KB | jogo da vida
   24 |             19711 KB |             60433 KB | mapa 2d no tempo, bfs
-  25 |                 2 KB |                 0 KB | converter número base estranha
-
+  25 |               113 KB |                 1 KB | converter número base estranha
 ```
 <!-- ci:result:end -->
