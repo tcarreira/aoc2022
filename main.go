@@ -40,7 +40,7 @@ import (
 )
 
 var (
-	Repeats         int  = 3
+	Repeats         int  = 1
 	UseCachedResult bool = false
 	RuntimeProfile  bool = false
 )
@@ -125,12 +125,13 @@ type PuzzleStats struct {
 		Part1 uint64
 		Part2 uint64
 	}
+	notes string
 }
 
 func calculatePuzzleStats(day int, aocDay DayAOC) (PuzzleStats, error) {
 	var m runtime.MemStats
 	var startTotalAlloc uint64
-	pSstats := PuzzleStats{}
+	pSstats := PuzzleStats{notes: aocDay.Notes()}
 
 	inputBytes, err := os.ReadFile(fmt.Sprintf(inputFileFormat, day))
 	if err != nil {
@@ -174,13 +175,11 @@ func main() {
 	d := setupProfiling()
 	defer d()
 
+	allDaysStats := []PuzzleStats{}
+
 	fmt.Println("######################################################")
 	fmt.Println("Resolvendo os puzzles do https://adventofcode.com/2022")
 	fmt.Println("######################################################")
-
-	fmt.Println()
-	fmt.Println(" Dia | Parte 1        (t ms | Mb)| Parte 2        (t ms | Mb)|")
-	fmt.Println("-----+---------------------------+---------------------------+")
 
 	aocDays := []DayAOC{
 		// existing days:
@@ -224,20 +223,44 @@ func main() {
 			fmt.Fprintf(os.Stderr, "error building PuzzleStats for day %d (cached=%v): %v\n", day, UseCachedResult, err)
 			continue
 		}
+		allDaysStats = append(allDaysStats, puzzleStats)
+	}
 
-		// Printing results
-		if day == 25 { // day 25 has only one part
-			fmt.Printf("  %02d | %-42s (%5d|%3d)| %s\n", day,
-				puzzleStats.Results.Part1, puzzleStats.Timing.Part1/time.Millisecond, puzzleStats.Memory.Part1/1024/1024,
-				aocDay.Notes(),
-			)
-		} else {
-			fmt.Printf("  %02d | %-14s (%5d|%3d)| %-14s (%5d|%3d)| %s\n", day,
-				puzzleStats.Results.Part1, puzzleStats.Timing.Part1/time.Millisecond, puzzleStats.Memory.Part1/1024/1024,
-				puzzleStats.Results.Part2, puzzleStats.Timing.Part2/time.Millisecond, puzzleStats.Memory.Part2/1024/1024,
-				aocDay.Notes(),
-			)
-		}
+	fmt.Println()
+	fmt.Println()
+	fmt.Println("*****************     Soluções     *****************")
+	fmt.Println(" Dia | Parte 1              | Parte 2              |")
+	fmt.Println("-----+----------------------+----------------------+")
+	for d, puzzleStats := range allDaysStats {
+		fmt.Printf("  %02d | %-20s | %-20s | %s\n", d+1, puzzleStats.Results.Part1, puzzleStats.Results.Part2, puzzleStats.notes)
+	}
+
+	fmt.Println()
+	fmt.Println()
+	fmt.Println("*****************      Tempos      *****************")
+	fmt.Println(" Dia | Parte 1              | Parte 2              |")
+	fmt.Println("-----+----------------------+----------------------+")
+	for d, puzzleStats := range allDaysStats {
+		fmt.Printf("  %02d | %17.2f ms | %17.2f ms | %s\n",
+			d+1,
+			float64(puzzleStats.Timing.Part1/time.Microsecond)/1000,
+			float64(puzzleStats.Timing.Part2/time.Microsecond)/1000,
+			puzzleStats.notes,
+		)
+	}
+
+	fmt.Println()
+	fmt.Println()
+	fmt.Println("**************     Memória Alocada    **************")
+	fmt.Println(" Dia | Parte 1              | Parte 2              |")
+	fmt.Println("-----+----------------------+----------------------+")
+	for d, puzzleStats := range allDaysStats {
+		fmt.Printf("  %02d | %17d KB | %17d KB | %s\n",
+			d+1,
+			puzzleStats.Memory.Part1/1024,
+			puzzleStats.Memory.Part2/1024,
+			puzzleStats.notes,
+		)
 	}
 
 	// Special prints

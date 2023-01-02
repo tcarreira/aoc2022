@@ -23,7 +23,7 @@ func minDuration(times []time.Duration) time.Duration {
 }
 
 func parseCachedResults(day int, aocDay DayAOC) (PuzzleStats, error) {
-	pSstats := PuzzleStats{}
+	pSstats := PuzzleStats{notes: aocDay.Notes()}
 
 	data, err := os.ReadFile(fmt.Sprintf(cacheFileFormat, day))
 	if err != nil {
@@ -45,16 +45,18 @@ func cachePuzzleStats(p PuzzleStats, day int) error {
 
 func buildCachedPuzzleStats(day int, aocDay DayAOC) (PuzzleStats, error) {
 	pStats, err := parseCachedResults(day, aocDay)
-	if !os.IsNotExist(err) {
+	if err == nil {
 		return pStats, nil
+	}
+	if !os.IsNotExist(err) {
+		return PuzzleStats{}, err
 	}
 
 	pStats, err = calculatePuzzleStats(day, aocDay)
 	if err == nil && pStats.Results.Part1 != "-" && pStats.Results.Part2 != "-" {
-		err = cachePuzzleStats(pStats, day)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Could not write cache: %v\n", err)
-			err = nil
+		err1 := cachePuzzleStats(pStats, day)
+		if err1 != nil {
+			fmt.Fprintf(os.Stderr, "Could not write cache: %v\n", err1)
 		}
 	}
 	return pStats, err
